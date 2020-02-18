@@ -14,7 +14,7 @@ class BlockController extends Controller
      */
     public function index()
     {
-        //
+
     }
 
     /**

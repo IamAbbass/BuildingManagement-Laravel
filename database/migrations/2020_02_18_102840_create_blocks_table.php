@@ -17,6 +17,7 @@ class CreateBlocksTable extends Migration
             $table->bigIncrements('id');
             $table->string('name');
             $table->text('description')->nullable();
+            $table->integer('user_id');
             $table->integer('building_id');
             $table->timestamps();
         });
