@@ -231,7 +231,19 @@
                     <a class="dropdown-item" href="page.setting.html">
                         <span>Account Settings</span>
                     </a>
-                    <a class="dropdown-item" href="signin.html">Sign out</a>
+
+
+                    {{-- this code is for signout --}}
+                    
+                    <a class="dropdown-item" href="{{ route('logout') }}"
+                        onclick="event.preventDefault();
+                        document.getElementById('logout-form').submit();">
+                        {{ __('Logout') }}
+                         <i class="fa fa-sign-out"></i> </a>
+                         <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                           @csrf
+                       </form>
+                      
                 </div>
             </li>
             <!-- Navarbar toggle btn -->
