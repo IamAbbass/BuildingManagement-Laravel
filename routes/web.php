@@ -11,14 +11,19 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('welcome');
+// });
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/', 'HomeController@index')->name('home');
+
+Route::get('/profile/{id}','HomeController@edit');
+Route::post('/profile/{id}/update','HomeController@update');
 
 Auth::routes();
 
-//Route::resource('/block', 'BlockController@index')->name('home');
+ // Route::resource('/block', 'BlockController@index')->name('home');
+
+ Route::resource('/block','BlockController');

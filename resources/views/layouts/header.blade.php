@@ -211,8 +211,8 @@
                     <span class="avatar w-24" style="margin: -2px;"><img src="../assets/img/a0.jpg" alt="..."></span>
                 </a>
                 <div class="dropdown-menu dropdown-menu-right w mt-3 animate fadeIn">
-                    <a class="dropdown-item" href="page.profile.html">
-                        <span>Jacqueline Reid</span>
+                <a class="dropdown-item" href="/profile/{{Auth::user()->id}}">
+                        <span>{{ Auth::user()->name }}</span>
                     </a>
                     <a class="dropdown-item" href="page.price.html">
                         <span class="badge bg-success text-uppercase">Upgrade</span>
