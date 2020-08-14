@@ -27,3 +27,4 @@ Auth::routes();
  // Route::resource('/block', 'BlockController@index')->name('home');
 
  Route::resource('/block','BlockController');
+ Route::resource('/block/{id}/floor','FloorController');

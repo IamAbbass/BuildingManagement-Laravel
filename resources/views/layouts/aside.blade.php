@@ -31,7 +31,7 @@
                         <span class="text-muted">Applications</span>
                     </li>
                     <li>
-                        <a href="/block/create">
+                        <a href="/block">
                             <span class="nav-icon text-info"><i data-feather='calendar'></i></span>
                             <span class="nav-text">Blocks</span>
                             <span class="nav-badge"><b class="badge-circle xs text-danger"></b></span>

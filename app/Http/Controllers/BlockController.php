@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Block;
-use App\User;
+// use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -16,6 +16,7 @@ class BlockController extends Controller
      */
     public function index()
     {
+        
         $block=Block::where('building_id','=',Auth::User()->building_id)->paginate(2);
          return view('Block.All_Block',['block'=>$block]);
     }
@@ -50,6 +51,7 @@ class BlockController extends Controller
         );
         Block::create($block_data);
         return redirect('/block');
+       
     }
 
     /**
@@ -60,7 +62,8 @@ class BlockController extends Controller
      */
     public function show(Block $block)
     {
-        //
+        // $show_Block=Block::FindOrFail($block->id);
+        // return view('Block.Show_Block',['block'=>$block]);
     }
 
     /**
