@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\ExpenseHead;
+use App\Building;
 use Illuminate\Http\Request;
 
 class ExpenseHeadController extends Controller
@@ -14,7 +15,10 @@ class ExpenseHeadController extends Controller
      */
     public function index()
     {
-        //
+
+        $expensehead=Expensehead::where('building_id','=',Auth()->User()->building_id)->get();
+        $building=Building::all();
+        return view('ExpenseHead.All_ExpenseHead',['expensehead'=>$expensehead,'building'=>$building]);
     }
 
     /**
@@ -24,7 +28,7 @@ class ExpenseHeadController extends Controller
      */
     public function create()
     {
-        //
+        return view('ExpenseHead.Add_ExpenseHead');
     }
 
     /**
@@ -35,7 +39,13 @@ class ExpenseHeadController extends Controller
      */
     public function store(Request $request)
     {
-        //
+       $expensehead=array(
+           'name'=>$request->name,
+           'description'=>$request->description,
+           'building_id'=>Auth()->User()->building_id
+       );
+       ExpenseHead::create($expensehead);
+       return redirect('/expensehead');
     }
 
     /**
@@ -55,9 +65,21 @@ class ExpenseHeadController extends Controller
      * @param  \App\ExpenseHead  $expenseHead
      * @return \Illuminate\Http\Response
      */
-    public function edit(ExpenseHead $expenseHead)
+    public function edit( $expenseHead)
     {
-        //
+        //  return Auth()->User()->building_id;
+        $expensehead=ExpenseHead::findOrFail($expenseHead);
+            // return view('ExpenseHead.Update_ExpenseHead',['expensehead'=>$expensehead]);
+        if ($expensehead->building_id!=Auth()->User()->building_id) {
+          return "its not yours ";
+        } else {
+            
+            return view('ExpenseHead.Update_ExpenseHead',['expensehead'=>$expensehead]);
+        }
+        // return $expensehead->building_id;
+        
+
+       
     }
 
     /**
@@ -67,9 +89,14 @@ class ExpenseHeadController extends Controller
      * @param  \App\ExpenseHead  $expenseHead
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, ExpenseHead $expenseHead)
+    public function update(Request $request, $expensehead_id)
     {
-        //
+        $expensehead_data=array(
+            'name'=>$request->name,
+            'description'=>$request->description
+        );
+        ExpenseHead::whereId($expensehead_id)->update($expensehead_data);
+        return redirect('/expensehead');
     }
 
     /**
@@ -78,8 +105,9 @@ class ExpenseHeadController extends Controller
      * @param  \App\ExpenseHead  $expenseHead
      * @return \Illuminate\Http\Response
      */
-    public function destroy(ExpenseHead $expenseHead)
+    public function destroy($expenseHead)
     {
-        //
+        ExpenseHead::destroy($expenseHead);
+        return redirect('/expensehead');
     }
 }

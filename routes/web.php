@@ -28,3 +28,6 @@ Auth::routes();
 
  Route::resource('/block','BlockController');
  Route::resource('/block/{id}/floor','FloorController');
+ Route::resource('/block/{block_id}/floor/{floor_id}/flat','FlatController');
+ Route::resource('expensehead','ExpenseHeadController');
+ Route::resource('expensehead/{expensehead_id}/expense','ExpenseController');

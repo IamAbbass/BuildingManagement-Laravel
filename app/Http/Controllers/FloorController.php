@@ -82,15 +82,16 @@ class FloorController extends Controller
      * @param  \App\Floor  $floor
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request,$block_id)
+    public function update(Request $request,$block,$floor)
     {
-        $floor_id=$request->floor_id;
+        
+       
       $floor_data=array(
           'name'=>$request->name,
           'description'=>$request->description,
       );
-      Floor::whereId($floor_id)->update($floor_data);
-      return redirect('/block'. '/'.$block_id.'/floor');
+      Floor::whereId($floor)->update($floor_data);
+      return redirect('/block'. '/'.$block.'/floor');
     }
 
     /**
@@ -99,10 +100,11 @@ class FloorController extends Controller
      * @param  \App\Floor  $floor
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Request $request)
+    public function destroy($block,$floor)
     {
-       $floor_id = $request->floor_id;
-       Floor::destroy($floor_id);
+        
+       
+       Floor::destroy($floor);
        return redirect()->back();
     }
 }
