@@ -6,21 +6,27 @@
     <!-- ############ Content START-->
     <div id="content" class="flex ">
        <!-- ############ Main START-->
-    <a href="/block/{{$id}}/floor/create">Add Floor</a>
+    {{-- <a href="/block/{{$id}}/floor/create">Add Floor</a> --}}
        <div>
            <div class="page-hero page-container " id="page-hero">
                <div class="padding d-flex">
                    <div class="page-title">
-                       <h2 class="text-md text-highlight">All Floor</h2>
+                       <h2 class="text-md text-highlight">  
+                        <a href="/block" class="btn btn-md text-muted">
+                            <i data-feather="arrow-left"></i>
+                        <span class="d-none d-sm-inline mx-1">{{$block->name}}</span>
+                            
+                        </a>
+                        </h2>
                       
                    </div>
-                   {{-- <div class="flex"></div> --}}
-                   {{-- <div>
-                       <a href="https://themeforest.net/item/basik-responsive-bootstrap-web-admin-template/23365964" class="btn btn-md text-muted">
-                           <span class="d-none d-sm-inline mx-1">Buy this Item</span>
+                   <div class="flex"></div>
+                   <div>
+                   <a href="/block/{{$id}}/floor/create" class="btn btn-md text-muted">
+                       <span class="d-none d-sm-inline mx-1">Add Floor</span>
                            <i data-feather="arrow-right"></i>
                        </a>
-                   </div> --}}
+                   </div>
                </div>
            </div>
            <div class="page-content page-container" id="page-content">
@@ -35,7 +41,7 @@
                                <th data-sortable="true" data-field="owner">Name</th>
                                <th data-sortable="true" data-field="project">Description</th>
                                <th data-sortable="true" data-field="project">Building</th>
-                               <th data-sortable="true" data-field="project">Floor</th>
+                               <th data-sortable="true" data-field="project">Block</th>
                                <th data-field="task"><span class="d-none d-sm-block">Action</span></th>
                              
                                <th></th>
@@ -80,21 +86,15 @@
                             <td class="flex">
                                 {{-- <a href="#" class="item-title text-color ">Feed Reader</a> --}}
                                 <div class="item-except text-muted text-sm h-1x">
-                                    @foreach ($block as $blocks)
-                                        
-                                    
-                                   @if ($item->block_id==$blocks->id)
-                                       {{$blocks->name}}
-                                   @else
-                                       
-                                   @endif
-                                   @endforeach
+                                  {{$block->name}}
                                     {{-- <a href='#'>#big data</a> --}}
                                 </div>
                             </td>
                                
                                <td>
                                    <div class="item-action dropdown">
+                                   <a href="/block/{{$id}}/floor/{{$item->id}}/flat" class="btn gd-warning text-white btn-rounded">Add Flat</a>
+
                                        <a href="#" data-toggle="dropdown" class="text-muted">
                                            <i data-feather="more-vertical"></i>
                                        </a>

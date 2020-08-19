@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Block;
 // use App\User;
+use App\Building;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -16,9 +17,9 @@ class BlockController extends Controller
      */
     public function index()
     {
-        
+        $building=Building::findOrFail(Auth::User()->building_id);    // i want all building to find which is login buildin id 
         $block=Block::where('building_id','=',Auth::User()->building_id)->paginate(2);
-         return view('Block.All_Block',['block'=>$block]);
+         return view('Block.All_Block',['block'=>$block,'building'=>$building]);
     }
 
     /**
@@ -28,8 +29,8 @@ class BlockController extends Controller
      */
     public function create()
     {
-        
-         return view('Block.Add_Block');
+        $building=Building::findOrFail(Auth::User()->building_id);
+         return view('Block.Add_Block',['building'=>$building]);
     }
 
     /**

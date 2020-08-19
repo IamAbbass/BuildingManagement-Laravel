@@ -17,7 +17,7 @@ class FloorController extends Controller
      */
     public function index($id)
     {
-         $block=Block::all();
+         $block=Block::findOrFail($id);
          $builidng=Building::all();
          $floor=Floor::where('building_id','=',Auth()->User()->building_id)->where('block_id','=',$id) ->get();
          return view('Floor.All_Floor',['floor'=>$floor,'building'=>$builidng,'block'=>$block,'id'=>$id]);
@@ -30,8 +30,8 @@ class FloorController extends Controller
      */
     public function create($id)
     {
-        
-        return view('Floor.Add_Floor',['id'=>$id]);
+        $block=Block::findOrFail($id);
+        return view('Floor.Add_Floor',['id'=>$id ,'block'=>$block]);
     }
 
     /**

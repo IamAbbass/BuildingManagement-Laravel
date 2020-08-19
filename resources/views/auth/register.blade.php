@@ -65,7 +65,19 @@
 
                         {{-- this is my code  --}}
 
-                       
+                        <div class="form-group row">
+                            <label  class="col-md-4 col-form-label text-md-right">building name</label>
+
+                            <div class="col-md-6">
+                                <input id="" type="text" name="building_name" class="form-control @error('phone') is-invalid @enderror" name="phone" required >
+                              
+                                @error('building_name')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                            </div>
+                        </div>
 
                         <div class="form-group row">
                             <label  class="col-md-4 col-form-label text-md-right">Phone Number</label>

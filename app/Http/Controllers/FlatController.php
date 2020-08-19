@@ -32,7 +32,8 @@ class FlatController extends Controller
      */
     public function create($block_id,$floor_id)
     {
-        return view('Flat.Add_Flat',['block_id'=>$block_id,'floor_id'=>$floor_id]);
+        $floor=Floor::findOrFail($floor_id);
+        return view('Flat.Add_Flat',['block_id'=>$block_id,'floor_id'=>$floor_id,'floor'=>$floor]);
     }
 
     /**

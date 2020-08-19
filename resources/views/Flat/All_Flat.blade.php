@@ -6,21 +6,27 @@
     <!-- ############ Content START-->
     <div id="content" class="flex ">
        <!-- ############ Main START-->
-    <a href="/block/{{$block_id}}/floor/{{$floor_id}}/flat/create">Add flat</a>
+    {{-- <a href="/block/{{$block_id}}/floor/{{$floor_id}}/flat/create">Add flat</a> --}}
        <div>
            <div class="page-hero page-container " id="page-hero">
                <div class="padding d-flex">
                    <div class="page-title">
-                       <h2 class="text-md text-highlight">All flat</h2>
-                      
+                    <a href="/block/{{$block_id}}/floor/{{$floor_id}}/flat/create" class="btn btn-md text-muted">
+                    <span class="d-none d-sm-inline mx-1">@foreach ($floor as $item)
+                        @if ($item->id==$floor_id)
+                            {{$item->name}}
+                        @endif
+                    @endforeach</span>
+                        <i data-feather="arrow-right"></i>
+                    </a>
                    </div>
-                   {{-- <div class="flex"></div> --}}
-                   {{-- <div>
-                       <a href="https://themeforest.net/item/basik-responsive-bootstrap-web-admin-template/23365964" class="btn btn-md text-muted">
-                           <span class="d-none d-sm-inline mx-1">Buy this Item</span>
+                   <div class="flex"></div>
+                   <div>
+                   <a href="/block/{{$block_id}}/floor/{{$floor_id}}/flat/create" class="btn btn-md text-muted">
+                           <span class="d-none d-sm-inline mx-1">Add Flat</span>
                            <i data-feather="arrow-right"></i>
                        </a>
-                   </div> --}}
+                   </div>
                </div>
            </div>
            <div class="page-content page-container" id="page-content">

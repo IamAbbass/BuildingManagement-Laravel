@@ -69,7 +69,7 @@ class RegisterController extends Controller
     {
 
         $building = Building::create([
-          'name' => request('name'),
+          'name' => request('building_name'),
           'phone' => request('phone'),
           'address' => request('address'),
         ]);
