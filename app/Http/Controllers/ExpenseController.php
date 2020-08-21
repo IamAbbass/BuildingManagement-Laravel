@@ -29,8 +29,9 @@ class ExpenseController extends Controller
      */
     public function create($expensehead_id)
     {
-
-        return view('Expense.Add_Expense',['expensehead_id'=>$expensehead_id]);
+        $expensehead_name=ExpenseHead::findOrFail($expensehead_id);
+        
+        return view('Expense.Add_Expense',['expensehead_id'=>$expensehead_id,'expensehead_name'=>$expensehead_name]);
     }
 
     /**
@@ -41,6 +42,7 @@ class ExpenseController extends Controller
      */
     public function store(Request $request ,$expensehead_id)
     {
+        $expense_name=$request->name;
         $expense_data=array(
             'name'=>$request->name,
             'amount'=>$request->amount,
@@ -50,7 +52,7 @@ class ExpenseController extends Controller
             'building_id'=>Auth()->User()->building_id
         );
        Expense::create($expense_data);
-       return redirect('/expensehead'.'/'.$expensehead_id.'/expense');
+       return redirect('/expensehead'.'/'.$expensehead_id.'/expense')->with('addexpense',$expense_name.' Added Successfully');
     }
 
     /**
@@ -59,7 +61,7 @@ class ExpenseController extends Controller
      * @param  \App\Expense  $expense
      * @return \Illuminate\Http\Response
      */
-    public function show(Expense $expense)
+    public function show()
     {
         
     }
@@ -92,13 +94,15 @@ class ExpenseController extends Controller
      */
     public function update(Request $request,$expensehead,$expense)
     {
+     
+        $expense_name=Expense::findOrFail($expense);
         $expense_data=array(
             'name'=>$request->name,
             'amount'=>$request->amount,
             'description'=>$request->description
         );
        Expense::whereId($expense)->update($expense_data);
-       return redirect('/expensehead'.'/'.$expensehead.'/expense');
+       return redirect('/expensehead'.'/'.$expensehead.'/expense')->with('updateexpense',$expense_name->name.' Updated Successfully');
     }
 
     /**
@@ -109,7 +113,10 @@ class ExpenseController extends Controller
      */
     public function destroy($expensehead_id,$expense_id)
     {
+        
+        
+        $deleteexpense=Expense::findOrFail($expense_id);
         Expense::destroy($expense_id);
-        return redirect('/expensehead'.'/'.$expensehead_id.'/expense');
+        return redirect()->back()->with('deleteexpense',$deleteexpense->name.' Deleted Seccessfully');
     }
 }

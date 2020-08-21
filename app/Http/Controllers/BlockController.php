@@ -18,7 +18,7 @@ class BlockController extends Controller
     public function index()
     {
         $building=Building::findOrFail(Auth::User()->building_id);    // i want all building to find which is login buildin id 
-        $block=Block::where('building_id','=',Auth::User()->building_id)->paginate(2);
+        $block=Block::where('building_id','=',Auth::User()->building_id)->paginate(10);
          return view('Block.All_Block',['block'=>$block,'building'=>$building]);
     }
 
@@ -51,7 +51,7 @@ class BlockController extends Controller
             'building_id'=>Auth()->User()->building_id
         );
         Block::create($block_data);
-        return redirect('/block');
+        return redirect('/block')->with('block','Block Added Succesfully');
        
     }
 
@@ -97,7 +97,7 @@ class BlockController extends Controller
             'description'=>$request->description
         );
         Block::whereId($block->id)->update($block_data);
-        return redirect('/block');
+        return redirect('/block')->with('Update','Block updated Succesfully');
     }
 
     /**
@@ -109,6 +109,6 @@ class BlockController extends Controller
     public function destroy(Block $block)
     {
         Block::destroy($block->id);
-        return redirect('/block');
+        return redirect('/block')->with('delete','block deleted successfully');
     }
 }

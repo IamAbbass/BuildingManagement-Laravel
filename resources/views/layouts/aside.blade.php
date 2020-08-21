@@ -37,6 +37,13 @@
                             <span class="nav-badge"><b class="badge-circle xs text-danger"></b></span>
                         </a>
                     </li>
+                    <li>
+                        <a href="/expensehead">
+                            <span class="nav-icon text-info"><i data-feather='calendar'></i></span>
+                            <span class="nav-text">Expense Head</span>
+                            <span class="nav-badge"><b class="badge-circle xs text-danger"></b></span>
+                        </a>
+                    </li>
                 </ul>
 
             </div>

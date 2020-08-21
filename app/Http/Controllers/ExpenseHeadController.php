@@ -17,7 +17,7 @@ class ExpenseHeadController extends Controller
     {
 
         $expensehead=Expensehead::where('building_id','=',Auth()->User()->building_id)->get();
-        $building=Building::all();
+        $building=Building::findOrFail(Auth()->User()->building_id);
         return view('ExpenseHead.All_ExpenseHead',['expensehead'=>$expensehead,'building'=>$building]);
     }
 
@@ -28,7 +28,8 @@ class ExpenseHeadController extends Controller
      */
     public function create()
     {
-        return view('ExpenseHead.Add_ExpenseHead');
+        $building=Building::findOrFail(Auth()->User()->building_id);
+        return view('ExpenseHead.Add_ExpenseHead' ,['building'=>$building]);
     }
 
     /**
@@ -39,13 +40,14 @@ class ExpenseHeadController extends Controller
      */
     public function store(Request $request)
     {
+        $expensehead_name=$request->name;
        $expensehead=array(
            'name'=>$request->name,
            'description'=>$request->description,
            'building_id'=>Auth()->User()->building_id
        );
        ExpenseHead::create($expensehead);
-       return redirect('/expensehead');
+       return redirect('/expensehead')->with('addexpensehead',$expensehead_name.' added Seccessfully');
     }
 
     /**
@@ -91,12 +93,14 @@ class ExpenseHeadController extends Controller
      */
     public function update(Request $request, $expensehead_id)
     {
+        $old_expensehead_name=ExpenseHead::findOrFail($expensehead_id);
+        $new_expensehead_name=$request->name;
         $expensehead_data=array(
             'name'=>$request->name,
             'description'=>$request->description
         );
         ExpenseHead::whereId($expensehead_id)->update($expensehead_data);
-        return redirect('/expensehead');
+        return redirect('/expensehead')->with('updateexpensehead',$old_expensehead_name->name.' Updated to '.$new_expensehead_name);
     }
 
     /**
@@ -107,7 +111,8 @@ class ExpenseHeadController extends Controller
      */
     public function destroy($expenseHead)
     {
+        $expensehead_name=ExpenseHead::findOrFail($expenseHead);
         ExpenseHead::destroy($expenseHead);
-        return redirect('/expensehead');
+        return redirect('/expensehead')->with('deleteexpensehead',$expensehead_name->name.' Deleted');
     }
 }

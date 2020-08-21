@@ -27,6 +27,39 @@
                     </div>
                 </div>
             </div>
+
+            
+
+        @if (\Session::has('block'))
+        <div class="alert alert-primary alert-dismissible fade show" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                <span class="sr-only">Close</span>
+            </button>
+            <strong>Alert</strong> {{!! \Session::get('block') !!}}
+        </div>
+        @endif
+
+        @if (\Session::has('Update'))
+        <div class="alert alert-primary alert-dismissible fade show" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                <span class="sr-only">Close</span>
+            </button>
+            <strong>Alert</strong> {{!! \Session::get('Update') !!}}
+        </div>
+        @endif
+
+        @if (\Session::has('delete'))
+        <div class="alert alert-primary alert-dismissible fade show" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                <span class="sr-only">Close</span>
+            </button>
+            <strong>Alert</strong> {{!! \Session::get('delete') !!}}
+        </div>
+        @endif
+
             <div class="page-content page-container" id="page-content">
                 <div class="padding">
                     <div id="toolbar">
@@ -47,6 +80,11 @@
                         <tbody>
                         
                             
+                           @if ($block->count() > 0)
+                               
+                           
+                               
+                      
                             @foreach ($block as $item)
                     
                             <tr class=" " data-id="13">
@@ -105,6 +143,18 @@
                                 </td>
                             </tr>
                             @endforeach
+                            @else
+
+                            <div class="alert alert-primary alert-dismissible fade show" role="alert">
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                    <span class="sr-only">alert</span>
+                                </button>
+                                <strong>There is no block must add first</strong> 
+                            </div>
+
+                          
+                            @endif
                         </tbody>
                     </table>
                 </div>

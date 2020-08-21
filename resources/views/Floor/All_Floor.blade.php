@@ -29,6 +29,38 @@
                    </div>
                </div>
            </div>
+
+           @if (\Session::has('addfloor'))
+                    <div class="alert alert-primary alert-dismissible fade show" role="alert">
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                        <span class="sr-only">Close</span>
+                        </button>
+                        <strong>Alert</strong> {{!!  \session::get('addfloor')  !!}}
+                    </div>
+           @endif
+
+           @if (\Session::has('updatefloor'))
+                    <div class="alert alert-primary alert-dismissible fade show" role="alert">
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                        <span class="sr-only">Close</span>
+                        </button>
+                        <strong>Alert</strong> {{!!  \session::get('updatefloor')  !!}}
+                    </div>
+           @endif
+
+           @if (\Session::has('deletefloor'))
+                    <div class="alert alert-primary alert-dismissible fade show" role="alert">
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                        <span class="sr-only">Close</span>
+                        </button>
+                        <strong>Alert</strong> {{!!  \session::get('deletefloor')  !!}}
+                    </div>
+           @endif
+
+
            <div class="page-content page-container" id="page-content">
                <div class="padding">
                    <div id="toolbar">
@@ -49,7 +81,10 @@
                        </thead>
                        <tbody>
                        
-                           
+                        @if ($floor->count() > 0)
+                            
+                          
+
                            @foreach ($floor as $item)
                    
                            <tr class=" " data-id="13">
@@ -116,6 +151,16 @@
                                </td>
                            </tr>
                            @endforeach
+                           @else
+
+                           <div class="alert alert-primary alert-dismissible fade show" role="alert">
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                                <span class="sr-only">alert</span>
+                            </button>
+                            <strong>There is no floor must add first</strong> 
+                        </div>
+                           @endif
                        </tbody>
                    </table>
                </div>

@@ -6,23 +6,66 @@
      <!-- ############ Content START-->
      <div id="content" class="flex ">
         <!-- ############ Main START-->
-     <a href="/expensehead/{{$expensehead_id}}/expense/create">Add Expense</a>
+     {{-- <a href="/expensehead/{{$expensehead_id}}/expense/create">Add Expense</a> --}}
         <div>
             <div class="page-hero page-container " id="page-hero">
                 <div class="padding d-flex">
                     <div class="page-title">
-                        <h2 class="text-md text-highlight">All Expense</h2>
-                       
-                    </div>
-                    {{-- <div class="flex"></div> --}}
-                    {{-- <div>
-                        <a href="https://themeforest.net/item/basik-responsive-bootstrap-web-admin-template/23365964" class="btn btn-md text-muted">
-                            <span class="d-none d-sm-inline mx-1">Buy this Item</span>
+                        <a href="/expensehead" class="btn btn-md text-muted">
+                            <span class="d-none d-sm-inline mx-1">@foreach ($expensehead as $item)
+                                @if ($item->id==$expensehead_id)
+                                    {{$item->name}}
+                                @endif
+                            @endforeach</span>
                             <i data-feather="arrow-right"></i>
                         </a>
-                    </div> --}}
+                    </div>
+                    <div class="flex"></div>
+                    <div>
+                    <a href="/expensehead/{{$expensehead_id}}/expense/create" class="btn btn-md text-muted">
+                            <span class="d-none d-sm-inline mx-1">Add Expense</span>
+                            <i data-feather="arrow-right"></i>
+                        </a>
+                    </div>
                 </div>
             </div>
+
+            @if (\Session::has('addexpense'))
+                
+            <div class="alert alert-primary alert-dismissible fade show" role="alert">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                    <span class="sr-only">Close</span>
+                </button>
+                <strong>Alert</strong>{{!! \Session::get('addexpense') !!}}
+            </div>
+
+            @endif
+
+            @if (\Session::has('updateexpense'))
+                
+            <div class="alert alert-primary alert-dismissible fade show" role="alert">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                    <span class="sr-only">Close</span>
+                </button>
+                <strong>Alert</strong>{{!! \Session::get('updateexpense') !!}}
+            </div>
+
+            @endif
+
+            @if (\Session::has('deleteexpense'))
+                
+            <div class="alert alert-primary alert-dismissible fade show" role="alert">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                    <span class="sr-only">Close</span>
+                </button>
+                <strong>Alert</strong>{{!! \Session::get('deleteexpense') !!}}
+            </div>
+
+            @endif
+
             <div class="page-content page-container" id="page-content">
                 <div class="padding">
                     <div id="toolbar">
@@ -44,7 +87,8 @@
                         </thead>
                         <tbody>
                         
-                            
+                            @if ($expense->count() > 0)
+
                             @foreach ($expense as $item)
                     
                             <tr class=" " data-id="13">
@@ -105,6 +149,15 @@
                                 </td>
                             </tr>
                             @endforeach
+                            @else
+                                <div class="alert alert-primary alert-dismissible fade show" role="alert">
+                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                        <span class="sr-only">Close</span>
+                                    </button>
+                                    <strong>Alert</strong> There is no expense
+                                </div>
+                            @endif
                         </tbody>
                     </table>
                 </div>

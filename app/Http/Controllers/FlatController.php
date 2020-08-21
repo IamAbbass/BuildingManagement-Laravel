@@ -44,7 +44,7 @@ class FlatController extends Controller
      */
     public function store(Request $request,$block_id,$floor_id)
     {
-     
+     $flat=$request->name;
         $flat_data=array
         (
             'flat_no'=>$request->flat_no,
@@ -58,7 +58,7 @@ class FlatController extends Controller
             'building_id'=>Auth()->User()->building_id
         );
         Flat::create($flat_data);
-        return redirect('/block'.'/'.$block_id.'/floor'.'/'.$floor_id.'/flat');
+        return redirect('/block'.'/'.$block_id.'/floor'.'/'.$floor_id.'/flat')->with('addflat',$flat.' Added Successfully');
 
     }
 
@@ -94,6 +94,7 @@ class FlatController extends Controller
      */
     public function update(Request $request,$block,$floor,$flat)
     {
+        $flat_name=Flat::findOrFail($flat);
         $flat_data=array
         (
             'flat_no'=>$request->flat_no,
@@ -105,7 +106,7 @@ class FlatController extends Controller
            
         );
         Flat::whereId($flat)->update($flat_data);
-        return redirect('/block'.'/'.$block.'/floor'.'/'.$floor.'/flat');
+        return redirect('/block'.'/'.$block.'/floor'.'/'.$floor.'/flat')->with('updateflat',$flat_name->name.'  updated');
     }
 
     /**
@@ -116,7 +117,8 @@ class FlatController extends Controller
      */
     public function destroy($block,$floor,$flat)
     {
+        $flat_name=Flat::findOrFail($flat);
         Flat::destroy($flat);
-        return redirect()->back();
+        return redirect('/block'.'/'.$block.'/floor'.'/'.$floor.'/flat')->with('deleteflat',$flat_name->name.' deleted');
     }
 }

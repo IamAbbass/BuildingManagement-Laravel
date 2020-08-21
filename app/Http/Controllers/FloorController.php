@@ -42,6 +42,7 @@ class FloorController extends Controller
      */
     public function store(Request $request,$id)
     {
+        $floor_name=$request->name;
         $floor=array(
             'name'=>$request->name,
             'description'=>$request->description,
@@ -49,7 +50,7 @@ class FloorController extends Controller
             'building_id'=>Auth()->User()->building_id
         );
       Floor::create($floor);
-      return redirect('/block'. '/'.$id.'/floor');
+      return redirect('/block'. '/'.$id.'/floor')->with('addfloor' ,$floor_name . '  Added Successfully');
     }
 
     /**
@@ -84,14 +85,14 @@ class FloorController extends Controller
      */
     public function update(Request $request,$block,$floor)
     {
-        
-       
+        $update_floor=$request->name;
+       $floor_name=Floor::findOrFail($floor);
       $floor_data=array(
           'name'=>$request->name,
           'description'=>$request->description,
       );
       Floor::whereId($floor)->update($floor_data);
-      return redirect('/block'. '/'.$block.'/floor');
+      return redirect('/block'. '/'.$block.'/floor')->with('updatefloor',$floor_name->name. ' updated to '.$update_floor);
     }
 
     /**
@@ -103,8 +104,8 @@ class FloorController extends Controller
     public function destroy($block,$floor)
     {
         
-       
+       $floor_name =Floor::findOrFail($floor);
        Floor::destroy($floor);
-       return redirect()->back();
+       return redirect('/block'.'/'.$block.'/floor')->with('deletefloor',$floor_name->name.' Floor deleted');
     }
 }

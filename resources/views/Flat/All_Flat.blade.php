@@ -11,7 +11,7 @@
            <div class="page-hero page-container " id="page-hero">
                <div class="padding d-flex">
                    <div class="page-title">
-                    <a href="/block/{{$block_id}}/floor/{{$floor_id}}/flat/create" class="btn btn-md text-muted">
+                    <a href="/block/{{$block_id}}/floor/" class="btn btn-md text-muted">
                     <span class="d-none d-sm-inline mx-1">@foreach ($floor as $item)
                         @if ($item->id==$floor_id)
                             {{$item->name}}
@@ -29,6 +29,40 @@
                    </div>
                </div>
            </div>
+
+           @if (\Session::has('updateflat'))
+           <div class="alert alert-primary alert-dismissible fade show" role="alert">
+               <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                   <span aria-hidden="true">&times;</span>
+                   <span class="sr-only">Close</span>
+               </button>
+               <strong>Alert</strong>{{!! \Session::get('updateflat') !!}}
+           </div>
+           @endif
+
+
+           @if (\Session::has('addflat'))
+           <div class="alert alert-primary alert-dismissible fade show" role="alert">
+               <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                   <span aria-hidden="true">&times;</span>
+                   <span class="sr-only">Close</span>
+               </button>
+               <strong>Alert</strong>{{!! \Session::get('addflat') !!}}
+           </div>
+           @endif
+
+
+           @if (\Session::has('deleteflat'))
+           <div class="alert alert-primary alert-dismissible fade show" role="alert">
+               <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                   <span aria-hidden="true">&times;</span>
+                   <span class="sr-only">Close</span>
+               </button>
+               <strong>Alert</strong>{{!! \Session::get('deleteflat') !!}}
+           </div>
+           @endif
+
+
            <div class="page-content page-container" id="page-content">
                <div class="padding">
                    <div id="toolbar">
@@ -54,7 +88,9 @@
                        </thead>
                        <tbody>
                        
-                           
+                           @if ($flat->count() > 0)
+                               
+                        
                            @foreach ($flat as $item)
                    
                            <tr class=" " data-id="13">
@@ -150,6 +186,15 @@
                                </td>
                            </tr>
                            @endforeach
+                           @else
+                               <div class="alert alert-primary alert-dismissible fade show" role="alert">
+                                   <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                       <span aria-hidden="true">&times;</span>
+                                       <span class="sr-only">Close</span>
+                                   </button>
+                                   <strong>Alert</strong> There is no flat 
+                               </div>
+                           @endif
                        </tbody>
                    </table>
                </div>

@@ -25,7 +25,7 @@
         <div id="main" class="layout-column flex">
             <!-- ############ Header START-->
             @include('layouts.header')
-            <!-- ############ Footer END-->
+            
             <!-- ############ Content START-->
             @yield('content')
             <!-- ############ Content END-->
