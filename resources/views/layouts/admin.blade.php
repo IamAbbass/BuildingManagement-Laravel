@@ -13,7 +13,7 @@
         <link rel="stylesheet" href="{{ asset('/basik/assets/css/theme.css') }}" type="text/css" />
         <link rel="stylesheet" href="{{ asset('/basik/assets/css/style.css') }}" type="text/css" />
         <link rel="stylesheet" href="{{ asset('/css/admin.css') }}" type="text/css" />
-
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
         
         <!-- endbuild -->

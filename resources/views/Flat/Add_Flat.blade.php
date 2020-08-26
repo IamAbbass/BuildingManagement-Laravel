@@ -67,11 +67,14 @@
 
                             <div class="form-group row">
                                 <label class="col-sm-2 col-form-label">Status</label>
-                                <select class="col-sm-9 form-control" name="status" data-plugin="select2" data-option="{}" data-minimum-results-for-search="Infinity">
+                                <div class="col-sm-9">
+
+                                <select class=" form-control" name="status" data-plugin="select2" data-option="{}" data-minimum-results-for-search="Infinity">
                                     <option value="owner">owner</option>
                                     <option value="rent" >rent</option>
                                     <option value="vacant">vacant</option>
                                 </select>
+                                </div>
                             </div>
                            
                            

@@ -14,14 +14,14 @@
                         {{-- <h2 class="text-md text-highlight">All Blocks</h2> --}}
                         <a href="" class="btn btn-md text-muted">
                             <i data-feather="arrow-left"></i>
-                            <span class="d-none d-sm-inline mx-1">{{$building->name}}</span>
+                            <span class="d-none d-sm-inline mx-1"></span>
                             
                         </a>
                     </div>
                     <div class="flex"></div>
                     <div>
-                        <a href="/block/create" class="btn btn-md text-muted">
-                            <span class="d-none d-sm-inline mx-1">Add block</span>
+                        <a href="maintainance/create" class="btn btn-md text-muted">
+                            <span class="d-none d-sm-inline mx-1">Add maintenance</span>
                             <i data-feather="arrow-right"></i>
                         </a>
                     </div>
@@ -29,7 +29,7 @@
             </div>
 
             
-
+{{-- 
         @if (\Session::has('block'))
         <div class="alert alert-primary alert-dismissible fade show" role="alert">
             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
@@ -58,7 +58,7 @@
             </button>
             <strong>Alert</strong> {{!! \Session::get('delete') !!}}
         </div>
-        @endif
+        @endif --}}
 
             <div class="page-content page-container" id="page-content">
                 <div class="padding">
@@ -69,9 +69,12 @@
                         <thead>
                             <tr>
                                 <th data-sortable="true" data-field="id">ID</th>
-                                <th data-sortable="true" data-field="owner">Name</th>
-                                <th data-sortable="true" data-field="project">Description</th>
+                                <th data-sortable="true" data-field="owner">block</th>
+                                <th data-sortable="true" data-field="project">floor</th>
+                                <th data-sortable="true" data-field="project">flat</th>
                                 <th data-sortable="true" data-field="project">building</th>
+                                <th data-sortable="true" data-field="project">amount</th>
+                                <th data-sortable="true" data-field="project">description</th>
                                 <th data-field="task"><span class="d-none d-sm-block">Action</span></th>
                               
                                 <th></th>
@@ -80,61 +83,81 @@
                         <tbody>
                         
                             
-                           @if ($block->count() > 0)
+                           @if ($maintenance->count() > 0)
                                
                            
                                
                       
-                            @foreach ($block as $item)
+                            @foreach ($maintenance as $item)
                     
                             <tr class=" " data-id="13">
                                 <td style="min-width:30px;text-align:center">
                                 <span class="w-32 avatar gd-primary">{{$item->id}}</span>
                                 </td>
                                 <td>
-                                <div class="item-except text-muted text-sm h-1x">{{$item->name}}</div>
-                                {{-- <span class="item-amount d-none d-sm-block text-sm "><a href="/block/{{$item->id}}/floor" class="item-title text-color ">{{$item->name}}</a></span> --}}
+                                <div class="item-except text-muted text-sm h-1x">
+                                    @foreach ($block as $blocks)
+                                        @if ($item->block_id==$blocks->id)
+                                           {{ $blocks->name}}
+                                        @endif
+                                    @endforeach
+                                </div>
                                 </td>
-                                <td class="flex">
-                                    {{-- <a href="#" class="item-title text-color ">Feed Reader</a> --}}
-                                    <div class="item-except text-muted text-sm h-1x">
-                               {{ $item->description}}
-                                        {{-- <a href='#'>#big data</a> --}}
-                                    </div>
+                                <td>
+                                <div class="item-except text-muted text-sm h-1x">
+                                @foreach ($floor as $floors)
+                                    @if ($item->floor_id==$floors->id)
+                                        {{$floors->name}}
+                                    @endif
+                                @endforeach
+                                 </div>
                                 </td>
                                 
-                                <td class="flex">
-                                    {{-- <a href="#" class="item-title text-color ">Feed Reader</a> --}}
+                                <td>
                                     <div class="item-except text-muted text-sm h-1x">
-                           
-                                        {{$building->name}}
-                            {{-- @foreach ($building as $buildings)
-                                @if ($item->building_id==$buildings->id)
-                                    {{$buildings->name}}
-                                @endif
-                            @endforeach       --}}
-                            
-                                        {{-- <a href='#'>#big data</a> --}}
+                                   @foreach ($flat as $flats)
+                                       @if ($item->flat_id==$flats->id)
+                                           {{$flats->name}}
+                                       @endif
+                                   @endforeach
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="item-except text-muted text-sm h-1x">
+                                        @foreach ($building as $buildings)
+                                            @if ($item->building_id==$buildings->id)
+                                                {{$buildings->name}}
+                                            @endif
+                                        @endforeach
+                                    </div>
+                                </td>
+
+                                <td>
+                                    <div class="item-except text-muted text-sm h-1x">
+                                        {{$item->amount}}
+                                    </div>
+                                </td>
+
+                                <td>
+                                    <div class="item-except text-muted text-sm h-1x">
+                                        {{$item->description}}
                                     </div>
                                 </td>
                                 
 
                                 <td>
                                     <div class="item-action dropdown">
-
-                                    <a href="/block/{{$item->id}}/floor" class="btn gd-warning text-white btn-rounded">Add floor</a>
-
                                         <a href="#" data-toggle="dropdown" class="text-muted">
                                             <i data-feather="more-vertical"></i>
                                         </a>
                                         <div class="dropdown-menu dropdown-menu-right bg-black" role="menu">
-                                        <a class="dropdown-item" href="/block/{{$item->id}}/edit">
+                                        <a class="dropdown-item" href="/maintainance/{{$item->id}}/edit">
                                                 Edit
                                             </a>
                                             <a class="dropdown-item" href="#">
                                                 show
                                             </a>
-                                        <form action="/block/{{$item->id}}" method="post">
+                                        <form action="/maintainance/{{$item->id}}" method="post">
                                                 @csrf
                                                 @method('DELETE')
                                                 <button type="submit" class="dropdown-item">delete</button>
@@ -165,7 +188,7 @@
     </div>
     <!-- ############ Content END-->
 
-    {{$block->links()}}
+    {{-- {{$block->links()}} --}}
 </div>
 
 @endsection
