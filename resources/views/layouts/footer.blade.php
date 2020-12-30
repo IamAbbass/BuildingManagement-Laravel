@@ -1,6 +1,9 @@
-<div id="footer" class="page-footer hide">
-    <div class="d-flex p-3">
-        <span class="text-sm text-muted flex">&copy; Copyright. zeddevelopers.com</span>
-        <div class="text-sm text-muted">Version 1.0</div>
+<!-- Footer -->
+<footer class="sticky-footer bg-white">
+    <div class="container my-auto">
+        <div class="copyright text-center my-auto">
+            <span>Copyright &copy; Zed Developers 2020</span>
+        </div>
     </div>
-</div>
+</footer>
+<!-- End of Footer -->

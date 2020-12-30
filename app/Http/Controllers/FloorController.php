@@ -2,25 +2,24 @@
 
 namespace App\Http\Controllers;
 
-use App\Floor;
-use App\Block;
-use App\Building;
+use App\Models\Floor;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 
 class FloorController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+    
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index($id)
+    public function index()
     {
-         $block=Block::findOrFail($id);
-         $builidng=Building::all();
-         $floor=Floor::where('building_id','=',Auth()->User()->building_id)->where('block_id','=',$id) ->get();
-         return view('Floor.All_Floor',['floor'=>$floor,'building'=>$builidng,'block'=>$block,'id'=>$id]);
+        //
     }
 
     /**
@@ -28,10 +27,9 @@ class FloorController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create($id)
+    public function create()
     {
-        $block=Block::findOrFail($id);
-        return view('Floor.Add_Floor',['id'=>$id ,'block'=>$block]);
+        //
     }
 
     /**
@@ -40,23 +38,15 @@ class FloorController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request,$id)
+    public function store(Request $request)
     {
-        $floor_name=$request->name;
-        $floor=array(
-            'name'=>$request->name,
-            'description'=>$request->description,
-            'block_id'=>$id,
-            'building_id'=>Auth()->User()->building_id
-        );
-      Floor::create($floor);
-      return redirect('/block'. '/'.$id.'/floor')->with('addfloor' ,$floor_name . '  Added Successfully');
+        //
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Floor  $floor
+     * @param  \App\Models\Floor  $floor
      * @return \Illuminate\Http\Response
      */
     public function show(Floor $floor)
@@ -67,45 +57,34 @@ class FloorController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Floor  $floor
+     * @param  \App\Models\Floor  $floor
      * @return \Illuminate\Http\Response
      */
-    public function edit($block_id ,$floor_id)
+    public function edit(Floor $floor)
     {
-     $floor=Floor::findOrFail($floor_id);       
-     return view('Floor.Update_Floor',['floor'=>$floor,'block'=>$block_id]);
+        //
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Floor  $floor
+     * @param  \App\Models\Floor  $floor
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request,$block,$floor)
+    public function update(Request $request, Floor $floor)
     {
-        $update_floor=$request->name;
-       $floor_name=Floor::findOrFail($floor);
-      $floor_data=array(
-          'name'=>$request->name,
-          'description'=>$request->description,
-      );
-      Floor::whereId($floor)->update($floor_data);
-      return redirect('/block'. '/'.$block.'/floor')->with('updatefloor',$floor_name->name. ' updated to '.$update_floor);
+        //
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Floor  $floor
+     * @param  \App\Models\Floor  $floor
      * @return \Illuminate\Http\Response
      */
-    public function destroy($block,$floor)
+    public function destroy(Floor $floor)
     {
-        
-       $floor_name =Floor::findOrFail($floor);
-       Floor::destroy($floor);
-       return redirect('/block'.'/'.$block.'/floor')->with('deletefloor',$floor_name->name.' Floor deleted');
+        //
     }
 }

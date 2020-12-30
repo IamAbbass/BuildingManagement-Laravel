@@ -2,117 +2,67 @@
 
 namespace App\Http\Controllers;
 
-use App\ExpenseHead;
-use App\Building;
+use App\Models\ExpenseHead;
 use Illuminate\Http\Request;
 
 class ExpenseHeadController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+    
     public function index()
     {
-
-        $expensehead=Expensehead::where('building_id','=',Auth()->User()->building_id)->get();
-        $building=Building::findOrFail(Auth()->User()->building_id);
-        return view('ExpenseHead.All_ExpenseHead',['expensehead'=>$expensehead,'building'=>$building]);
+        $expense_heads = ExpenseHead::all();
+        return view('expense_head.index',[
+            'expense_heads' => $expense_heads,
+        ]);
     }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    
     public function create()
     {
-        $building=Building::findOrFail(Auth()->User()->building_id);
-        return view('ExpenseHead.Add_ExpenseHead' ,['building'=>$building]);
+        return view('expense_head.create',);
     }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
+    
     public function store(Request $request)
     {
-        $expensehead_name=$request->name;
-       $expensehead=array(
-           'name'=>$request->name,
-           'description'=>$request->description,
-           'building_id'=>Auth()->User()->building_id
-       );
-       ExpenseHead::create($expensehead);
-       return redirect('/expensehead')->with('addexpensehead',$expensehead_name.' added Seccessfully');
-    }
+        ExpenseHead::create([
+            'name' => request('name'),
+            'created_by' => auth()->id()
+        ]);
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\ExpenseHead  $expenseHead
-     * @return \Illuminate\Http\Response
-     */
+        session()->flash('success','Expense Head Created!');
+        return redirect('/expensehead');
+    }
+    
     public function show(ExpenseHead $expenseHead)
     {
         //
     }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\ExpenseHead  $expenseHead
-     * @return \Illuminate\Http\Response
-     */
-    public function edit( $expenseHead)
+    
+    public function edit($id)
     {
-        //  return Auth()->User()->building_id;
-        $expensehead=ExpenseHead::findOrFail($expenseHead);
-            // return view('ExpenseHead.Update_ExpenseHead',['expensehead'=>$expensehead]);
-        if ($expensehead->building_id!=Auth()->User()->building_id) {
-          return "its not yours ";
-        } else {
-            
-            return view('ExpenseHead.Update_ExpenseHead',['expensehead'=>$expensehead]);
-        }
-        // return $expensehead->building_id;
-        
-
-       
+        $expense_head = ExpenseHead::findOrFail($id);
+        return view('expense_head.edit',[
+            'expense_head' => $expense_head,
+        ]);
     }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\ExpenseHead  $expenseHead
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $expensehead_id)
+    
+    public function update($id)
     {
-        $old_expensehead_name=ExpenseHead::findOrFail($expensehead_id);
-        $new_expensehead_name=$request->name;
-        $expensehead_data=array(
-            'name'=>$request->name,
-            'description'=>$request->description
-        );
-        ExpenseHead::whereId($expensehead_id)->update($expensehead_data);
-        return redirect('/expensehead')->with('updateexpensehead',$old_expensehead_name->name.' Updated to '.$new_expensehead_name);
+        $expense_head = ExpenseHead::findOrFail($id);
+        $expense_head->update([
+            'name' => request('name'),
+            'updated_by' => auth()->id()
+        ]);
+
+        session()->flash('success','Expense Head Updated!');
+        return redirect('/expensehead');
     }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\ExpenseHead  $expenseHead
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($expenseHead)
+    
+    public function destroy(ExpenseHead $expenseHead)
     {
-        $expensehead_name=ExpenseHead::findOrFail($expenseHead);
-        ExpenseHead::destroy($expenseHead);
-        return redirect('/expensehead')->with('deleteexpensehead',$expensehead_name->name.' Deleted');
+        //
     }
 }

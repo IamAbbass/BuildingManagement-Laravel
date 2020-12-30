@@ -1,262 +1,203 @@
-<div id="header" class="page-header ">
-    <div class="navbar navbar-expand-lg">
-        <!-- brand -->
-        <a href="index.html" class="navbar-brand d-lg-none">
-            <svg width="32" height="32" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg" fill="currentColor">
-                <g class="loading-spin" style="transform-origin: 256px 256px">
-                    <path d="M200.043 106.067c-40.631 15.171-73.434 46.382-90.717 85.933H256l-55.957-85.933zM412.797 288A160.723 160.723 0 0 0 416 256c0-36.624-12.314-70.367-33.016-97.334L311 288h101.797zM359.973 134.395C332.007 110.461 295.694 96 256 96c-7.966 0-15.794.591-23.448 1.715L310.852 224l49.121-89.605zM99.204 224A160.65 160.65 0 0 0 96 256c0 36.639 12.324 70.394 33.041 97.366L201 224H99.204zM311.959 405.932c40.631-15.171 73.433-46.382 90.715-85.932H256l55.959 85.932zM152.046 377.621C180.009 401.545 216.314 416 256 416c7.969 0 15.799-.592 23.456-1.716L201.164 288l-49.118 89.621z"></path>
-                </g>
-            </svg>
-            <!-- <img src="../assets/img/logo.png" alt="..."> -->
-            <span class="hidden-folded d-inline l-s-n-1x d-lg-none">Basik</span>
-        </a>
-        <!-- / brand -->
-        <!-- Navbar collapse -->
-        <div class="collapse navbar-collapse order-2 order-lg-1" id="navbarToggler">
-            <form class="input-group m-2 my-lg-0 ">
-                <div class="input-group-prepend">
-                    <button type="button" class="btn no-shadow no-bg px-0 text-inherit">
-                        <i data-feather="search"></i>
-                    </button>
-                </div>
-                <input type="text" class="form-control no-border no-shadow no-bg typeahead" placeholder="Search components..." data-plugin="typeahead" data-api="../assets/api/menu.json">
-            </form>
+<!-- Topbar -->
+<nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
+
+    <!-- Sidebar Toggle (Topbar) -->
+    <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
+        <i class="fa fa-bars"></i>
+    </button>
+
+    <!-- Topbar Search -->
+    {{-- <form
+        class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
+        <div class="input-group">
+            <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..."
+                aria-label="Search" aria-describedby="basic-addon2">
+            <div class="input-group-append">
+                <button class="btn btn-primary" type="button">
+                    <i class="fas fa-search fa-sm"></i>
+                </button>
+            </div>
         </div>
-        <ul class="nav navbar-menu order-1 order-lg-2">
-            <li class="nav-item d-none d-sm-block">
-                <a class="nav-link px-2" data-toggle="fullscreen" data-plugin="fullscreen">
-                    <i data-feather="maximize"></i>
-                </a>
-            </li>
-            <li class="nav-item dropdown">
-                <a class="nav-link px-2" data-toggle="dropdown">
-                    <i data-feather="settings"></i>
-                </a>
-                <!-- ############ Setting START-->
-                <div class="dropdown-menu dropdown-menu-center mt-3 w-md animate fadeIn">
-                    <div class="setting px-3">
-                        <div class="mb-2 text-muted">
-                            <strong>Setting:</strong>
-                        </div>
-                        <div class="mb-3" id="settingLayout">
-                            <label class="ui-check ui-check-rounded my-1 d-block">
-                                <input type="checkbox" name="stickyHeader">
-                                <i></i>
-                                <small>Sticky header</small>
-                            </label>
-                            <label class="ui-check ui-check-rounded my-1 d-block">
-                                <input type="checkbox" name="stickyAside">
-                                <i></i>
-                                <small>Sticky aside</small>
-                            </label>
-                            <label class="ui-check ui-check-rounded my-1 d-block">
-                                <input type="checkbox" name="foldedAside">
-                                <i></i>
-                                <small>Folded Aside</small>
-                            </label>
-                            <label class="ui-check ui-check-rounded my-1 d-block">
-                                <input type="checkbox" name="hideAside">
-                                <i></i>
-                                <small>Hide Aside</small>
-                            </label>
-                        </div>
-                        <div class="mb-2 text-muted">
-                            <strong>Color:</strong>
-                        </div>
-                        <div class="mb-2">
-                            <label class="radio radio-inline ui-check ui-check-md">
-                                <input type="radio" name="bg" value="">
-                                <i></i>
-                            </label>
-                            <label class="radio radio-inline ui-check ui-check-color ui-check-md">
-                                <input type="radio" name="bg" value="bg-dark">
-                                <i class="bg-dark"></i>
-                            </label>
-                        </div>
-                        <div class="mb-2 text-muted">
-                            <strong>Layouts:</strong>
-                        </div>
-                        <div class="mb-3">
-                            <a href="dashboard.html" class="btn btn-xs btn-white no-ajax mb-1">Default</a>
-                            <a href="layout.a.html?bg" class="btn btn-xs btn-primary no-ajax mb-1">A</a>
-                            <a href="layout.b.html?bg" class="btn btn-xs btn-info no-ajax mb-1">B</a>
-                            <a href="layout.c.html?bg" class="btn btn-xs btn-success no-ajax mb-1">C</a>
-                            <a href="layout.d.html?bg" class="btn btn-xs btn-warning no-ajax mb-1">D</a>
-                        </div>
-                        <div class="mb-2 text-muted">
-                            <strong>Apps:</strong>
-                        </div>
-                        <div>
-                            <a href="dashboard.html" class="btn btn-sm btn-white no-ajax mb-1">Dashboard</a>
-                            <a href="music.html?bg" class="btn btn-sm btn-white no-ajax mb-1">Music</a>
-                            <a href="video.html?bg" class="btn btn-sm btn-white no-ajax mb-1">Video</a>
-                        </div>
-                    </div>
-                </div>
-                <!-- ############ Setting END-->
-            </li>
-            <!-- Notification -->
-            <li class="nav-item dropdown">
-                <a class="nav-link px-2 mr-lg-2" data-toggle="dropdown">
-                    <i data-feather="bell"></i>
-                    <span class="badge badge-pill badge-up bg-primary">4</span>
-                </a>
-                <!-- dropdown -->
-                <div class="dropdown-menu dropdown-menu-right mt-3 w-md animate fadeIn p-0">
-                    <div class="scrollable hover" style="max-height: 250px">
-                        <div class="list list-row">
-                            <div class="list-item " data-id="6">
-                                <div>
-                                    <a href="#">
-                                        <span class="w-32 avatar gd-danger">
-                  <img src="../assets/img/a6.jpg" alt=".">
-            </span>
-                                    </a>
-                                </div>
-                                <div class="flex">
-                                    <div class="item-feed h-2x">
-                                        Just saw this on the
-                                        <a href='#'>@eBay</a> dashboard, dude is an absolute unit.
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="list-item " data-id="12">
-                                <div>
-                                    <a href="#">
-                                        <span class="w-32 avatar gd-info">
-                  A
-            </span>
-                                    </a>
-                                </div>
-                                <div class="flex">
-                                    <div class="item-feed h-2x">
-                                        <a href='#'>Support</a> team updated the status
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="list-item " data-id="8">
-                                <div>
-                                    <a href="#">
-                                        <span class="w-32 avatar gd-success">
-                  <img src="../assets/img/a8.jpg" alt=".">
-            </span>
-                                    </a>
-                                </div>
-                                <div class="flex">
-                                    <div class="item-feed h-2x">
-                                        The biggest software developer conference
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="list-item " data-id="4">
-                                <div>
-                                    <a href="#">
-                                        <span class="w-32 avatar gd-success">
-                  <img src="../assets/img/a4.jpg" alt=".">
-            </span>
-                                    </a>
-                                </div>
-                                <div class="flex">
-                                    <div class="item-feed h-2x">
-                                        Big News! Introducing
-                                        <a href='#'>NextUX</a> Enterprise 2.1 - additional #Windows Server support
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="list-item " data-id="11">
-                                <div>
-                                    <a href="#">
-                                        <span class="w-32 avatar gd-info">
-                  K
-            </span>
-                                    </a>
-                                </div>
-                                <div class="flex">
-                                    <div class="item-feed h-2x">
-                                        Prepare the documentation for the
-                                        <a href='#'>Fitness app</a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="list-item " data-id="2">
-                                <div>
-                                    <a href="#">
-                                        <span class="w-32 avatar gd-primary">
-                  <img src="../assets/img/a2.jpg" alt=".">
-            </span>
-                                    </a>
-                                </div>
-                                <div class="flex">
-                                    <div class="item-feed h-2x">
-                                        Can data lead us to making the best possible decisions?
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="d-flex px-3 py-2 b-t">
-                        <div class="flex">
-                            <span>6 Notifications</span>
-                        </div>
-                        <a href="page.setting.html">See all
-                            <i class="fa fa-angle-right text-muted"></i>
-                        </a>
-                    </div>
-                </div>
-                <!-- / dropdown -->
-            </li>
-            <!-- User dropdown menu -->
-            <li class="nav-item dropdown">
-                <a href="#" data-toggle="dropdown" class="nav-link d-flex align-items-center px-2 text-color">
-                    <span class="avatar w-24" style="margin: -2px;"><img src="../assets/img/a0.jpg" alt="..."></span>
-                </a>
-                <div class="dropdown-menu dropdown-menu-right w mt-3 animate fadeIn">
-                <a class="dropdown-item" href="/profile/{{Auth::user()->id}}">
-                        <span>{{ Auth::user()->name }}</span>
-                    </a>
-                    <a class="dropdown-item" href="page.price.html">
-                        <span class="badge bg-success text-uppercase">Upgrade</span>
-                        <span>to Pro</span>
-                    </a>
-                    <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="page.profile.html">
-                        <span>Profile</span>
-                    </a>
-                    <a class="dropdown-item d-flex" href="page.invoice.html">
-                        <span class="flex">Invoice</span>
-                        <span><b class="badge badge-pill gd-warning">5</b></span>
-                    </a>
-                    <a class="dropdown-item" href="page.faq.html">Need help?</a>
-                    <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="page.setting.html">
-                        <span>Account Settings</span>
-                    </a>
+    </form> --}}
 
+    <!-- Topbar Navbar -->
+    <ul class="navbar-nav ml-auto">
 
-                    {{-- this code is for signout --}}
-                    
-                    <a class="dropdown-item" href="{{ route('logout') }}"
-                        onclick="event.preventDefault();
-                        document.getElementById('logout-form').submit();">
-                        {{ __('Logout') }}
-                         <i class="fa fa-sign-out"></i> </a>
-                         <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                           @csrf
-                       </form>
-                      
-                </div>
-            </li>
-            <!-- Navarbar toggle btn -->
-            <li class="nav-item d-lg-none">
-                <a href="#" class="nav-link px-2" data-toggle="collapse" data-toggle-class data-target="#navbarToggler">
-                    <i data-feather="search"></i>
+        {{-- <!-- Nav Item - Search Dropdown (Visible Only XS) -->
+        {{-- <li class="nav-item dropdown no-arrow d-sm-none">
+            <a class="nav-link dropdown-toggle" href="#" id="searchDropdown" role="button"
+                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="fas fa-search fa-fw"></i>
+            </a>
+            <!-- Dropdown - Messages -->
+            <div class="dropdown-menu dropdown-menu-right p-3 shadow animated--grow-in"
+                aria-labelledby="searchDropdown">
+                <form class="form-inline mr-auto w-100 navbar-search">
+                    <div class="input-group">
+                        <input type="text" class="form-control bg-light border-0 small"
+                            placeholder="Search for..." aria-label="Search"
+                            aria-describedby="basic-addon2">
+                        <div class="input-group-append">
+                            <button class="btn btn-primary" type="button">
+                                <i class="fas fa-search fa-sm"></i>
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </li> --}}
+
+        {{-- <!-- Nav Item - Alerts -->
+        <li class="nav-item dropdown no-arrow mx-1">
+            <a class="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button"
+                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="fas fa-bell fa-fw"></i>
+                <!-- Counter - Alerts -->
+                <span class="badge badge-danger badge-counter">3+</span>
+            </a>
+            <!-- Dropdown - Alerts -->
+            <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in"
+                aria-labelledby="alertsDropdown">
+                <h6 class="dropdown-header">
+                    Alerts Center
+                </h6>
+                <a class="dropdown-item d-flex align-items-center" href="#">
+                    <div class="mr-3">
+                        <div class="icon-circle bg-primary">
+                            <i class="fas fa-file-alt text-white"></i>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="small text-gray-500">December 12, 2019</div>
+                        <span class="font-weight-bold">A new monthly report is ready to download!</span>
+                    </div>
                 </a>
-            </li>
-            <li class="nav-item d-lg-none">
-                <a class="nav-link px-1" data-toggle="modal" data-target="#aside">
-                    <i data-feather="menu"></i>
+                <a class="dropdown-item d-flex align-items-center" href="#">
+                    <div class="mr-3">
+                        <div class="icon-circle bg-success">
+                            <i class="fas fa-donate text-white"></i>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="small text-gray-500">December 7, 2019</div>
+                        $290.29 has been deposited into your account!
+                    </div>
                 </a>
-            </li>
-        </ul>
-    </div>
-</div>
+                <a class="dropdown-item d-flex align-items-center" href="#">
+                    <div class="mr-3">
+                        <div class="icon-circle bg-warning">
+                            <i class="fas fa-exclamation-triangle text-white"></i>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="small text-gray-500">December 2, 2019</div>
+                        Spending Alert: We've noticed unusually high spending for your account.
+                    </div>
+                </a>
+                <a class="dropdown-item text-center small text-gray-500" href="#">Show All Alerts</a>
+            </div>
+        </li>
+
+        <!-- Nav Item - Messages -->
+        <li class="nav-item dropdown no-arrow mx-1">
+            <a class="nav-link dropdown-toggle" href="#" id="messagesDropdown" role="button"
+                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="fas fa-envelope fa-fw"></i>
+                <!-- Counter - Messages -->
+                <span class="badge badge-danger badge-counter">7</span>
+            </a>
+            <!-- Dropdown - Messages -->
+            <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in"
+                aria-labelledby="messagesDropdown">
+                <h6 class="dropdown-header">
+                    Message Center
+                </h6>
+                <a class="dropdown-item d-flex align-items-center" href="#">
+                    <div class="dropdown-list-image mr-3">
+                        <img class="rounded-circle" src="img/undraw_profile_1.svg"
+                            alt="">
+                        <div class="status-indicator bg-success"></div>
+                    </div>
+                    <div class="font-weight-bold">
+                        <div class="text-truncate">Hi there! I am wondering if you can help me with a
+                            problem I've been having.</div>
+                        <div class="small text-gray-500">Emily Fowler · 58m</div>
+                    </div>
+                </a>
+                <a class="dropdown-item d-flex align-items-center" href="#">
+                    <div class="dropdown-list-image mr-3">
+                        <img class="rounded-circle" src="img/undraw_profile_2.svg"
+                            alt="">
+                        <div class="status-indicator"></div>
+                    </div>
+                    <div>
+                        <div class="text-truncate">I have the photos that you ordered last month, how
+                            would you like them sent to you?</div>
+                        <div class="small text-gray-500">Jae Chun · 1d</div>
+                    </div>
+                </a>
+                <a class="dropdown-item d-flex align-items-center" href="#">
+                    <div class="dropdown-list-image mr-3">
+                        <img class="rounded-circle" src="img/undraw_profile_3.svg"
+                            alt="">
+                        <div class="status-indicator bg-warning"></div>
+                    </div>
+                    <div>
+                        <div class="text-truncate">Last month's report looks great, I am very happy with
+                            the progress so far, keep up the good work!</div>
+                        <div class="small text-gray-500">Morgan Alvarez · 2d</div>
+                    </div>
+                </a>
+                <a class="dropdown-item d-flex align-items-center" href="#">
+                    <div class="dropdown-list-image mr-3">
+                        <img class="rounded-circle" src="https://source.unsplash.com/Mv9hjnEUHR4/60x60"
+                            alt="">
+                        <div class="status-indicator bg-success"></div>
+                    </div>
+                    <div>
+                        <div class="text-truncate">Am I a good boy? The reason I ask is because someone
+                            told me that people say this to all dogs, even if they aren't good...</div>
+                        <div class="small text-gray-500">Chicken the Dog · 2w</div>
+                    </div>
+                </a>
+                <a class="dropdown-item text-center small text-gray-500" href="#">Read More Messages</a>
+            </div>
+        </li> --}}
+
+        {{-- <div class="topbar-divider d-none d-sm-block"></div> --}}
+
+        <!-- Nav Item - User Information -->
+        <li class="nav-item dropdown no-arrow">
+            <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
+                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <span class="mr-2 d-none d-lg-inline text-gray-600 small">{{ auth()->user()->name }}</span>
+                <img class="img-profile rounded-circle"
+                    src="{{ asset('img/undraw_profile.svg') }}">
+            </a>
+            <!-- Dropdown - User Information -->
+            <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
+                aria-labelledby="userDropdown">
+                {{-- <a class="dropdown-item" href="#">
+                    <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
+                    Profile
+                </a> --}}
+                {{-- <a class="dropdown-item" href="#">
+                    <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
+                    Settings
+                </a>
+                <a class="dropdown-item" href="#">
+                    <i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
+                    Activity Log
+                </a> --}}
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
+                    <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+                    Logout
+                </a>
+            </div>
+        </li>
+
+    </ul>
+
+</nav>
+<!-- End of Topbar -->
