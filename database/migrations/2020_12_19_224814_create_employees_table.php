@@ -20,7 +20,7 @@ class CreateEmployeesTable extends Migration
             $table->string('mobile');
             $table->string('salary');
             $table->string('department')->nullable();
-            $table->text('notes')->nullable();
+            $table->longText('notes')->nullable();
             $table->integer('created_by')->nullable();
             $table->integer('updated_by')->nullable();
             $table->timestamps();

@@ -17,7 +17,12 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
-    public function index()
+    public function home()
+    {
+        return view('home');
+    }
+
+    public function dashboard()
     {
         $defaulters     = 0;
         $income         = 0;

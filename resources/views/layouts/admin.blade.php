@@ -22,6 +22,12 @@
 
     <link href="{{ asset('vendor/datatables/dataTables.bootstrap4.min.css') }}" rel="stylesheet">
 
+    
+    <script src="{{ asset('vendor/jquery/jquery.min.js') }}"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
+
 </head>
 
 <body id="page-top">
@@ -43,6 +49,14 @@
                     <div class="container-fluid">
                         <div class="alert alert-success">
                             <p>{{ session('success') }}</p>
+                        </div>
+                    </div>
+                @endif
+
+                @if(session('danger'))
+                    <div class="container-fluid">
+                        <div class="alert alert-danger">
+                            <p>{{ session('danger') }}</p>
                         </div>
                     </div>
                 @endif
@@ -86,7 +100,7 @@
     </div>
 
     <!-- Bootstrap core JavaScript-->
-    <script src="{{ asset('vendor/jquery/jquery.min.js') }}"></script>
+    
     <script src="{{ asset('vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
 
     <!-- Core plugin JavaScript-->
@@ -108,6 +122,33 @@
 
     <!-- Page level custom scripts -->
     <script src="{{ asset('js/demo/datatables-demo.js') }}"></script>
+
+    <script>
+        $(document).ready(function(){
+            var start = moment().subtract(29, 'days');
+            var end = moment();
+
+            function cb(start, end) {
+                $('#reportrange span').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'));
+            }
+
+            $('#reportrange').daterangepicker({
+            startDate: start,
+            endDate: end,
+            ranges: {
+                'Today': [moment(), moment()],
+                'Yesterday': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
+                'Last 7 Days': [moment().subtract(6, 'days'), moment()],
+                'Last 30 Days': [moment().subtract(29, 'days'), moment()],
+                'This Month': [moment().startOf('month'), moment().endOf('month')],
+                'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
+            }
+            }, cb);
+            cb(start, end);
+            
+        });
+        
+    </script>
 
 </body>
 

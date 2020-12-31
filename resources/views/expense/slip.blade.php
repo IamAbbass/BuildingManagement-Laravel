@@ -69,36 +69,36 @@
 		<h1 class="text-center">Saima Square One Residents Tower Association<br /><small>Plot No. 1185/G, Stadium Road, Block 10-A, Gulshan-e-Iqbal, Karachi</small></h1>
         <p></p>
         
-        <h2 class="text-center"><kbd>Block-{{ $payment->flat->block->name }} / Flat# {{ $payment->flat->name }}</kbd></h2>
-        
+        <h2 class="text-center"><kbd>{{ $expense->head->name }}</kbd></h2>
+
         <div class="row">
             <div class="one_six bold"><span>Receipt No:</span></div>
-            <div class="one_six"><span>{{ $payment->id }}</span></div>
+            <div class="one_six"><span> E-{{ $expense->id }}</span></div>
             
             <div class="one_six text-right bold"><span>&nbsp;</span></div>
             <div class="one_six"><span>&nbsp;</span></div>
             
             <div class="one_six text-right bold"><span>Date:</span></div>
-            <div class="one_six"><span>{{ $payment->date }}</span></div>            
+            <div class="one_six"><span>{{ $expense->date }}</span></div>            
             <div class="clearfix"></div>
         </div>    
         
         <div class="row">
-            <div class="one_two bold"><span>Received with thanks from Mr/Mrs.:</span></div>
-            <div class="one_two"><span>{{ $payment->flat->person_name }} </span></div>
+            <div class="one_two"><span>{{ $expense->name }}</span></div>
+            <div class="one_two"><span> </span></div>
             <div class="clearfix"></div>
         </div>
         
         <div class="row">            
-            <div class="one_two bold"><span>{{ $payment->account->name }} :</span></div>
-            <div class="one_two"><span>{{ $payment->month }}</span></div>
+            <div class="one_two"><span>{{$expense->description}}</span></div>
+            <div class="one_two"><span> </span></div>
             <div class="clearfix"></div>
         </div>
         
         <div class="row">            
             <div class="one_two bold"><span>Amount:</span></div>
             <div class="one_two capitalize">
-                <span class="amount"><strong>{{ number_format($payment->payment) }} /-</strong></span>                
+                <span class="amount"><strong> {{ number_format($expense->amount) }} /-</strong></span>                
             </div>
             <div class="clearfix"></div>
         </div>

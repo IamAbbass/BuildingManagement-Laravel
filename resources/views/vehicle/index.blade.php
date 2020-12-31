@@ -7,16 +7,16 @@
 
     <!-- Page Heading -->
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
-        <h1 class="h3 mb-2 text-gray-800">Account Heads</h1>
-        {{-- <a href="/accounthead/create" class="btn btn-primary shadow-sm"><i
-        class="fas fa-plus fa-sm text-white-50"></i> Create</a> --}}
+        <h1 class="h3 mb-2 text-gray-800">{{ $flat->name }} Vehicles</h1>
+        <a href="/flat/{{ $flat->id }}/vehicle/create" class="btn btn-primary shadow-sm"><i
+        class="fas fa-plus fa-sm text-white-50"></i> Create</a>
     </div>
     
 
     <!-- DataTales Example -->
     <div class="card shadow mb-4">
         <div class="card-header py-3">
-            <h6 class="m-0 font-weight-bold text-primary">Account Heads</h6>
+            <h6 class="m-0 font-weight-bold text-primary">{{ $flat->name }} Vehicles</h6>
         </div>
         <div class="card-body">
             <div class="table-responsive">
@@ -24,8 +24,10 @@
                     <thead>
                         <tr>
                             <th>Sno</th>
-                            <th>Name</th>
-                            <th>Charges</th>
+                            <th>Make</th>
+                            <th>Model</th>
+                            <th>Color</th>
+                            <th>Number</th>
                             <th>Details</th>
                             <th>Options</th>
                         </tr>
@@ -35,27 +37,30 @@
                             $sno = 0;    
                         @endphp
                         
-                        @foreach($account_heads as $head)
+                        @foreach($vehicles as $vehicle)
                         
                             <tr>
                                 <td>{{ ++$sno }}</td>
-                                <td>{{ $head->name }}</td>
-                                <td>{{ $head->default_amount }}</td>
+                                <td>{{ $vehicle->make }}</td>
+                                <td>{{ $vehicle->model }}</td>
+                                <td>{{ $vehicle->color }}</td>
+                                <td>{{ $vehicle->number }}</td>
                                 <td>
-                                    @if($head->creator)
-                                        Created By: {{ $head->creator->name }}
+                                    @if($vehicle->creator)
+                                        Created By: {{ $vehicle->creator->name }}
                                     @endif
 
-                                    @if($head->updater)
+                                    @if($vehicle->updater)
                                         <br/>
-                                        Updated By: {{ $head->updater->name }}
+                                        Updated By: {{ $vehicle->updater->name }}
                                     @endif
                                     
                                 </td>
                                 <td> 
-                                    {{-- <a href="/accounthead/{{ $head->id }}/edit" class="btn btn-warning shadow-sm"><i
-                                    class="fas fa-edit fa-sm text-white-50"></i> Edit</a>
-                                </td> --}}
+                                    {{-- <a href="/flat/{{ $vehicle->flat_id }}/vehicle/{{ $vehicle->id }}/edit" class="btn btn-warning shadow-sm"><i
+                                        class="fas fa-edit fa-sm text-white-50"></i> Edit</a> --}}
+
+                                </td>
                             </tr>
                         @endforeach
                     </tbody>

@@ -36,7 +36,7 @@
                     </div>
                     <div class="col-md-4">
                         <label>Expense Amount: *</label>
-                        <input required type="number" class="form-control" name="amount" />
+                        <input min="1" required type="number" class="form-control" name="amount" />
                     </div>
                 </div>
                 <div class="row mt-3">

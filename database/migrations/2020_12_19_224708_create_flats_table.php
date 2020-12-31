@@ -18,8 +18,8 @@ class CreateFlatsTable extends Migration
             $table->string('name');
             $table->integer('block_id');
             $table->integer('floor_id');  
-
             $table->string('person_name')->nullable();
+            $table->string('person_email')->nullable();
             $table->string('person_mobile')->nullable();
             $table->string('person_mobile2')->nullable();
             $table->string('person_cnic')->nullable();

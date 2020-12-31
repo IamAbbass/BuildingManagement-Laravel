@@ -3,10 +3,12 @@
 namespace App\Http\Controllers;
 
 use \App\Models\Flat;
+use \App\Models\Block;
 use \App\Models\AccountHead;
 use \App\Models\Maintenance;
-
-use Illuminate\Http\Request;
+// use \Maatwebsite\Excel\Excel;
+use \App\Imports\ImportExcel;
+use \Maatwebsite\Excel\Facades\Excel;
 
 class FlatController extends Controller
 {
@@ -22,9 +24,35 @@ class FlatController extends Controller
      */
     public function index()
     {
-        $flats = Flat::all();
+        
+        $blocks = Block::all();
+        $selected_block = request('block') ?? 1;
+        $flats  = Flat::where('block_id',$selected_block)->get();
+
         return view('flat.index',[
-            'flats' => $flats,
+            'flats'     => $flats,
+            'blocks'    => $blocks,
+            'selected_block' => $selected_block,
+        ]);
+    }
+
+    public function export($selected_block)
+    {        
+        $flats  = Flat::where('block_id',$selected_block)->get();
+        $block  = Block::findOrFail($selected_block);
+
+
+        return view('flat.export',[
+            'flats'     => $flats,
+            'block' => $block,
+        ]);
+    }
+
+    public function show($id)
+    {
+        $flat = Flat::findOrFail($id);
+        return view('flat.show',[
+            'flat' => $flat,
         ]);
     }
     
@@ -41,6 +69,7 @@ class FlatController extends Controller
         $flat = Flat::findOrFail($id);
         $flat->update([
             'person_name'=> request('person_name'),
+            'person_email'=> request('person_email'),            
             'person_mobile'=> request('person_mobile'),
             'person_mobile2'=> request('person_mobile2'),
             'person_cnic'=> request('person_cnic'),
@@ -52,10 +81,10 @@ class FlatController extends Controller
         return redirect('/flat'); 
     }
 
-    public function payment ($id)
+    public function payment($id)
     {
         $flat           = Flat::findOrFail($id);
-        $account_heads  = AccountHead::all();
+        $account_heads  = AccountHead::where('default_amount','>',0)->get();
 
         return view('flat.payment',[
             'account_heads' => $account_heads,
@@ -64,20 +93,29 @@ class FlatController extends Controller
     }
 
     public function payment_save ($id)
-    {
-        $payment = Maintenance::create([
-            'head_id' => request('head_id'),
-            'flat_id' => $id,
-            'amount' => request('amount'),
-            'discount' => request('discount'),
-            'method' => request('method'),
-            'cheque_no' => request('cheque_no'),
-            'date' => request('date'),
-            'type' => request('type'),
-            'month' => request('month'),
-            'payment' => request('payment'),
-        ]);
-        return redirect("/slip/$payment->id"); 
+    {        
+        $month          = strtoupper(date("M-Y", strtotime(request('month'))));
+        $already_paid   = Maintenance::where('flat_id',$id)->where('month',$month)->where('head_id',1)->count();
+        if($already_paid == 0){
+            $payment = Maintenance::create([
+                'head_id' => request('head_id'),
+                'flat_id' => $id,
+                'amount' => request('amount'),
+                'discount' => request('discount'),
+                'method' => request('method'),
+                'cheque_no' => request('cheque_no'),
+                'date' => strtoupper(date("d-M-Y", strtotime(request('date')))),
+                'type' => request('type'),
+                'month' => strtoupper(date("M-Y", strtotime(request('month')))),
+                'payment' => request('payment'),
+            ]);
+            return redirect("/slip/$payment->id"); 
+        }else{
+            session()->flash('danger','Maintenance For '.$month.' Already Paid!');
+            return back(); 
+        }
+        
+        
     } 
     
     public function slip ($id)
@@ -87,5 +125,61 @@ class FlatController extends Controller
         return view("flat.slip",[
             'payment' => $payment,
         ]); 
-    } 
+    }
+    
+    public function import ()
+    {     
+        $import = Excel::toCollection(new ImportExcel, "excel.xlsx");
+        $sheet_one = $import[0];
+
+        $flat_id = null;
+        // $flat = 0;
+
+
+        foreach($sheet_one as $key => $row){
+            // 0 = due date
+            // 1 = description
+            // 2 = dues
+            // 3 = discount
+            // 4 = net Rcvble
+            // 5 = received
+            // 6 = balance
+            // 7 = slip no
+
+            if (strpos($row[0], 'UNIT') !== false) { //Load the flat     
+                // echo $row[1]."<br/>";           
+                $flat_id = Flat::where('name',$row[1])->first()->id;
+                // $flat++;
+            }
+
+            if (strpos($row[0], '2017') !== false || strpos($row[0], '2018') !== false || strpos($row[0], '2019') !== false || strpos($row[0], '2020') !== false) {
+                if($row[1] == "Maintenance"){
+                    $head_id = 1;
+                }else if($row[1] == "Membership"){
+                    $head_id = 2;
+                }else if($row[1] == "RO Plant"){
+                    $head_id = 3;
+                }else{
+                    $head_id = 0;
+                }
+                
+                Maintenance::create([
+                    'head_id' => $head_id,
+                    'flat_id' => $flat_id,
+                    'amount' => $row[2],
+                    'discount' => $row[3],
+                    'method' => 'cash',
+                    'date' => "01-".$row[0],
+                    'type' => ($row[6] == "0") ? 'full' : 'partial',
+                    'month' => $row[0],
+                    'payment' => $row[5],
+                    'description' => $row[1],
+                    'old_slip_no' => $row[7]
+                ]);
+            }
+        }
+        return ['success' => true];
+    }
+
+    
 }

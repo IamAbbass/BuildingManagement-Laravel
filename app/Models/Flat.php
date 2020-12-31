@@ -13,4 +13,16 @@ class Flat extends Model
     public function block(){
         return $this->hasOne('\App\Models\Block','id','block_id');
     }
+
+    public function last_payment(){
+        return $this->hasOne('\App\Models\Maintenance','flat_id','id')->orderBy('id', 'desc');
+    }
+
+    public function payments(){
+        return $this->hasMany('\App\Models\Maintenance','flat_id','id');
+    }
+
+    public function vehicles(){
+        return $this->hasMany('\App\Models\Vehicle','flat_id','id');
+    }
 }

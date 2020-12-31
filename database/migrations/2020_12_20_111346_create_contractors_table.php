@@ -18,7 +18,7 @@ class CreateContractorsTable extends Migration
             $table->string('name');
             $table->string('cnic');
             $table->string('mobile');
-            $table->text('notes')->nullable();
+            $table->longText('notes')->nullable();
             $table->integer('created_by')->nullable();
             $table->integer('updated_by')->nullable();
             $table->timestamps();

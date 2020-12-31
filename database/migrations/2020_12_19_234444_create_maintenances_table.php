@@ -17,7 +17,7 @@ class CreateMaintenancesTable extends Migration
             $table->id();
             $table->integer('head_id');
             $table->integer('flat_id');            
-            $table->string('amount');
+            $table->string('amount');//due
             $table->string('discount')->nullable();
             $table->string('method');
             $table->string('cheque_no')->nullable();
@@ -25,9 +25,13 @@ class CreateMaintenancesTable extends Migration
             $table->string('type');            
             $table->string('payment');
             $table->string('month')->nullable();
+            $table->longText('description')->nullable();
+            $table->longText('old_slip_no')->nullable();            
             $table->integer('created_by')->nullable();
             $table->integer('updated_by')->nullable();
             $table->timestamps();
+
+
         });
     }
 

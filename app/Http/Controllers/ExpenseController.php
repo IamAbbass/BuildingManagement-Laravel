@@ -75,6 +75,14 @@ class ExpenseController extends Controller
         session()->flash('success','Expense Updated!');
         return redirect('/expense');
     }
+
+    public function slip($id)
+    {
+        $expense = Expense::findOrFail($id);
+        return view('expense.slip',[
+            'expense' => $expense,
+        ]);
+    }
     
     public function destroy(Expense $expense)
     {

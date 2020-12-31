@@ -24,12 +24,12 @@
                         <label>Account: *</label>
                         @foreach($account_heads as $account_head)
                             <br/>
-                            <label><input required type="radio" name="head_id" value="{{ $account_head->id }}" /> {{ $account_head->name }} <b>(PKR {{ $account_head->default_amount }})</b></label>
+                            <label><input data-amount={{ $account_head->default_amount }} required type="radio" name="head_id" value="{{ $account_head->id }}" /> {{ $account_head->name }} <b>(PKR {{ $account_head->default_amount }})</b></label>
                         @endforeach
                     </div>
                     <div class="col-md-4">
                         <label>Amount: *</label>
-                        <input required type="number" class="form-control" name="amount" />
+                        <input required min="1" type="number" class="form-control" name="amount" />
                     </div>
                     <div class="col-md-4">
                         <label>Month:</label>
@@ -58,16 +58,17 @@
                     <div class="col-md-4">
                         <label>Payment Type: *</label><br/>
                         <label><input required type="radio" name="type" value="full" /> Full</label><br/>
-                        <label><input required type="radio" name="type" value="partial" /> Partial</label>
+                        <label><input required type="radio" name="type" value="partial" /> Partial</label><br/>
+                        <label><input required type="radio" name="type" value="bounce" /> Cheque Bounce</label>
                     </div>
 
                     <div class="col-md-4">
                         <label>Received Amount: *</label>
-                        <input required type="text" class="form-control" name="payment" />
+                        <input required min="1" type="text" class="form-control" name="payment" />
                     </div>
                     <div class="col-md-4">
                         <label>Discount:</label>
-                        <input type="number" class="form-control" name="discount" />
+                        <input type="number" value="0" class="form-control" name="discount" />
                     </div>
                 </div>
 
@@ -86,5 +87,19 @@
     </div>
 
 </div>
+
+<script>
+    $(document).ready(function(){
+        $("input[name='head_id']").change(function(){
+            var amount = $(this).attr('data-amount');
+            $("input[name='amount'], input[name='payment'], input[name='discount']").val(amount);
+            $("input[name='amount'], input[name='payment'], input[name='discount']").attr('max',amount);    
+
+            
+            
+            
+        });
+    });
+</script>
 
 @endsection

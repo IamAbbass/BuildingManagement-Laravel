@@ -45,7 +45,7 @@ class DefaultSeeder extends Seeder
         //Floor
         $blocks = Block::all();
         foreach($blocks as $block){
-            $limit = 6;
+            $limit = 12;            
             for($i=1; $i<=$limit; $i++){
                 Floor::create([
                     'block_id' => $block->id,
@@ -57,7 +57,15 @@ class DefaultSeeder extends Seeder
         //Flats
         $floors = Floor::all();
         foreach($floors as $floor){
-            $limit = 12;
+            if($floor->block->name == "C" || $floor->block->name == "D"){
+                $limit = 4;
+            }else{
+                $limit = 6;
+            }
+            if($floor->name <= 9){
+                $floor->name = "0$floor->name";
+            }
+
             for($i=1; $i<=$limit; $i++){
                 $flat_no = $i;
                 if($flat_no <= 9){
@@ -66,7 +74,7 @@ class DefaultSeeder extends Seeder
                 Flat::create([
                     'block_id' => $floor->block_id,
                     'floor_id' => $floor->id,
-                    'name' => $floor->block->name.$floor->name.$flat_no,
+                    'name' => $floor->block->name."-".$floor->name.$flat_no,
                 ]);
             }
         }  
@@ -92,10 +100,12 @@ class DefaultSeeder extends Seeder
 
         //Account Heads
         AccountHead::create(['name' => 'Monthly Maintainance', 'default_amount' => '10000', 'created_by' => 1]);
+        AccountHead::create(['name' => 'Membership', 'default_amount' => '0', 'created_by' => 1]);
+        AccountHead::create(['name' => 'RO', 'default_amount' => '10000', 'created_by' => 1]);        
         AccountHead::create(['name' => 'Membership (Tenant)', 'default_amount' => '15000', 'created_by' => 1]);
         AccountHead::create(['name' => 'Membership (Purchaser)', 'default_amount' => '60000', 'created_by' => 1]);
         AccountHead::create(['name' => 'Membership (Owner)', 'default_amount' => '40000', 'created_by' => 1]);
-        AccountHead::create(['name' => 'RO', 'default_amount' => '10000', 'created_by' => 1]);
+        
 
         //
         
