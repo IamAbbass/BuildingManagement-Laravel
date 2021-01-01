@@ -23,7 +23,7 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'home']);
 Route::get('/dashboard', [App\Http\Controllers\HomeController::class, 'dashboard']);
 
 
-// Route::get('/import', [App\Http\Controllers\FlatController::class, 'import']);
+//Route::get('/import', [App\Http\Controllers\FlatController::class, 'import']);
 Route::get('/flat', [App\Http\Controllers\FlatController::class, 'index']);
 Route::get('/flat/{id}/edit', [App\Http\Controllers\FlatController::class, 'edit']);
 Route::get('/flat/export/{id}', [App\Http\Controllers\FlatController::class, 'export']);

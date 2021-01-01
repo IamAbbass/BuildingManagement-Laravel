@@ -92,12 +92,9 @@
     $(document).ready(function(){
         $("input[name='head_id']").change(function(){
             var amount = $(this).attr('data-amount');
-            $("input[name='amount'], input[name='payment'], input[name='discount']").val(amount);
+            $("input[name='amount'], input[name='payment']").val(amount);
             $("input[name='amount'], input[name='payment'], input[name='discount']").attr('max',amount);    
-
-            
-            
-            
+           
         });
     });
 </script>
