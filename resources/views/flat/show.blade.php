@@ -33,6 +33,7 @@
                             <th>Month</th>
                             <th>Description</th>
                             <th>Date</th>
+                            <th></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -63,6 +64,10 @@
                                 <td>{{ $payment->month }}</td>
                                 <td>{{ $payment->description }}</td>
                                 <td>{{ $payment->date }}</td>
+                                <td>
+                                    <a target="_blank" href="/slip/{{ $payment->id }}" class="btn mr-1 mb-1 btn-info shadow-sm"><i
+                                        class="fas fa-print fa-sm text-white-50"></i> Slip</a>
+                                </td>
                             </tr>
                         @endforeach
                     </tbody>
