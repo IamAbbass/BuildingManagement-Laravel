@@ -23,7 +23,9 @@
     <div class="card shadow mb-4">
         <div class="card-header py-3">
             <h6 class="m-0 font-weight-bold text-primary">Flats</h6>
-            <a href="/flat/export/{{ $selected_block }}" class="btn btn-primary float-right">Export</a>
+            <a href="/flat/export/{{ $selected_block }}" class="btn btn-info float-right mr-1">Export Maintenance Report</a>
+            <a href="/flat/export/{{ $selected_block }}?type=full" class="btn btn-success float-right mr-1">Export Flat Info Report</a>
+            
         </div>
         <div class="card-body">
             <div class="table-responsive">

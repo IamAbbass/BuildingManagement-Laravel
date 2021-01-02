@@ -24,6 +24,7 @@ Route::get('/dashboard', [App\Http\Controllers\HomeController::class, 'dashboard
 
 
 //Route::get('/import', [App\Http\Controllers\FlatController::class, 'import']);
+Route::get('/cycle', [App\Http\Controllers\FlatController::class, 'cycle']);
 Route::get('/flat', [App\Http\Controllers\FlatController::class, 'index']);
 Route::get('/flat/{id}/edit', [App\Http\Controllers\FlatController::class, 'edit']);
 Route::get('/flat/export/{id}', [App\Http\Controllers\FlatController::class, 'export']);
@@ -36,6 +37,8 @@ Route::get('/slip/{id}', [App\Http\Controllers\FlatController::class, 'slip']);
 Route::resource('/expensehead', App\Http\Controllers\ExpenseHeadController::class);
 Route::resource('/expense', App\Http\Controllers\ExpenseController::class);
 Route::get('/expense/{id}/slip', [App\Http\Controllers\ExpenseController::class,'slip']);
+Route::get('/profile', [App\Http\Controllers\ProfileController::class,'index']);
+Route::post('/profile', [App\Http\Controllers\ProfileController::class,'update']);
 
 Route::resource('/accounthead', App\Http\Controllers\AccountHeadController::class);
 Route::resource('/employee', App\Http\Controllers\EmployeeController::class);

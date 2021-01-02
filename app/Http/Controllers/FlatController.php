@@ -73,7 +73,7 @@ class FlatController extends Controller
             'person_mobile'=> request('person_mobile'),
             'person_mobile2'=> request('person_mobile2'),
             'person_cnic'=> request('person_cnic'),
-            'person_perm_address'=> request('person_perm_address'),
+            'person_perm_address'=> request('person_perm_address'),                   
             'status'=> request('status'),
             'updated_by'=> auth()->id(),
         ]);
@@ -95,7 +95,10 @@ class FlatController extends Controller
     public function payment_save ($id)
     {        
         $month          = strtoupper(date("M-Y", strtotime(request('month'))));
-        $already_paid   = Maintenance::where('flat_id',$id)->where('month',$month)->where('head_id',1)->count();
+        $already_paid   = Maintenance::where('flat_id',$id)
+        ->where('month',$month)
+        ->where('type','full')
+        ->where('head_id',1)->count();
         if($already_paid == 0){
             $payment = Maintenance::create([
                 'head_id' => request('head_id'),
@@ -108,7 +111,33 @@ class FlatController extends Controller
                 'type' => request('type'),
                 'month' => strtoupper(date("M-Y", strtotime(request('month')))),
                 'payment' => request('payment'),
+                'description' => request('description'),
+                'old_slip_no' => request('old_slip_no'),     
             ]);
+
+            $flat = Flat::findOrFail($id);
+
+            $username   = "923022203204";///Your Username
+            $password   = "riahuzM@25";///Your Password
+            $sender     = "Saima One";
+            $mobile     = $flat->person_mobile;
+            $message    = "Thanks ".($flat->person_name).". Rs. ".number_format(request('amount'))." Received.";
+           
+            if($flat->person_mobile){
+                $post = "sender=".urlencode($sender)."&mobile=".urlencode($mobile)."&message=".urlencode($message)."";
+                $url = "https://sendpk.com/api/sms.php?username=$username&password=$password";
+                $ch = curl_init();
+                $timeout = 30; // set to zero for no timeout
+                curl_setopt($ch, CURLOPT_USERAGENT, 'Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; SV1)');
+                curl_setopt($ch, CURLOPT_URL,$url);
+                curl_setopt($ch, CURLOPT_POST, 1);
+                curl_setopt($ch, CURLOPT_POSTFIELDS,$post);
+                curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+                curl_setopt ($ch, CURLOPT_CONNECTTIMEOUT, $timeout);
+                $result = curl_exec($ch); 
+            }
+            
+
             return redirect("/slip/$payment->id"); 
         }else{
             session()->flash('danger','Maintenance For '.$month.' Already Paid!');
@@ -179,6 +208,45 @@ class FlatController extends Controller
             }
         }
         return ['success' => true];
+    }   
+    public function cycle (){
+        $flats = Flat::all();
+        $month = strtoupper(date("M-Y"));
+    
+        $count = 0;
+        foreach($flats as $flat){
+            $already_paid   = Maintenance::where('flat_id',$flat->id)
+            ->where('month',$month)
+            // ->where('type','full')
+            ->where('head_id',1)->count();
+
+            if($already_paid == 0){
+                Maintenance::create([
+                    'head_id' => 1,
+                    'flat_id' => $flat->id,
+                    'amount' => 10000,
+                    'discount' => 0,
+                    'method' => 'cash',
+                    'date' => "",
+                    'type' => 'partial',
+                    'month' => $month,
+                    'payment' => 0,
+                ]);
+                $count++;
+            }
+        }
+
+
+        
+
+
+        return [
+            'success' => true,
+            'count' => $count,
+        ];
+
+
+        
     }
 
     

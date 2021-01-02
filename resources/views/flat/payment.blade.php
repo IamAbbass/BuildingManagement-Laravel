@@ -7,14 +7,14 @@
 
     <!-- Page Heading -->
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
-        <h1 class="h3 mb-2 text-gray-800">Payment</h1>
+        <h1 class="h3 mb-2 text-gray-800">Payment for {{ $flat->name }}</h1>
     </div>
     
 
     <!-- DataTales Example -->
     <div class="card shadow mb-4">
         <div class="card-header py-3">
-            <h6 class="m-0 font-weight-bold text-primary">Payment</h6>
+            <h6 class="m-0 font-weight-bold text-primary">Payment for {{ $flat->name }}</h6>
         </div>
         <div class="card-body">
             <form action="/flat/{{ $flat->id }}/payment" method="POST">
@@ -69,6 +69,17 @@
                     <div class="col-md-4">
                         <label>Discount:</label>
                         <input type="number" value="0" class="form-control" name="discount" />
+                    </div>
+                </div>
+
+                <div class="row mt-4">
+                    <div class="col-md-4">
+                        <label>Notes: </label>
+                        <input  type="text" class="form-control" name="description" />
+                    </div>
+                    <div class="col-md-4">
+                        <label>Manual Slip No:</label>
+                        <input type="text" class="form-control" name="old_slip_no" />
                     </div>
                 </div>
 
