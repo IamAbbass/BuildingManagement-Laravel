@@ -141,7 +141,7 @@ function convert_number_to_words($number){
            display: block;
            padding:0 0;
            border-top:1px solid #999;
-        }       
+        }
         .one_six{
             width:16.66%;
             float:left;
@@ -151,12 +151,12 @@ function convert_number_to_words($number){
             float:left;
         }
         .clearfix{
-            clear:both;   
+            clear:both;
         }
         .row div span{
             padding:10px;
             display: block;
-            
+
         }
         .capitalize{
             text-transform: capitalize;
@@ -184,7 +184,7 @@ function convert_number_to_words($number){
 </head>
 <body>
     {{-- {{ $payment }} --}}
-    
+
 	<!-- Office Copy -->
     <div class="container" >
         <h4 class="text-center"><kbd>Office Copy</kbd></h4>
@@ -201,43 +201,43 @@ function convert_number_to_words($number){
             <small>IBAN Number: PK25MUCB1071560271010048</small>
         </h4>
         <h4 class="text-center"><kbd>Block-{{ $payment->flat->block->name }} / Flat# {{ $payment->flat->name }}</kbd></h4>
-        
+
         <div class="row">
             <div class="one_six bold"><span>Receipt No:</span></div>
             <div class="one_six"><span>{{ $payment->id }}</span></div>
-            
+
             <div class="one_six text-right bold"><span>&nbsp;</span></div>
             <div class="one_six"><span>&nbsp;</span></div>
-            
+
             <div class="one_six text-right bold"><span>Date:</span></div>
-            <div class="one_six"><span>{{ $payment->date }}</span></div>            
+            <div class="one_six"><span>{{ $payment->date }}</span></div>
             <div class="clearfix"></div>
-        </div>    
-        
+        </div>
+
         <div class="row">
             <div class="one_two bold"><span>Received with thanks from Mr/Mrs.:</span></div>
             <div class="one_two"><span>{{ $payment->flat->person_name }} </span></div>
             <div class="clearfix"></div>
         </div>
-        
-        <div class="row">            
+
+        <div class="row">
             <div class="one_two bold"><span>{{ $payment->account->name }} :</span></div>
             <div class="one_two"><span>{{ $payment->month }}</span></div>
             <div class="clearfix"></div>
         </div>
-        
-        <div class="row">            
-            <div class="one_two bold"><span>Amount:</span></div>
+
+        <div class="row">
+            <div class="one_two bold"><span>Amount ({{ ucfirst($payment->method) }} {{ $payment->cheque_no }}):</span></div>
             <div class="one_two capitalize">
                 <span class="amount">
                     {{ number_format($payment->payment) }} /-
                     <br/>
                     {{ convert_number_to_words($payment->payment)." Only." }}
-                </span>                
+                </span>
             </div>
             <div class="clearfix"></div>
         </div>
-       
+
         <div class="row" style="padding:5px">
             <p style="font-size: 11px">
                <u style="text-align: left">This is an electronic generated receipt, no signature is required.</u>
@@ -245,7 +245,7 @@ function convert_number_to_words($number){
                <label>Printed By: </label>
                {{ auth()->user()->name }}
                 at {{ date('d-M-Y h:i a') }}</span>
-            </p> 
+            </p>
         </div>
 	</div>
 
@@ -268,44 +268,44 @@ function convert_number_to_words($number){
             <small>IBAN Number: PK25MUCB1071560271010048</small>
         </h4>
         <h4 class="text-center"><kbd>Block-{{ $payment->flat->block->name }} / Flat# {{ $payment->flat->name }}</kbd></h4>
-        
+
         <div class="row">
             <div class="one_six bold"><span>Receipt No:</span></div>
             <div class="one_six"><span>{{ $payment->id }}</span></div>
-            
+
             <div class="one_six text-right bold"><span>&nbsp;</span></div>
             <div class="one_six"><span>&nbsp;</span></div>
-            
+
             <div class="one_six text-right bold"><span>Date:</span></div>
-            <div class="one_six"><span>{{ $payment->date }}</span></div>            
+            <div class="one_six"><span>{{ $payment->date }}</span></div>
             <div class="clearfix"></div>
-        </div>    
-        
+        </div>
+
         <div class="row">
             <div class="one_two bold"><span>Received with thanks from Mr/Mrs.:</span></div>
             <div class="one_two"><span>{{ $payment->flat->person_name }} </span></div>
             <div class="clearfix"></div>
         </div>
-        
-        <div class="row">            
+
+        <div class="row">
             <div class="one_two bold"><span>{{ $payment->account->name }} :</span></div>
             <div class="one_two"><span>{{ $payment->month }}</span></div>
             <div class="clearfix"></div>
         </div>
-        
-        <div class="row">            
-            <div class="one_two bold"><span>Amount:</span></div>
+
+        <div class="row">
+            <div class="one_two bold"><span>Amount ({{ ucfirst($payment->method) }} {{ $payment->cheque_no }}):</span></div>
             <div class="one_two capitalize">
                 <span class="amount">
                     {{ number_format($payment->payment) }} /-
                     <br/>
                     {{ convert_number_to_words($payment->payment)." Only." }}
-                    
-                </span>                
+
+                </span>
             </div>
             <div class="clearfix"></div>
         </div>
-       
+
         <div class="row" style="padding:5px">
             <p style="font-size: 11px">
                <u style="text-align: left">This is an electronic generated receipt, no signature is required.</u>
@@ -313,10 +313,10 @@ function convert_number_to_words($number){
                <label>Printed By: </label>
                {{ auth()->user()->name }}
                 at {{ date('d-M-Y h:i a') }}</span>
-            </p> 
+            </p>
         </div>
 	</div>
-    
+
     <script type="text/javascript">
 		window.print();
 	</script>

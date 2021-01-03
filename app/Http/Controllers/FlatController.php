@@ -122,6 +122,8 @@ class FlatController extends Controller
             $sender     = "Saima One";
             $mobile     = $flat->person_mobile;
             $message    = "Thanks ".($flat->person_name).". Rs. ".number_format(request('amount'))." Received.";
+
+            return $message;
            
             if($flat->person_mobile){
                 $post = "sender=".urlencode($sender)."&mobile=".urlencode($mobile)."&message=".urlencode($message)."";
