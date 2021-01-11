@@ -100,6 +100,9 @@ class FlatController extends Controller
         ->where('type','full')
         ->where('head_id',1)->count();
         if($already_paid == 0){
+            $month  = strtoupper(date("M-Y", strtotime(request('month'))));
+            $date   = strtoupper(date("d-M-Y", strtotime(request('date'))));
+
             $payment = Maintenance::create([
                 'head_id' => request('head_id'),
                 'flat_id' => $id,
@@ -107,9 +110,9 @@ class FlatController extends Controller
                 'discount' => request('discount'),
                 'method' => request('method'),
                 'cheque_no' => request('cheque_no'),
-                'date' => strtoupper(date("d-M-Y", strtotime(request('date')))),
+                'date' => $date,
                 'type' => request('type'),
-                'month' => strtoupper(date("M-Y", strtotime(request('month')))),
+                'month' => $month,
                 'payment' => request('payment'),
                 'description' => request('description'),
                 'old_slip_no' => request('old_slip_no'),     
@@ -121,8 +124,18 @@ class FlatController extends Controller
             $password   = "riahuzM@25";///Your Password
             $sender     = "Saima One";
             $mobile     = $flat->person_mobile;
-            $message    = "Thanks ".($flat->person_name).". Rs. ".number_format(request('amount'))." Received.";
-           
+            // $message    = "Thanks ".($flat->person_name).". Rs. ".number_format(request('amount'))." Received.";
+
+            //Account Head
+            $account_head = AccountHead::findOrFail(request('head_id'));
+
+            $message    = "Received with thanks Rs. ".(number_format(request('amount')))."/- Flat # (".($flat->name).")";
+            $message    .= " against ".$account_head->name.".";
+            $message    .= " Payment by ".ucfirst(request('method'));            
+            $message    .= " for the month of $month.";
+            // $message    .= " Balance 20,000/- ";
+            $message    .= " $date ".date("h:i A");
+
             if($flat->person_mobile){
                 $post = "sender=".urlencode($sender)."&mobile=".urlencode($mobile)."&message=".urlencode($message)."";
                 $url = "https://sendpk.com/api/sms.php?username=$username&password=$password";
