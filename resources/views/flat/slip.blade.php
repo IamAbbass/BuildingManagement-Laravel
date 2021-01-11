@@ -118,7 +118,15 @@ function convert_number_to_words($number){
 @endphp
 <head>
 	<title></title>
-	 <style type="text/css">
+     <style type="text/css">
+        .flat-no{
+            border: 2px solid #000;
+            width: 230px;
+            text-align: center !important;
+            margin: 10px auto;
+            padding: 3px;
+            border-radius: 5px;
+        }
         body{
            font-family: sans-serif;
         }
@@ -189,7 +197,7 @@ function convert_number_to_words($number){
     <div class="container" >
         <h4 class="text-center"><kbd>Office Copy</kbd></h4>
         <h4 class="text-center">Saima Square One Residents Tower Association
-            <br />
+            {{-- <br />
             <small>Plot No. 1185/G, Stadium Road, Block 10-A, Gulshan-e-Iqbal, Karachi</small>
             <br />
             <small>Bank Name: MUSLIM COMMERCIAL BANK LTD.</small>
@@ -198,9 +206,9 @@ function convert_number_to_words($number){
             <br />
             <small>Account No: 1071560271010048</small>
             <br />
-            <small>IBAN Number: PK25MUCB1071560271010048</small>
+            <small>IBAN Number: PK25MUCB1071560271010048</small> --}}
         </h4>
-        <h4 class="text-center"><kbd>Block-{{ $payment->flat->block->name }} / Flat# {{ $payment->flat->name }}</kbd></h4>
+        <h4 class="text-center flat-no">Block-{{ $payment->flat->block->name }} / Flat# SSQ1-{{ $payment->flat->name }}</h4>
 
         <div class="row">
             <div class="one_six bold"><span>Receipt No:</span></div>
@@ -239,6 +247,12 @@ function convert_number_to_words($number){
         </div>
 
         <div class="row" style="padding:5px">
+            <p style="font-size: 11px; text-align:center;">
+                Software By: <u>Zed Developers (zeddevelopers.com)</u>
+            </p>
+        </div>
+
+        <div class="row" style="padding:5px">
             <p style="font-size: 11px">
                <u style="text-align: left">This is an electronic generated receipt, no signature is required.</u>
                <span style="float: right;">
@@ -246,7 +260,8 @@ function convert_number_to_words($number){
                {{ auth()->user()->name }}
                 at {{ date('d-M-Y h:i a') }}</span>
             </p>
-        </div>
+        </div>        
+
 	</div>
 
     <!-- Seperator -->
@@ -267,7 +282,7 @@ function convert_number_to_words($number){
             <br />
             <small>IBAN Number: PK25MUCB1071560271010048</small>
         </h4>
-        <h4 class="text-center"><kbd>Block-{{ $payment->flat->block->name }} / Flat# {{ $payment->flat->name }}</kbd></h4>
+        <h4 class="text-center flat-no">Block-{{ $payment->flat->block->name }} / Flat# SSQ1-{{ $payment->flat->name }}</h4>
 
         <div class="row">
             <div class="one_six bold"><span>Receipt No:</span></div>
@@ -304,6 +319,12 @@ function convert_number_to_words($number){
                 </span>
             </div>
             <div class="clearfix"></div>
+        </div>
+
+        <div class="row" style="padding:5px">
+            <p style="font-size: 11px; text-align:center;">
+                Software By: <u>Zed Developers (zeddevelopers.com)</u>
+            </p>
         </div>
 
         <div class="row" style="padding:5px">

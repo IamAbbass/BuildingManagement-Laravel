@@ -72,8 +72,11 @@ class FlatController extends Controller
             'person_email'=> request('person_email'),            
             'person_mobile'=> request('person_mobile'),
             'person_mobile2'=> request('person_mobile2'),
+            'ptcl_no' => request('ptcl_no'),
             'person_cnic'=> request('person_cnic'),
-            'person_perm_address'=> request('person_perm_address'),                   
+            'person_perm_address'=> request('person_perm_address'),
+            'tenant_name'=> request('tenant_name'),  
+            'notes'=> request('notes'),
             'status'=> request('status'),
             'updated_by'=> auth()->id(),
         ]);
@@ -93,8 +96,20 @@ class FlatController extends Controller
     }
 
     public function payment_save ($id)
-    {        
+    { 
         $month          = strtoupper(date("M-Y", strtotime(request('month'))));
+
+        /*
+        except this MONTH
+        */
+
+        //Balance Delete
+        $trashed   = Maintenance::where('head_id',1)->where('flat_id',$id)->where('type','partial')
+        ->where('month',$month)->where('payment',0)->get();
+        foreach($trashed as $trash){
+            $trash->delete();
+        }        
+        
         $already_paid   = Maintenance::where('flat_id',$id)
         ->where('month',$month)
         ->where('type','full')
@@ -225,6 +240,19 @@ class FlatController extends Controller
     public function cycle (){
         $flats = Flat::all();
         $month = strtoupper(date("M-Y"));
+
+
+        //remove trash
+        foreach($flats as $flat){
+            $trashed   = Maintenance::where('head_id',1)
+            ->where('flat_id',$flat->id)
+            ->where('type','partial')
+            ->where('month',$month)
+            ->where('payment',0)->get();
+            foreach($trashed as $trash){
+                $trash->delete();
+            }
+        }  
     
         $count = 0;
         foreach($flats as $flat){
@@ -249,8 +277,7 @@ class FlatController extends Controller
             }
         }
 
-
-        
+             
 
 
         return [

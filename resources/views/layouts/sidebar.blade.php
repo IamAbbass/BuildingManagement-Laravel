@@ -16,6 +16,13 @@
 
     <hr class="sidebar-divider my-0">
     <li class="nav-item">
+        <a class="nav-link" href="/search">
+            <i class="fas fa-fw fa-users"></i>
+            <span>Search</span></a>
+    </li>
+
+    <hr class="sidebar-divider my-0">
+    <li class="nav-item">
         <a class="nav-link" href="/flat">
             <i class="fas fa-fw fa-users"></i>
             <span>Flats</span></a>

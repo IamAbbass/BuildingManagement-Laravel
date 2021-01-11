@@ -22,14 +22,20 @@
                 @method('PATCH')
                 <div class="row">
                     <div class="col-md-4">
-                        <label>Name: *</label>
+                        <label>Owner Name: *</label>
                         <input required value="{{ $flat->person_name }}" type="text" class="form-control" name="person_name" />
+                    </div>
+                    <div class="col-md-4">
+                        <label>Tenant Name:</label>
+                        <input value="{{ $flat->tenant_name }}" type="text" class="form-control" name="tenant_name" />
                     </div>
                     <div class="col-md-4">
                         <label>Email:</label>
                         <input value="{{ $flat->person_email }}" type="email" class="form-control" name="person_email" />
                     </div>
-                    
+                </div>
+
+                <div class="row mt-4">
                     <div class="col-md-4">
                         <label>Mobile:</label>
                         <input value="{{ $flat->person_mobile }}" type="number" class="form-control" name="person_mobile" />
@@ -39,13 +45,20 @@
                         <input value="{{ $flat->person_mobile2 }}" type="number" class="form-control" name="person_mobile2" />
                     </div>
                     <div class="col-md-4">
+                        <label>PTCL No:</label>
+                        <input value="{{ $flat->ptcl_no }}" type="text" class="form-control" name="ptcl_no" />
+                    </div>
+                </div>
+
+                <div class="row mt-4">                                        
+                    <div class="col-md-4">
                         <label>CNIC:</label>
                         <input value="{{ $flat->person_cnic }}" type="number" class="form-control" name="person_cnic" />
                     </div>
                     <div class="col-md-4">
                         <label>Perminent Address:</label>
                         <input value="{{ $flat->person_perm_address }}" type="text" class="form-control" name="person_perm_address" />
-                    </div>
+                    </div>  
                     <div class="col-md-4">
                         <label>Status:</label>
                         <select class="form-control" name="status">
@@ -55,7 +68,13 @@
                             <option {{ $flat->status == 'Tenant' ? 'selected' : '' }} value="Tenant">Tenant</option>
                         </select>
                     </div>
+                </div>
 
+                <div class="row mt-4">
+                    <div class="col-md-4">
+                        <label>Notes:</label>
+                        <textarea type="text" class="form-control" name="notes">{{ $flat->notes }}</textarea>
+                    </div>
                     <div class="col-md-4">
                         <label>&nbsp;</label><br/>
                         <button type="submit" class="btn btn-primary">Edit</button>

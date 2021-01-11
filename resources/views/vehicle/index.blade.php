@@ -57,9 +57,8 @@
                                     
                                 </td>
                                 <td> 
-                                    {{-- <a href="/flat/{{ $vehicle->flat_id }}/vehicle/{{ $vehicle->id }}/edit" class="btn btn-warning shadow-sm"><i
-                                        class="fas fa-edit fa-sm text-white-50"></i> Edit</a> --}}
-
+                                    <a href="/flat/{{ $vehicle->flat_id }}/vehicle/{{ $vehicle->id }}/edit" class="btn btn-warning shadow-sm"><i
+                                        class="fas fa-edit fa-sm text-white-50"></i> Edit</a>
                                 </td>
                             </tr>
                         @endforeach

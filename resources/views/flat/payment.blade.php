@@ -29,7 +29,7 @@
                     </div>
                     <div class="col-md-4">
                         <label>Amount: *</label>
-                        <input required min="1" type="number" class="form-control" name="amount" />
+                        <input required min="0" type="number" class="form-control" name="amount" />
                     </div>
                     <div class="col-md-4">
                         <label>Month:</label>

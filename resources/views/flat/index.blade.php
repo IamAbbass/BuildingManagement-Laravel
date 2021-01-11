@@ -38,7 +38,7 @@
                             <th>Name</th>
                             <th>Email</th>
                             <th>Mobile</th>
-                            <th>Mobile (2)</th>
+                            <th>PTCL</th>
                             <th>CNIC</th>
                             {{-- <th>Permanent Address</th> --}}
                             <th>Vehicles</th>
@@ -61,8 +61,8 @@
                                 <td>{{ $flat->name }}</td>
                                 <td>{{ $flat->person_name }}</td>
                                 <td>{{ $flat->person_email }}</td>                                
-                                <td>{{ $flat->person_mobile }}</td>
-                                <td>{{ $flat->person_mobile2 }}</td>
+                                <td>{{ $flat->person_mobile }}<br/>{{ $flat->person_mobile2 }}</td>
+                                <td>{{ $flat->ptcl_no }}</td>                                
                                 <td>{{ $flat->person_cnic }}</td>
                                 {{-- <td>{{ $flat->person_perm_address }}</td> --}}
                                 <td>

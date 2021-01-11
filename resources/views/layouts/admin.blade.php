@@ -48,7 +48,7 @@
                 @if(session('success'))
                     <div class="container-fluid">
                         <div class="alert alert-success">
-                            <p>{{ session('success') }}</p>
+                            <p class="m-0">{{ session('success') }}</p>
                         </div>
                     </div>
                 @endif
@@ -56,7 +56,7 @@
                 @if(session('danger'))
                     <div class="container-fluid">
                         <div class="alert alert-danger">
-                            <p>{{ session('danger') }}</p>
+                            <p class="m-0">{{ session('danger') }}</p>
                         </div>
                     </div>
                 @endif
