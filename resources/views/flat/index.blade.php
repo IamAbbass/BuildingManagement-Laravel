@@ -25,6 +25,7 @@
             <h6 class="m-0 font-weight-bold text-primary">Flats</h6>
             <a href="/flat/export/{{ $selected_block }}" class="btn btn-info float-right mr-1">Export Maintenance Report</a>
             <a href="/flat/export/{{ $selected_block }}?type=full" class="btn btn-success float-right mr-1">Export Flat Info Report</a>
+            <a href="/flat/export/{{ $selected_block }}/defaulter" class="btn btn-danger float-right mr-1">Defaulter List</a>
             
         </div>
         <div class="card-body">
@@ -33,17 +34,11 @@
                     <thead>
                         <tr>
                             <th>Sno</th>
-                            <th>Block</th>
-                            <th>Flat</th>
-                            <th>Name</th>
-                            <th>Email</th>
-                            <th>Mobile</th>
-                            <th>PTCL</th>
-                            <th>CNIC</th>
-                            {{-- <th>Permanent Address</th> --}}
+                            <th style="width:75px;">Block</th>
+                            <th style="width:75px;">Flat</th>
+                            <th>Contact Name</th>
                             <th>Vehicles</th>
-                            <th>Status</th>
-                            {{-- <th>Last Payment</th> --}}
+                            {{-- <th>Status</th> --}}
                             <th>Balance</th>
                             <th>Options</th>
                         </tr>
@@ -58,13 +53,24 @@
                             <tr>
                                 <td>{{ ++$sno }}</td>
                                 <td>Block {{ $flat->block->name }}</td>
-                                <td>{{ $flat->name }}</td>
-                                <td>{{ $flat->person_name }}</td>
-                                <td>{{ $flat->person_email }}</td>                                
-                                <td>{{ $flat->person_mobile }}<br/>{{ $flat->person_mobile2 }}</td>
-                                <td>{{ $flat->ptcl_no }}</td>                                
-                                <td>{{ $flat->person_cnic }}</td>
-                                {{-- <td>{{ $flat->person_perm_address }}</td> --}}
+                                <td>
+                                    {{ $flat->name }}
+                                    @php
+                                        if($flat->isDefaulter->sum('payment') < 10000){
+                                            echo "<span class='badge badge-danger'>Defaulter</span>";
+                                        }
+                                    @endphp
+
+                                </td>
+                                <td>
+                                    {!! $flat->person_name ? "Owner: $flat->person_name </br>" : '' !!}
+                                    {!! $flat->tenant_name ? "Tenant: $flat->tenant_name </br>" : '' !!}
+                                    {!! $flat->person_email ? "Email: $flat->person_email </br>" : '' !!}
+                                    {!! $flat->person_mobile ? "Mobile: $flat->person_mobile </br>" : '' !!}
+                                    {!! $flat->person_mobile2 ? "Mobile (2): $flat->person_mobile2 </br>" : '' !!}
+                                    {!! $flat->ptcl_no ? "PTCL: $flat->ptcl_no </br>" : '' !!}
+                                    {!! $flat->person_cnic ? "CNIC: $flat->person_cnic </br>" : '' !!}
+                                </td>
                                 <td>
                                     <ol class="p-0 ml-2">
                                         @foreach ($flat->vehicles as $vehicle)
@@ -73,7 +79,7 @@
                                     </ol>
                                     <a href="/flat/{{ $flat->id }}/vehicle" class="btn btn-sm btn-secondary shadow-sm">Edit</a>
                                 </td>
-                                <td>{{ $flat->status }}</td>
+                                {{-- <td>{{ $flat->status }}</td> --}}
                                 {{-- <td>
                                     PKR {{ $flat->last_payment->amount }} ({{ $flat->last_payment->month }})                                
                                 </td> --}}
@@ -84,15 +90,14 @@
                                 </td>
                                 
                                 <td> 
-                                    <a href="/flat/{{ $flat->id }}/edit" class="btn mr-1 mb-1 btn-warning shadow-sm"><i
+                                    <a href="/flat/{{ $flat->id }}/edit" class="btn btn-sm mr-1 mb-1 btn-warning shadow-sm"><i
                                         class="fas fa-edit fa-sm text-white-50"></i> Edit</a>
                                     
-                                    <a href="/flat/{{ $flat->id }}/payment" class="btn mr-1 mb-1 btn-success shadow-sm"><i
+                                    <a href="/flat/{{ $flat->id }}/payment" class="btn btn-sm mr-1 mb-1 btn-success shadow-sm"><i
                                         class="fas fa-edit fa-sm text-white-50"></i> Payment</a>
 
-                                    <a href="/flat/{{ $flat->id }}" class="btn mr-1 mb-1 btn-info shadow-sm"><i
+                                    <a href="/flat/{{ $flat->id }}" class="btn btn-sm mr-1 mb-1 btn-info shadow-sm"><i
                                         class="fas fa-edit fa-sm text-white-50"></i> History</a>
-
                                 </td>
                             </tr>
                         @endforeach

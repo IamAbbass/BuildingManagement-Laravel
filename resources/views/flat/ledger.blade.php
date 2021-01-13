@@ -1,21 +1,15 @@
-@extends('layouts.admin')
+@extends('layouts.print')
 
 
 @section('content')
 
 <div class="container-fluid">
-
-    <!-- Page Heading -->
-    <div class="d-sm-flex align-items-center justify-content-between mb-4">
-        <h1 class="h3 mb-2 text-gray-800">Flat {{ $flat->name }} History</h1>
-    </div>
     
 
     <!-- DataTales Example -->
     <div class="card shadow mb-4">
         <div class="card-header py-3">
-            <h6 class="m-0 font-weight-bold text-primary">Flat {{ $flat->name }} History</h6>
-            <a href="/flat/{{ $flat->id }}/print" class="btn btn-success float-right mr-1">Export Ledger</a>
+            <h6 class="m-0 font-weight-bold text-primary">Flat {{ $flat->name }}</h6>
             
         </div>
         <div class="card-body">
@@ -33,9 +27,7 @@
                             <th>Method</th>
                             <th>Received</th>
                             <th>Month</th>
-                            <th>Description</th>
                             <th>Date</th>
-                            <th></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -64,12 +56,7 @@
                                     {{ number_format($payment->payment) }} <span class="badge badge-secondary">{{ ucfirst($payment->type) }}  </span>                              
                                 </td>
                                 <td>{{ $payment->month }}</td>
-                                <td>{{ $payment->description }}</td>
                                 <td>{{ $payment->date }}</td>
-                                <td>
-                                    <a target="_blank" href="/slip/{{ $payment->id }}" class="btn mr-1 mb-1 btn-info shadow-sm"><i
-                                        class="fas fa-print fa-sm text-white-50"></i> Slip</a>
-                                </td>
                             </tr>
                         @endforeach
                     </tbody>

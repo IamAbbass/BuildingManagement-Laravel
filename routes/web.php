@@ -31,11 +31,15 @@ Route::post('/search', [App\Http\Controllers\MaintenanceController::class, 'sear
 Route::get('/flat', [App\Http\Controllers\FlatController::class, 'index']);
 Route::get('/flat/{id}/edit', [App\Http\Controllers\FlatController::class, 'edit']);
 Route::get('/flat/export/{id}', [App\Http\Controllers\FlatController::class, 'export']);
+Route::get('/flat/export/{id}/defaulter', [App\Http\Controllers\FlatController::class, 'defaulter']);
+
 Route::get('/flat/{id}/', [App\Http\Controllers\FlatController::class, 'show']);
 Route::patch('/flat/{id}/', [App\Http\Controllers\FlatController::class, 'update']);
+Route::get('/flat/{id}/print', [App\Http\Controllers\FlatController::class, 'print']);
 Route::get('/flat/{id}/payment', [App\Http\Controllers\FlatController::class, 'payment']);
 Route::post('/flat/{id}/payment', [App\Http\Controllers\FlatController::class, 'payment_save']);
 Route::get('/slip/{id}', [App\Http\Controllers\FlatController::class, 'slip']);
+
 
 Route::resource('/expensehead', App\Http\Controllers\ExpenseHeadController::class);
 Route::resource('/expense', App\Http\Controllers\ExpenseController::class);
@@ -48,3 +52,6 @@ Route::resource('/employee', App\Http\Controllers\EmployeeController::class);
 Route::resource('/contractor', App\Http\Controllers\ContractorController::class);
 Route::get('/attendance', [App\Http\Controllers\AttendanceController::class, 'index']);
 Route::resource('/flat/{id}/vehicle', App\Http\Controllers\VehicleController::class);
+
+Route::get('/report/daily', [App\Http\Controllers\ReportController::class,'daily_report']);
+Route::post('/report/daily', [App\Http\Controllers\ReportController::class,'daily_report_print']);

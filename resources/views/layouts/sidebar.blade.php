@@ -19,7 +19,7 @@
         <a class="nav-link" href="/search">
             <i class="fas fa-fw fa-users"></i>
             <span>Search</span></a>
-    </li>
+    </li>    
 
     <hr class="sidebar-divider my-0">
     <li class="nav-item">
@@ -69,6 +69,15 @@
             <i class="fas fa-fw fa-users"></i>
             <span>Bio Metric</span></a>
     </li> 
+
+    <hr class="sidebar-divider my-0">
+    <li class="nav-item">
+        <a class="nav-link" href="/report/daily">
+            <i class="fas fa-fw fa-users"></i>
+            <span>Daily Collection Report</span></a>
+    </li> 
+
+    
 
 
     {{-- - View All Maintenance (Block Wise Filter)

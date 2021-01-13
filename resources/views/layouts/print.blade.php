@@ -24,6 +24,12 @@
 
     
     <script src="{{ asset('vendor/jquery/jquery.min.js') }}"></script>
+    <style>
+        table td, table th{
+            padding: 2px !important;
+            color: #000;
+        }
+    </style>
 
 
 </head>

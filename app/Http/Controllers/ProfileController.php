@@ -53,7 +53,7 @@ class ProfileController extends Controller
                     if($request->new_password === $request->confirm_new_password){
                         $user->password = Hash::make($request->new_password);
                     }else{
-                        $request->session()->flash('error', 'New password and Confirm password NOT matched');
+                        $request->session()->flash('danger', 'New password and Confirm password NOT matched');
                         return redirect()->back();
                     }
                 }
@@ -63,7 +63,7 @@ class ProfileController extends Controller
                 return redirect('/profile');
 
             }else{
-                $request->session()->flash('error', 'Old Password is incorrect');
+                $request->session()->flash('danger', 'Old Password is incorrect');
                 return redirect()->back();
             }
 

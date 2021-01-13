@@ -25,4 +25,10 @@ class Flat extends Model
     public function vehicles(){
         return $this->hasMany('\App\Models\Vehicle','flat_id','id');
     }
+
+    public function isDefaulter(){
+        return $this->hasMany('\App\Models\Maintenance','flat_id','id')
+        ->where('month',strtoupper(date('M-Y')))
+        ->where('head_id',1);  
+    }
 }

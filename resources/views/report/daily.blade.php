@@ -7,26 +7,47 @@
 
     <!-- Page Heading -->
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
-        <h1 class="h3 mb-2 text-gray-800">Flat {{ $flat->name }} History</h1>
+        <h1 class="h3 mb-2 text-gray-800">Daily Collection Report</h1>
     </div>
     
 
     <!-- DataTales Example -->
     <div class="card shadow mb-4">
         <div class="card-header py-3">
-            <h6 class="m-0 font-weight-bold text-primary">Flat {{ $flat->name }} History</h6>
-            <a href="/flat/{{ $flat->id }}/print" class="btn btn-success float-right mr-1">Export Ledger</a>
-            
+            <h6 class="m-0 font-weight-bold text-primary">Daily Collection Report</h6>
         </div>
         <div class="card-body">
 
-            <div class="table-responsive">
+            <form method="POST" target="_blank" action="/report/daily">
+                @csrf
+                <div class="row">
+                    <div class="col-md-4">
+                        <label>Date: *</label>
+                        <input value="{{ request('date') }}" required name="date" class="form-control" type="date" />
+                    </div>
+                    {{-- <div class="col-md-4">
+                        <label>Date To: *</label>
+                        <input value="{{ request('to') }}" required name="to" class="form-control" type="date" />
+                    </div> --}}
+                    <div class="col-md-4">
+                        <label>&nbsp;</label><br/>
+                        <button class="btn btn-primary">Generate</button>
+                    </div>
+                </div>
+            </form>
+            
+
+            {{-- <div class="table-responsive">
+
+                
+
                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                     <thead>
 
                         <tr>
                             <th>Sno</th>
                             <th>Slip No</th>
+                            <th>Flat</th>
                             <th>Head</th>
                             <th>Amount</th>
                             <th>Discount</th>
@@ -35,7 +56,6 @@
                             <th>Month</th>
                             <th>Description</th>
                             <th>Date</th>
-                            <th></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -43,13 +63,17 @@
                             $sno = 0;    
                         @endphp
                         
-                        @foreach($flat->payments->where('payment','>',0) as $payment)
+                        @foreach($payments as $payment)
                         
                             <tr>
                                 <td>{{ ++$sno }}</td>
                                 <td>
                                     {{ $payment->id }}
                                 </td>
+                                <td>
+                                    {{ $payment->flat->name }}
+                                </td>
+                                
                                 <td>
                                     {{ $payment->account ? $payment->account->name : '-' }}
                                 </td>
@@ -66,15 +90,11 @@
                                 <td>{{ $payment->month }}</td>
                                 <td>{{ $payment->description }}</td>
                                 <td>{{ $payment->date }}</td>
-                                <td>
-                                    <a target="_blank" href="/slip/{{ $payment->id }}" class="btn mr-1 mb-1 btn-info shadow-sm"><i
-                                        class="fas fa-print fa-sm text-white-50"></i> Slip</a>
-                                </td>
                             </tr>
                         @endforeach
                     </tbody>
                 </table>
-            </div>
+            </div> --}}
             
             
             

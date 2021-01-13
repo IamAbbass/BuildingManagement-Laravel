@@ -37,7 +37,7 @@
 
                 <div class="row mt-4">
                     <div class="col-md-4">
-                        <label>Mobile:</label>
+                        <label>Mobile (SMS):</label>
                         <input value="{{ $flat->person_mobile }}" type="number" class="form-control" name="person_mobile" />
                     </div>
                     <div class="col-md-4">

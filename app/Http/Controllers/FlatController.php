@@ -48,10 +48,31 @@ class FlatController extends Controller
         ]);
     }
 
+    //yahan
+    public function defaulter($selected_block)
+    {        
+        $flats  = Flat::where('block_id',$selected_block)->get();
+        $block  = Block::findOrFail($selected_block);
+
+
+        return view('flat.defaulter',[
+            'flats'     => $flats,
+            'block'     => $block,
+        ]);
+    }
+
     public function show($id)
     {
         $flat = Flat::findOrFail($id);
         return view('flat.show',[
+            'flat' => $flat,
+        ]);
+    }
+
+    public function print($id)
+    {
+        $flat = Flat::findOrFail($id);
+        return view('flat.ledger',[
             'flat' => $flat,
         ]);
     }
@@ -113,7 +134,8 @@ class FlatController extends Controller
         $already_paid   = Maintenance::where('flat_id',$id)
         ->where('month',$month)
         ->where('type','full')
-        ->where('head_id',1)->count();
+        ->where('head_id',request('head_id'))->count();
+
         if($already_paid == 0){
             $month  = strtoupper(date("M-Y", strtotime(request('month'))));
             $date   = strtoupper(date("d-M-Y", strtotime(request('date'))));
