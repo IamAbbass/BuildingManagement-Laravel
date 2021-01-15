@@ -33,5 +33,5 @@ class MaintenanceController extends Controller
             return back();
         }
     }
-    
+
 }

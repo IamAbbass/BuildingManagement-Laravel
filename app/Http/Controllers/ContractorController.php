@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Contractor;
+use App\Models\Maintenance;
 use Illuminate\Http\Request;
 
 class ContractorController extends Controller
@@ -60,5 +61,48 @@ class ContractorController extends Controller
 
         session()->flash('success','Contractor Updated!');
         return redirect('/contractor');
+    }
+
+    public function payment($id)
+    {
+        $contractor = Contractor::findOrFail($id);
+
+        return view('contractor.payment',[
+            'contractor' => $contractor
+        ]);
+    }
+
+    public function payment_save ($id)
+    {
+        $month  = strtoupper(date("M-Y", strtotime(request('month'))));
+        $date   = strtoupper(date("d-M-Y", strtotime(request('date'))));
+
+        $payment = Maintenance::create([
+            'head_id' => 0,
+            'flat_id' => 0,
+            'contractor_id' => $id,            
+            'amount' => request('amount'),
+            'discount' => request('discount'),
+            'method' => request('method'),
+            'cheque_no' => request('cheque_no') ?? "",
+            'date' => $date,
+            'type' => request('type'),
+            'month' => $month,
+            'payment' => request('payment'),
+            'description' => request('description'),
+            'old_slip_no' => request('old_slip_no'),     
+        ]);
+
+        return redirect("/contractor/$payment->id"); 
+        
+    }
+
+    public function slip ($id)
+    {     
+        $payment = Maintenance::findOrFail($id);
+
+        return view("contractor.slip",[
+            'payment' => $payment,
+        ]); 
     }
 }

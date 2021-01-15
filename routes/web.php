@@ -39,7 +39,7 @@ Route::get('/flat/{id}/print', [App\Http\Controllers\FlatController::class, 'pri
 Route::get('/flat/{id}/payment', [App\Http\Controllers\FlatController::class, 'payment']);
 Route::post('/flat/{id}/payment', [App\Http\Controllers\FlatController::class, 'payment_save']);
 Route::get('/slip/{id}', [App\Http\Controllers\FlatController::class, 'slip']);
-
+Route::get('/contractor/{id}', [App\Http\Controllers\ContractorController::class, 'slip']);
 
 Route::resource('/expensehead', App\Http\Controllers\ExpenseHeadController::class);
 Route::resource('/expense', App\Http\Controllers\ExpenseController::class);
@@ -50,6 +50,11 @@ Route::post('/profile', [App\Http\Controllers\ProfileController::class,'update']
 Route::resource('/accounthead', App\Http\Controllers\AccountHeadController::class);
 Route::resource('/employee', App\Http\Controllers\EmployeeController::class);
 Route::resource('/contractor', App\Http\Controllers\ContractorController::class);
+
+Route::get('/contractor/{id}/payment', [App\Http\Controllers\ContractorController::class,'payment']);
+Route::post('/contractor/{id}/payment', [App\Http\Controllers\ContractorController::class,'payment_save']);
+
+
 Route::get('/attendance', [App\Http\Controllers\AttendanceController::class, 'index']);
 Route::resource('/flat/{id}/vehicle', App\Http\Controllers\VehicleController::class);
 

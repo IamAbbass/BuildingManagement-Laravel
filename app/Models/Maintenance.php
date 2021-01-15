@@ -22,6 +22,10 @@ class Maintenance extends Model
         return $this->hasOne('\App\Models\Flat','id','flat_id');
     } 
 
+    public function contractor(){
+        return $this->hasOne('\App\Models\Contractor','id','contractor_id');
+    } 
+
     public function account(){
         return $this->hasOne('\App\Models\AccountHead','id','head_id');
     } 
