@@ -93,7 +93,7 @@ class ContractorController extends Controller
             'old_slip_no' => request('old_slip_no'),     
         ]);
 
-        return redirect("/contractor/$payment->id"); 
+        return redirect("/contractor/slip/$payment->id"); 
         
     }
 

@@ -39,7 +39,7 @@ Route::get('/flat/{id}/print', [App\Http\Controllers\FlatController::class, 'pri
 Route::get('/flat/{id}/payment', [App\Http\Controllers\FlatController::class, 'payment']);
 Route::post('/flat/{id}/payment', [App\Http\Controllers\FlatController::class, 'payment_save']);
 Route::get('/slip/{id}', [App\Http\Controllers\FlatController::class, 'slip']);
-Route::get('/contractor/{id}', [App\Http\Controllers\ContractorController::class, 'slip']);
+Route::get('/contractor/slip/{id}', [App\Http\Controllers\ContractorController::class, 'slip']);
 
 Route::resource('/expensehead', App\Http\Controllers\ExpenseHeadController::class);
 Route::resource('/expense', App\Http\Controllers\ExpenseController::class);
