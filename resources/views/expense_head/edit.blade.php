@@ -22,9 +22,18 @@
                 @method('PATCH')
 
                 <div class="row">
-                    <div class="col-md-8">
+                    <div class="col-md-4">
                         <label>Name: *</label>
-                        <input type="text" class="form-control" name="name" value="{{ $expense_head->name }}" />
+                        <input type="text" class="form-control" name="name" value="{{ $expense_head->name }}" require />
+                    </div>
+                    <div class="col-md-4">
+                        <label>Head Type: *</label>
+                        <select class="form-control" name="head_type" require>
+                            <option value="">Select</option>
+                            <option {{ $expense_head->head_type == 'Asset' ? 'selected' : '' }} value="Asset">Asset</option>
+                            <option {{ $expense_head->head_type == 'Liability' ? 'selected' : '' }} value="Liability">Liability</option>
+                            <option {{ $expense_head->head_type == 'Expense' ? 'selected' : '' }} value="Expense">Expense</option>
+                        </select>
                     </div>
                     <div class="col-md-4">
                         <label>&nbsp;</label><br/>

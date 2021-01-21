@@ -38,7 +38,7 @@
                         
                             <tr>
                                 <td>{{ ++$sno }}</td>
-                                <td>{{ $head->name }}</td>
+                                <td>{{ $head->name }}</br><kbd>{{ $head->head_type}}</kbd></td>
                                 <td>
                                     @if($head->creator)
                                         Created By: {{ $head->creator->name }}

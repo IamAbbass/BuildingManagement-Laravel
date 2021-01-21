@@ -166,7 +166,7 @@ class FlatController extends Controller
             //Account Head
             $account_head = AccountHead::findOrFail(request('head_id'));
 
-            $message    = "Received with thanks Rs. ".(number_format(request('amount')))."/- Flat # (".($flat->name).")";
+            $message    = "Received with thanks Rs. ".(number_format(request('amount')))."/- Flat # SSQ1-(".($flat->name).")";
             $message    .= " against ".$account_head->name.".";
             $message    .= " Payment by ".ucfirst(request('method'));            
             $message    .= " for the month of $month.";

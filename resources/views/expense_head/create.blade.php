@@ -20,9 +20,18 @@
             <form action="/expensehead" method="POST">
                 @csrf
                 <div class="row">
-                    <div class="col-md-8">
+                    <div class="col-md-4">
                         <label>Name: *</label>
-                        <input type="text" class="form-control" name="name" />
+                        <input type="text" class="form-control" name="name" require />
+                    </div>
+                    <div class="col-md-4">
+                        <label>Head Type: *</label>
+                        <select class="form-control" name="head_type" require>
+                            <option value="">Select</option>
+                            <option value="Asset">Asset</option>
+                            <option value="Liability">Liability</option>
+                            <option value="Expense">Expense</option>
+                        </select>
                     </div>
                     <div class="col-md-4">
                         <label>&nbsp;</label><br/>
