@@ -25,8 +25,17 @@
             <h6 class="m-0 font-weight-bold text-primary">Flats</h6>
             <a href="/flat/export/{{ $selected_block }}" class="btn btn-info float-right mr-1">Export Maintenance Report</a>
             <a href="/flat/export/{{ $selected_block }}?type=full" class="btn btn-success float-right mr-1">Export Flat Info Report</a>
-            <a href="/flat/export/{{ $selected_block }}/defaulter" class="btn btn-danger float-right mr-1">Defaulter List</a>
-            
+            <button class="btn btn-danger float-right mr-1 dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Defaulter List           
+            </button>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                @foreach ($account_heads as $account_head)
+                    <a class="dropdown-item" href="/flat/export/{{ $selected_block }}/defaulter?head={{ $account_head->id }}">{{ $account_head->name }}</a>
+                @endforeach
+                <a class="dropdown-item" href="/flat/export/{{ $selected_block }}/defaulter">All</a>
+            </div>
+        </div>
+
         </div>
         <div class="card-body">
             <div class="table-responsive">

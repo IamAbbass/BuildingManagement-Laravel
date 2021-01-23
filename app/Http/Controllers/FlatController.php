@@ -23,16 +23,17 @@ class FlatController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {
-        
+    {        
         $blocks = Block::all();
         $selected_block = request('block') ?? 1;
         $flats  = Flat::where('block_id',$selected_block)->get();
+        $account_heads = AccountHead::all();
 
         return view('flat.index',[
             'flats'     => $flats,
             'blocks'    => $blocks,
             'selected_block' => $selected_block,
+            'account_heads' => $account_heads,
         ]);
     }
 
@@ -53,8 +54,6 @@ class FlatController extends Controller
     {        
         $flats  = Flat::where('block_id',$selected_block)->get();
         $block  = Block::findOrFail($selected_block);
-
-
         return view('flat.defaulter',[
             'flats'     => $flats,
             'block'     => $block,
