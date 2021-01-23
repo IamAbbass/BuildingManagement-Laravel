@@ -29,6 +29,7 @@ class ExpenseHeadController extends Controller
     {
         ExpenseHead::create([
             'name' => request('name'),
+            'head_type' => request('head_type'),
             'created_by' => auth()->id()
         ]);
 
@@ -54,6 +55,7 @@ class ExpenseHeadController extends Controller
         $expense_head = ExpenseHead::findOrFail($id);
         $expense_head->update([
             'name' => request('name'),
+            'head_type' => request('head_type'),
             'updated_by' => auth()->id()
         ]);
 

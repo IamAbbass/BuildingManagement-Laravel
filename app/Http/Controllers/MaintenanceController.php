@@ -34,4 +34,16 @@ class MaintenanceController extends Controller
         }
     }
 
+    public function cancel($id)
+    {
+        $maintenance    = Maintenance::findOrFail($id);
+        $maintenance->update([            
+            'is_cancelled'=> true,
+            'updated_by'=> auth()->id(),
+        ]);
+        session()->flash('success','Maintenance Cancelled!');
+        return back();
+    }
+
+
 }

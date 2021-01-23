@@ -137,6 +137,9 @@ function convert_number_to_words($number){
             border-radius: 7px;
         }
         .container{
+            position: relative;
+            overflow: hidden;
+
             background-image: url("{{ asset('img/logo.png') }}");
             background-color:#fff;
             background-position: -35px -20px;
@@ -144,6 +147,7 @@ function convert_number_to_words($number){
             background-size: 200px;
             border:1px solid #000;
             margin:40px 0;
+            z-index:0;
         }
         .row{
            display: block;
@@ -188,15 +192,56 @@ function convert_number_to_words($number){
             margin: 0 5px;
         }
 
+       .watermark-text-o, .watermark-text-r {
+            position: absolute;
+            color: #ababab;
+            font-size: 220px;
+            letter-spacing: -13px;
+            transform: rotate(345deg);
+            -webkit-transform: rotate(345deg);
+            z-index: -2;
+       }
+
+       .watermark-text-o {
+            top: 75px;
+            left: -5px;
+       }
+
+       .watermark-text-r {
+            top: 165px;
+            left: -5px;
+       }
+
+       .qrcode {
+            float: right;
+            margin-top: 15px ;
+            position: fixed !important;
+            left: 590px;
+        }
+        
+        .print{
+            display: none;
+        }
+
+        @media print {
+            .print{
+                display: block;
+            }
+        }
+
 	 </style>
 </head>
 <body>
     {{-- {{ $payment }} --}}
 
 	<!-- Office Copy -->
-    <div class="container" >
+    <div class="container">
+        <div class="qrcode print">
+            {!! DNS2D::getBarcodeHTML($payment->id.'/'.$payment->payment.'/'.$payment->date, 'QRCODE',5,5,'#be1d2c') !!}
+        </div>
+        <p class="watermark-text-o">SSQ - 1</p>
         <h4 class="text-center"><kbd>Office Copy</kbd></h4>
-        <h4 class="text-center">Saima Square One Residents Tower Association
+        <h4 class="text-center">{{ config('app.name', 'Laravel') }}
             {{-- <br />
             <small>Plot No. 1185/G, Stadium Road, Block 10-A, Gulshan-e-Iqbal, Karachi</small>
             <br />
@@ -229,7 +274,7 @@ function convert_number_to_words($number){
         </div>
 
         <div class="row">
-            <div class="one_two bold"><span>{{ $payment->account->name }} :</span></div>
+            <div class="one_two bold"><span>{{ $payment->account->name }}:</span></div>
             <div class="one_two"><span>{{ $payment->month }}</span></div>
             <div class="clearfix"></div>
         </div>
@@ -269,8 +314,12 @@ function convert_number_to_words($number){
 
 	<!-- Resident Copy -->
     <div class="container" >
+        <div class="qrcode print">
+            {!! DNS2D::getBarcodeHTML($payment->id.'/'.$payment->payment.'/'.$payment->date, 'QRCODE',5,5,'#be1d2c') !!}
+        </div>
+        <p class="watermark-text-r">SSQ - 1</p>
         <h4 class="text-center"><kbd>Resident Copy</kbd></h4>
-		<h4 class="text-center">Saima Square One Residents Tower Association
+		<h4 class="text-center">{{ config('app.name', 'Laravel') }}
             <br />
             <small>Plot No. 1185/G, Stadium Road, Block 10-A, Gulshan-e-Iqbal, Karachi</small>
             <br />
@@ -303,7 +352,7 @@ function convert_number_to_words($number){
         </div>
 
         <div class="row">
-            <div class="one_two bold"><span>{{ $payment->account->name }} :</span></div>
+            <div class="one_two bold"><span>{{ $payment->account->name }}:</span></div>
             <div class="one_two"><span>{{ $payment->month }}</span></div>
             <div class="clearfix"></div>
         </div>
