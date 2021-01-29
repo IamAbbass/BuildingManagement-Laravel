@@ -153,6 +153,7 @@ class FlatController extends Controller
                 'payment' => request('payment'),
                 'description' => request('description'),
                 'old_slip_no' => request('old_slip_no'),     
+                'created_by' => auth()->id()
             ]);            
 
             $username   = "923022203204";///Your Username

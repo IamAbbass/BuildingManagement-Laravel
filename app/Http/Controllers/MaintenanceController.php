@@ -45,5 +45,17 @@ class MaintenanceController extends Controller
         return back();
     }
 
+    public function verify($id)
+    {
+        $maintenance  = Maintenance::where('id',$id)->where('head_id',2)->where('is_cancelled',false)->first();
+        $verified = false;
+        if($maintenance){
+            $verified = true;
+        }
+        return view('flat.verify',[
+            'verified' => $verified,
+        ]);
+        
+    }
 
 }

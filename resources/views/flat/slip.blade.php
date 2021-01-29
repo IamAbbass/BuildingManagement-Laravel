@@ -387,8 +387,14 @@ function convert_number_to_words($number){
         </div>
 	</div>
 
+    <script src="{{ asset('vendor/jquery/jquery.min.js') }}"></script>
     <script type="text/javascript">
-		window.print();
+		$(document).ready(function(){
+            window.print();
+            setTimeout(function(){
+                window.close();
+            },1000);
+        });      
 	</script>
 </body>
 </html>

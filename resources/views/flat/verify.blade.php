@@ -1,0 +1,1 @@
+{{ $verified ? "YES" : "NO" }}

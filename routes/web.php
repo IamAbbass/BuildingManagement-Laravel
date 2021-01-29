@@ -62,3 +62,4 @@ Route::resource('/flat/{id}/vehicle', App\Http\Controllers\VehicleController::cl
 
 Route::get('/report/daily', [App\Http\Controllers\ReportController::class,'daily_report']);
 Route::post('/report/daily', [App\Http\Controllers\ReportController::class,'daily_report_print']);
+Route::get('/verify/{id}', [App\Http\Controllers\MaintenanceController::class,'verify']);

@@ -119,13 +119,8 @@ function convert_number_to_words($number){
 <head>
 	<title></title>
      <style type="text/css">
-        .flat-no{
-            border: 2px solid #000;
-            width: 230px;
+        .flat-no{            
             text-align: center !important;
-            margin: 10px auto;
-            padding: 3px;
-            border-radius: 5px;
         }
         body{
            font-family: sans-serif;

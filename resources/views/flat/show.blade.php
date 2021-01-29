@@ -68,14 +68,14 @@
                                 <td>{{ $payment->date }}</td>
                                 <td>
                                     @if($payment->is_cancelled == true)
-                                        <a class="btn mr-1 mb-1 btn-danger shadow-sm"><i
+                                        <a class="btn btn-sm mr-1 mb-1 btn-danger shadow-sm"><i
                                         class="fas fa-times fa-sm text-white-50"></i> Cancelled</a>
 
                                     @else
-                                        <a href="/slip/{{ $payment->id }}/cancel" class="btn mr-1 mb-1 btn-warning shadow-sm"><i
+                                        <a href="/slip/{{ $payment->id }}/cancel" class="btn btn-sm mr-1 mb-1 btn-warning shadow-sm"><i
                                         class="fas fa-times fa-sm text-white-50"></i> Cancel</a>
 
-                                        <a target="_blank" href="/slip/{{ $payment->id }}" class="btn mr-1 mb-1 btn-info shadow-sm"><i
+                                        <a target="_blank" href="/slip/{{ $payment->id }}" class="btn btn-sm mr-1 mb-1 btn-info shadow-sm"><i
                                         class="fas fa-print fa-sm text-white-50"></i> Slip</a>
                                     @endif
                                 </td>
