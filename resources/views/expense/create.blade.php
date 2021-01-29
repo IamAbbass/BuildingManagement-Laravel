@@ -45,6 +45,14 @@
                         <input required type="date" class="form-control" name="date" />
                     </div>
                     <div class="col-md-4">
+                        <label>Expense Type: *</label>
+                        <select class="form-control" name="exp_type" required>
+                            <option value="">Select</option>
+                            <option value="Bank">Bank</option>
+                            <option value="Cash">Cash</option>
+                        </select>
+                    </div>
+                    <div class="col-md-4">
                         <label>Description:</label>
                         <textarea class="form-control" name="description"></textarea>
                     </div>
