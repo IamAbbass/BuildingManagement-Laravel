@@ -26,7 +26,7 @@
                     </div>
                     <div class="col-md-4">
                         <label>Head Type: *</label>
-                        <select class="form-control" name="head_type" require>
+                        <select class="form-control" name="head_type" required>
                             <option value="">Select</option>
                             <option value="Asset">Asset</option>
                             <option value="Liability">Liability</option>

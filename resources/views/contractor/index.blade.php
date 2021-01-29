@@ -66,6 +66,9 @@
                                     
                                     <a href="/contractor/{{ $contractor->id }}/payment" class="btn btn-success shadow-sm"><i
                                         class="fas fa-edit fa-sm text-white-50"></i> Add Payment</a>
+
+                                    <a href="/contractor/{{ $contractor->id }}" class="btn btn-sm mr-1 mb-1 btn-info shadow-sm"><i
+                                        class="fas fa-edit fa-sm text-white-50"></i> History</a>
                                 </td>
                             </tr>
                         @endforeach

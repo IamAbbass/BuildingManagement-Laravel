@@ -183,6 +183,10 @@ class FlatController extends Controller
                 curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
                 curl_setopt ($ch, CURLOPT_CONNECTTIMEOUT, $timeout);
                 $result = curl_exec($ch); 
+
+                $payment->update([
+                    'sms_delivery'=> $result,
+                ]);
             }
             
 

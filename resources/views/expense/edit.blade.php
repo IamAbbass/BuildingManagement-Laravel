@@ -46,6 +46,14 @@
                         <input value="{{ $expense->date }}" required type="date" class="form-control" name="date" />
                     </div>
                     <div class="col-md-4">
+                        <label>Expense Type: *</label>
+                        <select class="form-control" name="exp_type" required>
+                            <option value="">Select</option>
+                            <option {{ $expense->exp_type == 'Bank' ? 'selected' : '' }} value="Bank">Bank</option>
+                            <option {{ $expense->exp_type == 'Cash' ? 'selected' : '' }} value="Cash">Cash</option>
+                        </select>
+                    </div>
+                    <div class="col-md-4">
                         <label>Description:</label>
                         <textarea class="form-control" name="description">{{ $expense->description }}</textarea>
                     </div>

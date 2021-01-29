@@ -37,7 +37,8 @@ class ExpenseController extends Controller
             'name'          => request('name'),
             'description'   => request('description'),
             'date'          => request('date'),
-            'amount'        => request('amount'),            
+            'amount'        => request('amount'),
+            'exp_type'      => request('exp_type'),      
             'created_by'    => auth()->id()
         ]);
 
@@ -68,7 +69,8 @@ class ExpenseController extends Controller
             'name'          => request('name'),
             'description'   => request('description'),
             'date'          => request('date'),
-            'amount'        => request('amount'),            
+            'amount'        => request('amount'),
+            'exp_type'      => request('exp_type'),      
             'updated_by'    => auth()->id()
         ]);
 
