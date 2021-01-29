@@ -105,4 +105,33 @@ class ContractorController extends Controller
             'payment' => $payment,
         ]); 
     }
+    
+    public function show($id)
+    {
+        $contractor = Contractor::findOrFail($id);
+        return view('contractor.show',[
+            'contractor' => $contractor,
+        ]);
+    }
+
+    public function cancel($id)
+    {
+        $maintenance    = Maintenance::findOrFail($id);
+        $maintenance->update([            
+            'is_cancelled'=> true,
+            'updated_by'=> auth()->id(),
+        ]);
+        session()->flash('success','Maintenance Cancelled!');
+        return back();
+    }
+
+    public function print($id)
+    {
+        $contractor = Contractor::findOrFail($id);
+        return view('contractor.ledger',[
+            'contractor' => $contractor,
+        ]);
+    }
+
+
 }

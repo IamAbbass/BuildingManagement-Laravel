@@ -211,7 +211,7 @@ function convert_number_to_words($number){
             float: right;
             margin-top: 15px ;
             position: fixed !important;
-            left: 590px;
+            left: 600px;
         }
         
         .print{
@@ -232,7 +232,7 @@ function convert_number_to_words($number){
 	<!-- Office Copy -->
     <div class="container" >
         <div class="qrcode print">
-            {!! DNS2D::getBarcodeHTML($payment->id.'/'.$payment->payment.'/'.$payment->date, 'QRCODE',5,5,'#be1d2c') !!}
+            {!! DNS2D::getBarcodeHTML("https://accounts.saimasquare1.com/verify/".$payment->id, 'QRCODE',3,3,'#be1d2c') !!}
         </div>
         <p class="watermark-text-o">SSQ - 1</p>
         <h4 class="text-center"><kbd>Office Copy</kbd></h4>

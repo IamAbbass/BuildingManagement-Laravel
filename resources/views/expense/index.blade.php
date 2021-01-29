@@ -42,7 +42,7 @@
                         
                             <tr>
                                 <td>{{ ++$sno }}</td>
-                                <td>{{ $expense->head->name }}</td>
+                                <td>{{ $expense->head->name }}<br><kbd>{{ $expense->exp_type }}</kbd></td>
                                 <td>{{ $expense->name }}</td>
                                 <td>{{ $expense->description }}</td>
                                 <td>{{ $expense->date }}</td>

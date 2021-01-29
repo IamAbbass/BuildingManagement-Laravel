@@ -55,6 +55,10 @@ Route::resource('/contractor', App\Http\Controllers\ContractorController::class)
 
 Route::get('/contractor/{id}/payment', [App\Http\Controllers\ContractorController::class,'payment']);
 Route::post('/contractor/{id}/payment', [App\Http\Controllers\ContractorController::class,'payment_save']);
+Route::get('/contractor/{id}/', [App\Http\Controllers\ContractorController::class, 'show']);
+Route::get('/contractor/{id}/cancel', [App\Http\Controllers\ContractorController::class, 'cancel']);
+Route::get('/contractor/{id}/print', [App\Http\Controllers\ContractorController::class, 'print']);
+
 
 
 Route::get('/attendance', [App\Http\Controllers\AttendanceController::class, 'index']);
