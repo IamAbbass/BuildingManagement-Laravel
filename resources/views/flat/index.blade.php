@@ -17,8 +17,6 @@
         </div>
     </div>
     
-            
-
     <!-- DataTales Example -->
     <div class="card shadow mb-4">
         <div class="card-header py-3">
@@ -35,8 +33,7 @@
                 <a class="dropdown-item" href="/flat/export/{{ $selected_block }}/defaulter">All</a>
             </div>
         </div>
-
-        </div>
+        
         <div class="card-body">
             <div class="table-responsive">
                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
