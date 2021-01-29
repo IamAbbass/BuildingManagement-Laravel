@@ -99,7 +99,7 @@
                                     <a href="/flat/{{ $flat->id }}/edit" class="btn btn-sm mr-1 mb-1 btn-warning shadow-sm"><i
                                         class="fas fa-edit fa-sm text-white-50"></i> Edit</a>
                                     
-                                    <a href="/flat/{{ $flat->id }}/payment" class="btn btn-sm mr-1 mb-1 btn-success shadow-sm"><i
+                                    <a target="_blank" href="/flat/{{ $flat->id }}/payment" class="btn btn-sm mr-1 mb-1 btn-success shadow-sm"><i
                                         class="fas fa-edit fa-sm text-white-50"></i> Payment</a>
 
                                     <a href="/flat/{{ $flat->id }}" class="btn btn-sm mr-1 mb-1 btn-info shadow-sm"><i

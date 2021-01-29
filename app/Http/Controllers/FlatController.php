@@ -138,6 +138,7 @@ class FlatController extends Controller
         if($already_paid == 0){
             $month  = strtoupper(date("M-Y", strtotime(request('month'))));
             $date   = strtoupper(date("d-M-Y", strtotime(request('date'))));
+            $flat   = Flat::findOrFail($id);
 
             $payment = Maintenance::create([
                 'head_id' => request('head_id'),
@@ -152,9 +153,7 @@ class FlatController extends Controller
                 'payment' => request('payment'),
                 'description' => request('description'),
                 'old_slip_no' => request('old_slip_no'),     
-            ]);
-
-            $flat = Flat::findOrFail($id);
+            ]);            
 
             $username   = "923022203204";///Your Username
             $password   = "riahuzM@25";///Your Password
