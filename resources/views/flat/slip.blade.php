@@ -194,7 +194,7 @@ function convert_number_to_words($number){
 
        .watermark-text-o, .watermark-text-r {
             position: absolute;
-            color: #ababab;
+            color: #dddddd;
             font-size: 220px;
             letter-spacing: -13px;
             transform: rotate(345deg);
