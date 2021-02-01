@@ -15,7 +15,7 @@ class Flat extends Model
     }
 
     public function last_payment(){
-        return $this->hasOne('\App\Models\Maintenance','flat_id','id')->orderBy('id', 'desc');
+        return $this->hasOne('\App\Models\Maintenance','flat_id','id')->where('is_cancelled',false)->orderBy('id', 'desc');
     }
 
     public function payments(){
@@ -28,7 +28,8 @@ class Flat extends Model
 
     public function isDefaulter(){
         return $this->hasMany('\App\Models\Maintenance','flat_id','id')
+        ->where('is_cancelled',false)
         ->where('month',strtoupper(date('M-Y')))
-        ->where('head_id',1);  
+        ->where('head_id',1);
     }
 }

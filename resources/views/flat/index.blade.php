@@ -23,15 +23,18 @@
             <h6 class="m-0 font-weight-bold text-primary">Flats</h6>
             <a href="/flat/export/{{ $selected_block }}" class="btn btn-info float-right mr-1">Export Maintenance Report</a>
             <a href="/flat/export/{{ $selected_block }}?type=full" class="btn btn-success float-right mr-1">Export Flat Info Report</a>
-            <button class="btn btn-danger float-right mr-1 dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <a href="/flat/export/{{ $selected_block }}/defaulter" class="btn btn-danger float-right mr-1">
                 Defaulter List           
-            </button>
-            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+            </a>
+            {{-- <button class="btn btn-danger float-right mr-1 dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Defaulter List           
+            </button> --}}
+            {{-- <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                 @foreach ($account_heads as $account_head)
-                    <a class="dropdown-item" href="/flat/export/{{ $selected_block }}/defaulter?head={{ $account_head->id }}">{{ $account_head->name }}</a>
+                    <a target="_blank" class="dropdown-item" href="/flat/export/{{ $selected_block }}/defaulter?head={{ $account_head->id }}">{{ $account_head->name }}</a>
                 @endforeach
-                <a class="dropdown-item" href="/flat/export/{{ $selected_block }}/defaulter">All</a>
-            </div>
+                <a target="_blank" class="dropdown-item" href="/flat/export/{{ $selected_block }}/defaulter">All</a>
+            </div> --}}
         </div>
         
         <div class="card-body">
@@ -99,7 +102,7 @@
                                     <a href="/flat/{{ $flat->id }}/edit" class="btn btn-sm mr-1 mb-1 btn-warning shadow-sm"><i
                                         class="fas fa-edit fa-sm text-white-50"></i> Edit</a>
                                     
-                                    <a target="_blank" href="/flat/{{ $flat->id }}/payment" class="btn btn-sm mr-1 mb-1 btn-success shadow-sm"><i
+                                    <a href="/flat/{{ $flat->id }}/payment" class="btn btn-sm mr-1 mb-1 btn-success shadow-sm"><i
                                         class="fas fa-edit fa-sm text-white-50"></i> Payment</a>
 
                                     <a href="/flat/{{ $flat->id }}" class="btn btn-sm mr-1 mb-1 btn-info shadow-sm"><i

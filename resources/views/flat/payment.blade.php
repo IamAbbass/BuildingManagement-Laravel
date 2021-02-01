@@ -17,7 +17,7 @@
             <h6 class="m-0 font-weight-bold text-primary">Payment for {{ $flat->name }}</h6>
         </div>
         <div class="card-body">
-            <form action="/flat/{{ $flat->id }}/payment" method="POST">
+            <form target="_blank" action="/flat/{{ $flat->id }}/payment" method="POST">
                 @csrf
                 <div class="row">
                     <div class="col-md-4">
@@ -32,8 +32,8 @@
                         <input required min="0" type="number" class="form-control" name="amount" />
                     </div>
                     <div class="col-md-4">
-                        <label>Month:</label>
-                        <input type="month" class="form-control" name="month" />
+                        <label>Month: *</label>
+                        <input required type="month" class="form-control" name="month" />
                     </div>
                 </div>
                 <div class="row mt-4">

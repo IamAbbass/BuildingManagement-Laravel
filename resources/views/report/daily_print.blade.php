@@ -48,7 +48,7 @@
                             <tr>
                                 <td>{{ ++$sno }}</td>
                                 <td>
-                                    {{ $payment->flat->name }}
+                                    {{ $payment->flat ? $payment->flat->name : '' }}
                                 </td>
                                 <td>
                                     {{ $payment->id }}
