@@ -271,6 +271,10 @@ function convert_number_to_words($number){
             <div class="one_two capitalize">
                 <span class="amount">
                     {{ number_format($payment->payment) }} /-
+
+                    @if($payment->discount)
+                        <small><b>(Discount: {{ number_format($payment->discount) }})</b></small>
+                    @endif
                     <br/>
                     {{ convert_number_to_words($payment->payment)." Only." }}
                 </span>
@@ -349,6 +353,9 @@ function convert_number_to_words($number){
             <div class="one_two capitalize">
                 <span class="amount">
                     {{ number_format($payment->payment) }} /-
+                    @if($payment->discount)
+                        <small><b>(Discount: {{ number_format($payment->discount) }})</b></small>
+                    @endif
                     <br/>
                     {{ convert_number_to_words($payment->payment)." Only." }}
 

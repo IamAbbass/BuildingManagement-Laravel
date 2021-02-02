@@ -236,6 +236,8 @@ function convert_number_to_words($number){
             <small>IBAN Number: PK25MUCB1071560271010048</small> --}}
         </h4>
 
+        <h4 class="text-center flat-no">{{ $payment->description }}</h4>
+
         <div class="row">
             <div class="one_six bold"><span>Receipt No:</span></div>
             <div class="one_six"><span>{{ $payment->id }}</span></div>
@@ -306,6 +308,7 @@ function convert_number_to_words($number){
             <br />
             <small>IBAN Number: PK25MUCB1071560271010048</small>
         </h4>
+        <h4 class="text-center flat-no">{{ $payment->description }}</h4>
 
         <div class="row">
             <div class="one_six bold"><span>Receipt No:</span></div>
