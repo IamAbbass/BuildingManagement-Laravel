@@ -187,25 +187,12 @@ function convert_number_to_words($number){
             margin: 0 5px;
         }
 
-       .watermark-text-o, .watermark-text-r {
-            position: absolute;
-            color: #ababab;
-            font-size: 220px;
-            letter-spacing: -13px;
-            transform: rotate(345deg);
-            -webkit-transform: rotate(345deg);
-            z-index: -2;
-       }
-
-       .watermark-text-o {
-            top: 30px;
-            left: -5px;
-       }
-
-       .watermark-text-r {
-            top: 88px;
-            left: -5px;
-       }
+        .watermark {
+            background: url({{ asset('img/watermark.png') }});
+            background-size: 200px;
+            background-repeat: no-repeat;
+            background-position: bottom 65px center;
+        }
 
        .qrcode {
             float: right;
@@ -231,10 +218,10 @@ function convert_number_to_words($number){
 
 	<!-- Office Copy -->
     <div class="container" >
+        <div class="watermark">
         <div class="qrcode print">
             {!! DNS2D::getBarcodeHTML("https://accounts.saimasquare1.com/verify/".$payment->id, 'QRCODE',3,3,'#be1d2c') !!}
         </div>
-        <p class="watermark-text-o">SSQ - 1</p>
         <h4 class="text-center"><kbd>Office Copy</kbd></h4>
         <h4 class="text-center" style="min-height: 50px;">{{ config('app.name', 'Laravel') }}
             {{-- <br />
@@ -294,7 +281,7 @@ function convert_number_to_words($number){
                 at {{ date('d-M-Y h:i a') }}</span>
             </p>
         </div>        
-
+    </div>
 	</div>
 
     <!-- Seperator -->
@@ -302,10 +289,10 @@ function convert_number_to_words($number){
 
 	<!-- Resident Copy -->
     <div class="container" >
+        <div class="watermark">
         <div class="qrcode print">
-            {!! DNS2D::getBarcodeHTML($payment->id.'/'.$payment->payment.'/'.$payment->date, 'QRCODE',5,5,'#be1d2c') !!}
+            {!! DNS2D::getBarcodeHTML("https://accounts.saimasquare1.com/verify/".$payment->id, 'QRCODE',3,3,'#be1d2c') !!}
         </div>
-        <p class="watermark-text-r">SSQ - 1</p>
         <h4 class="text-center"><kbd>Contractor Copy</kbd></h4>
 		<h4 class="text-center">{{ config('app.name', 'Laravel') }}
             <br />
@@ -366,6 +353,7 @@ function convert_number_to_words($number){
                 at {{ date('d-M-Y h:i a') }}</span>
             </p>
         </div>
+    </div>
 	</div>
 
     <script type="text/javascript">

@@ -16,7 +16,7 @@
     <div class="row">
         <div class="col-md-12">
 
-            <form target="_blank" method="post" action="">
+            <form method="post" action="">
                 @csrf
                 <div class="row">
                     <div class="col-md-6">

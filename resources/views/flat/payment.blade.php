@@ -58,8 +58,7 @@
                     <div class="col-md-4">
                         <label>Payment Type: *</label><br/>
                         <label><input required type="radio" name="type" value="full" /> Full</label><br/>
-                        <label><input required type="radio" name="type" value="partial" /> Partial</label><br/>
-                        <label><input required type="radio" name="type" value="bounce" /> Cheque Bounce</label>
+                        <label><input required type="radio" name="type" value="partial" /> Partial</label>
                     </div>
 
                     <div class="col-md-4">
@@ -104,9 +103,25 @@
         $("input[name='head_id']").change(function(){
             var amount = $(this).attr('data-amount');
             $("input[name='amount'], input[name='payment']").val(amount);
-            $("input[name='amount'], input[name='payment'], input[name='discount']").attr('max',amount);    
+            $("input[name='amount'], input[name='payment'], input[name='discount']").attr('max',amount);   
            
         });
+
+
+        $("input[name='method']").change(function(){
+            var value = $('input[name=method]:checked').val();
+            if(value == 'cash'){
+                $("input[name='cheque_no']").attr('readonly','readonly');
+                $("input[name='cheque_no']").removeAttr('required');           
+                $("input[name='cheque_no']").val("");        
+            }else{
+                $("input[name='cheque_no']").removeAttr('readonly');
+                $("input[name='cheque_no']").attr('required','required');
+            }
+        });
+
+
+
     });
 </script>
 

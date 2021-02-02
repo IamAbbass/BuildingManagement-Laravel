@@ -191,26 +191,13 @@ function convert_number_to_words($number){
             border-top: 3px dashed;
             margin: 0 5px;
         }
-
-       .watermark-text-o, .watermark-text-r {
-            position: absolute;
-            color: #dddddd;
-            font-size: 220px;
-            letter-spacing: -13px;
-            transform: rotate(345deg);
-            -webkit-transform: rotate(345deg);
-            z-index: -2;
-       }
-
-       .watermark-text-o {
-            top: 75px;
-            left: -5px;
-       }
-
-       .watermark-text-r {
-            top: 165px;
-            left: -5px;
-       }
+        
+       .watermark {
+            background: url({{ asset('img/watermark.png') }});
+            background-size: 200px;
+            background-repeat: no-repeat;
+            background-position: bottom 65px center;
+        }
 
        .qrcode {
             float: right;
@@ -236,10 +223,10 @@ function convert_number_to_words($number){
 
 	<!-- Office Copy -->
     <div class="container">
+        <div class="watermark">
         <div class="qrcode print">
             {!! DNS2D::getBarcodeHTML("https://accounts.saimasquare1.com/verify/".$payment->id, 'QRCODE',3,3,'#be1d2c') !!}
         </div>
-        <p class="watermark-text-o">SSQ - 1</p>
         <h4 class="text-center"><kbd>Office Copy</kbd></h4>
         <h4 class="text-center">{{ config('app.name', 'Laravel') }}
             {{-- <br />
@@ -306,7 +293,7 @@ function convert_number_to_words($number){
                 at {{ date('d-M-Y h:i a') }}</span>
             </p>
         </div>        
-
+        </div>
 	</div>
 
     <!-- Seperator -->
@@ -314,10 +301,10 @@ function convert_number_to_words($number){
 
 	<!-- Resident Copy -->
     <div class="container" >
+        <div class="watermark">
         <div class="qrcode print">
             {!! DNS2D::getBarcodeHTML("https://accounts.saimasquare1.com/verify/".$payment->id, 'QRCODE',3,3,'#be1d2c') !!}
         </div>
-        <p class="watermark-text-r">SSQ - 1</p>
         <h4 class="text-center"><kbd>Resident Copy</kbd></h4>
 		<h4 class="text-center">{{ config('app.name', 'Laravel') }}
             <br />
@@ -385,16 +372,11 @@ function convert_number_to_words($number){
                 at {{ date('d-M-Y h:i a') }}</span>
             </p>
         </div>
+        </div>
 	</div>
 
-    <script src="{{ asset('vendor/jquery/jquery.min.js') }}"></script>
     <script type="text/javascript">
-		$(document).ready(function(){
-            window.print();
-            setTimeout(function(){
-                window.close();
-            },1000);
-        });      
+		window.print();
 	</script>
 </body>
 </html>

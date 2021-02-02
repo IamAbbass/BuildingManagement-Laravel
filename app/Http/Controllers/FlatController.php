@@ -133,6 +133,7 @@ class FlatController extends Controller
         $already_paid   = Maintenance::where('flat_id',$id)
         ->where('month',$month)
         ->where('type','full')
+        ->where('is_cancelled',false) //not cancelled
         ->where('head_id',request('head_id'))->count();
 
         if($already_paid == 0){
@@ -266,51 +267,53 @@ class FlatController extends Controller
         $flats = Flat::all();
         $month = strtoupper(date("M-Y"));
 
+        $alread_generated   = Maintenance::where('head_id',1)
+        ->where('type','partial')
+        ->where('month',$month)
+        ->where('payment',0)->count();
 
-        //remove trash
-        foreach($flats as $flat){
-            $trashed   = Maintenance::where('head_id',1)
-            ->where('flat_id',$flat->id)
-            ->where('type','partial')
-            ->where('month',$month)
-            ->where('payment',0)->get();
-            foreach($trashed as $trash){
-                $trash->delete();
+        if($alread_generated == 456){ //already generated
+            session()->flash('success','Monthly Cycle Already Generated');
+            return redirect('/flat');
+        }else{
+            //remove trash
+            foreach($flats as $flat){
+                $trashed   = Maintenance::where('head_id',1)
+                ->where('flat_id',$flat->id)
+                ->where('type','partial')
+                ->where('month',$month)
+                ->where('payment',0)->get();
+                foreach($trashed as $trash){
+                    $trash->delete();
+                }
+            }  
+        
+            $count = 0;
+            foreach($flats as $flat){
+                $already_paid   = Maintenance::where('flat_id',$flat->id)
+                ->where('month',$month)
+                // ->where('type','full')
+                ->where('head_id',1)->count();
+
+                if($already_paid == 0){
+                    $payment = Maintenance::create([
+                        'head_id' => 1,
+                        'flat_id' => $flat->id,
+                        'amount' => 10000,
+                        'discount' => 0,
+                        'method' => 'cash',
+                        'date' => "",
+                        'type' => 'partial',
+                        'month' => $month,
+                        'payment' => 0,
+                    ]);
+                    $count++;
+                }
             }
+
+            session()->flash('success','Monthly Cycle Generated');
+            return redirect('/flat');
         }  
-    
-        $count = 0;
-        foreach($flats as $flat){
-            $already_paid   = Maintenance::where('flat_id',$flat->id)
-            ->where('month',$month)
-            // ->where('type','full')
-            ->where('head_id',1)->count();
-
-            if($already_paid == 0){
-                Maintenance::create([
-                    'head_id' => 1,
-                    'flat_id' => $flat->id,
-                    'amount' => 10000,
-                    'discount' => 0,
-                    'method' => 'cash',
-                    'date' => "",
-                    'type' => 'partial',
-                    'month' => $month,
-                    'payment' => 0,
-                ]);
-                $count++;
-            }
-        }
-
-             
-
-
-        return [
-            'success' => true,
-            'count' => $count,
-        ];
-
-
         
     }
 

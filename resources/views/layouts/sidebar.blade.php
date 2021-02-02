@@ -1,5 +1,5 @@
 <!-- Sidebar -->
-<ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+<ul class="navbar-nav bg-gradient-dark sidebar sidebar-dark accordion" id="accordionSidebar">
 
     <!-- Sidebar - Brand -->
     <a class="sidebar-brand d-flex align-items-center justify-content-center" href="/home">
@@ -17,35 +17,35 @@
     <hr class="sidebar-divider my-0">
     <li class="nav-item">
         <a class="nav-link" href="/search">
-            <i class="fas fa-fw fa-users"></i>
+            <i class="fas fa-fw fa-search"></i>
             <span>Search</span></a>
     </li>    
 
     <hr class="sidebar-divider my-0">
     <li class="nav-item">
         <a class="nav-link" href="/flat">
-            <i class="fas fa-fw fa-users"></i>
+            <i class="fas fa-fw fa-building"></i>
             <span>Flats</span></a>
     </li> 
     
     <hr class="sidebar-divider my-0">
     <li class="nav-item">
         <a class="nav-link" href="/expensehead">
-            <i class="fas fa-fw fa-users"></i>
+            <i class="fas fa-fw fa-list"></i>
             <span>Expense Heads</span></a>
     </li> 
 
     <hr class="sidebar-divider my-0">
     <li class="nav-item">
         <a class="nav-link" href="/expense">
-            <i class="fas fa-fw fa-users"></i>
+            <i class="fas fa-fw fa-receipt"></i>
             <span>All Expenses</span></a>
     </li> 
 
     <hr class="sidebar-divider my-0">
     <li class="nav-item">
         <a class="nav-link" href="/accounthead">
-            <i class="fas fa-fw fa-users"></i>
+            <i class="fas fa-fw fa-list"></i>
             <span>Account Heads</span></a>
     </li> 
 
@@ -66,15 +66,22 @@
     <hr class="sidebar-divider my-0">
     <li class="nav-item">
         <a class="nav-link" href="/attendance">
-            <i class="fas fa-fw fa-users"></i>
+            <i class="fas fa-fw fa-thumbs-up"></i>
             <span>Bio Metric</span></a>
     </li> 
 
     <hr class="sidebar-divider my-0">
     <li class="nav-item">
         <a class="nav-link" href="/report/daily">
-            <i class="fas fa-fw fa-users"></i>
+            <i class="fas fa-fw fa-edit"></i>
             <span>Daily Collection Report</span></a>
+    </li> 
+
+    <hr class="sidebar-divider my-0">
+    <li class="nav-item">
+        <a class="nav-link" href="/cycle">
+            <i class="fas fa-fw fa-spinner"></i>
+            <span>Generate Cycle ({{ date('M-Y') }})</span></a>
     </li> 
 
     
