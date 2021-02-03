@@ -32,11 +32,12 @@ class ExpenseController extends Controller
     
     public function store(Request $request)
     {
+        $date   = strtoupper(date("d-M-Y", strtotime(request('date'))));
         Expense::create([
             'head_id'       => request('head_id'),
             'name'          => request('name'),
             'description'   => request('description'),
-            'date'          => request('date'),
+            'date'          => $date,
             'amount'        => request('amount'),
             'exp_type'      => request('exp_type'),      
             'created_by'    => auth()->id()
@@ -63,12 +64,13 @@ class ExpenseController extends Controller
     
     public function update($id)
     {
+        $date   = strtoupper(date("d-M-Y", strtotime(request('date'))));
         $expense = Expense::findOrFail($id);
         $expense->update([
             'head_id'       => request('head_id'),
             'name'          => request('name'),
             'description'   => request('description'),
-            'date'          => request('date'),
+            'date'          => $date,
             'amount'        => request('amount'),
             'exp_type'      => request('exp_type'),      
             'updated_by'    => auth()->id()

@@ -44,8 +44,7 @@
                         @endphp
                         
                         @foreach($flat->payments->where('payment','>',0) as $payment)
-                        
-                            <tr>
+                            <tr title="SMS Report: {{ $payment->sms_delivery == '' ? ' Not Sent' : $payment->sms_delivery }}">
                                 <td>{{ ++$sno }}</td>
                                 <td>
                                     {{ $payment->id }}
@@ -72,8 +71,9 @@
                                         class="fas fa-times fa-sm text-white-50"></i> Cancelled</a>
 
                                     @else
-                                        <a href="/slip/{{ $payment->id }}/cancel" class="btn btn-sm mr-1 mb-1 btn-warning shadow-sm"><i
-                                        class="fas fa-times fa-sm text-white-50"></i> Cancel</a>
+                                        <a href="/slip/{{ $payment->id }}/cancel" class="btn btn-sm mr-1 mb-1 btn-warning shadow-sm" 
+                                        onclick="return confirm('Are you sure you would like to cancel this receipt?');">
+                                        <i class="fas fa-times fa-sm text-white-50"></i> Cancel</a>
 
                                         <a target="_blank" href="/slip/{{ $payment->id }}" class="btn btn-sm mr-1 mb-1 btn-info shadow-sm"><i
                                         class="fas fa-print fa-sm text-white-50"></i> Slip</a>

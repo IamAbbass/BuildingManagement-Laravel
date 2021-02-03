@@ -6,7 +6,7 @@
 <div class="container-fluid">
 
     <!-- DataTales Example -->
-    <div class="card shadow mb-4">
+    <div class="card shadow mb-4  mt-4">
         <div class="card-header py-3">
             <h6 class="m-0 font-weight-bold text-primary">Daily Collection Report ({{ $date }})</h6>
         </div>
@@ -34,7 +34,7 @@
                         @php
                             $sno            = 0;
                             $total          = 0;  
-                            $less_cheque    = 0;    
+                            $less_cheque    = 0;
                         @endphp
                         
                         @foreach($payments as $payment)
@@ -73,6 +73,7 @@
                                 <td>{{ $payment->date }}</td>
                             </tr>
                         @endforeach
+
                     </tbody>
                 </table>
 
@@ -103,13 +104,13 @@
                             <th>Less: Deposit in Bank</th>
                             <td>0</td>
                         </tr>
-                        {{-- <tr>
+                        <tr>
                             <th>Less: Expenses</th>
-                            <td></td>
-                        </tr> --}}
+                            <td>{{ number_format($expense) }}</td>
+                        </tr>
                         <tr>
                             <th>Closing Balance</th>
-                            <td>{{ number_format($total-$less_cheque) }}</td>
+                            <td>{{ number_format($total-$less_cheque-$expense) }}</td>
                         </tr>
                     </tbody>
                 </table>
