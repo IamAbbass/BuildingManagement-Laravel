@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Maintenance;
 use Illuminate\Http\Request;
+use App\Models\Maintenance;
 
 class MaintenanceController extends Controller
 {
