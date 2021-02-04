@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use \App\Models\Maintenance;
+use \App\Models\Expense;
 
 class ReportController extends Controller
 {
@@ -20,12 +21,14 @@ class ReportController extends Controller
     public function daily_report_print()
     {
         $date   = strtoupper(date('d-M-Y',strtotime(request('date'))));
-        // $to     = request('to');        
+        // $to     = request('to');
         $payments = Maintenance::where('date',$date)->get();        
+        $expense = Expense::where('date',$date)->sum('amount');
 
         return view('report.daily_print',[
-            'payments' => $payments,
             'date' => $date,
+            'payments' => $payments,
+            'expense'  => $expense,
         ]);
     }
 
