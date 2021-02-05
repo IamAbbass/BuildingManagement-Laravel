@@ -17,5 +17,10 @@ class AccountHead extends Model
 
     public function updater(){
         return $this->hasOne('\App\Models\User','id','updated_by');
-    }   
+    }
+
+    public function payments(){
+        return $this->hasMany('\App\Models\Maintenance','head_id','id');
+    }
+
 }

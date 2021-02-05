@@ -20,5 +20,6 @@ class Expense extends Model
 
     public function updater(){
         return $this->hasOne('\App\Models\User','id','updated_by');
-    }   
+    }
+
 }

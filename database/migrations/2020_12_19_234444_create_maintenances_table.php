@@ -23,7 +23,7 @@ class CreateMaintenancesTable extends Migration
             $table->string('cheque_no')->nullable();
             $table->string('date');
             $table->string('type');            
-            $table->string('payment');
+            $table->string('payment');//received
             $table->string('month')->nullable();
             $table->longText('description')->nullable();
             $table->longText('old_slip_no')->nullable();            
