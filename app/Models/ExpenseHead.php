@@ -16,5 +16,10 @@ class ExpenseHead extends Model
 
     public function updater(){
         return $this->hasOne('\App\Models\User','id','updated_by');
-    }   
+    }
+
+    public function expense(){
+        return $this->hasMany('\App\Models\Expense','head_id','id');
+    }
+       
 }
