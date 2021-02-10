@@ -79,6 +79,9 @@
                                     {!! $flat->person_mobile2 ? "Mobile (2): $flat->person_mobile2 </br>" : '' !!}
                                     {!! $flat->ptcl_no ? "PTCL: $flat->ptcl_no </br>" : '' !!}
                                     {!! $flat->person_cnic ? "CNIC: $flat->person_cnic </br>" : '' !!}
+                                    @if($flat->updater)
+                                        <span class="badge badge-info"><i class="fa fa-edit"></i> {{ $flat->updater->name }} {{ $flat->updated_at }}</span>
+                                    @endif
                                 </td>
                                 <td>
                                     <ol class="p-0 ml-2">
@@ -97,7 +100,6 @@
                                         PKR {{ number_format($flat->payments->sum('amount')-$flat->payments->sum('discount')-$flat->payments->sum('payment')) }}
                                     </b>
                                 </td>
-                                
                                 <td> 
                                     <a href="/flat/{{ $flat->id }}/edit" class="btn btn-sm mr-1 mb-1 btn-warning shadow-sm"><i
                                         class="fas fa-edit fa-sm text-white-50"></i> Edit</a>

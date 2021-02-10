@@ -32,4 +32,12 @@ class Flat extends Model
         ->where('month',strtoupper(date('M-Y')))
         ->where('head_id',1);
     }
+
+    public function creator(){
+        return $this->hasOne('\App\Models\User','id','created_by');
+    }
+
+    public function updater(){
+        return $this->hasOne('\App\Models\User','id','updated_by');
+    }
 }
