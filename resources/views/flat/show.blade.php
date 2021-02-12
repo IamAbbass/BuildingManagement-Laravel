@@ -27,10 +27,7 @@
                         <tr>
                             <th>Sno</th>
                             <th>Slip No</th>
-                            <th>Head</th>
-                            <th>Amount</th>
-                            <th>Discount</th>
-                            <th>Method</th>
+                            <th>Head/Amount</th>
                             <th>Received</th>
                             <th>Month</th>
                             <th>Description</th>
@@ -51,16 +48,14 @@
                                 </td>
                                 <td>
                                     {{ $payment->account ? $payment->account->name : '-' }}
+                                    ({{ number_format($payment->amount) }})
                                 </td>
-                                <td>
-                                    {{ number_format($payment->amount) }}
-                                </td>
-                                <td>{{ $payment->discount }}</td>
-                                <td>
-                                    {{ ucfirst($payment->method) }} {{ $payment->method == 'cheque' ? $payment->cheque_no : '' }}</td>
-                                <td>
-                                    {!! $payment->old_slip_no ? '(Manual Slip No. '.$payment->old_slip_no.')<br/>' : '' !!}
-                                    {{ number_format($payment->payment) }} <span class="badge badge-secondary">{{ ucfirst($payment->type) }}  </span>                              
+                                <td>                                    
+                                    {{ number_format($payment->payment) }} <span class="badge badge-secondary">{{ ucfirst($payment->type) }}  </span>
+                                    {!! $payment->discount > 0 ? "<br/><span class='text-danger'>Discount: ".$payment->discount."</span>" : '' !!}
+                                    <br/>
+                                    {{ ucfirst($payment->method) }} {{ $payment->method == 'cheque' ? $payment->cheque_no : '' }}  
+                                    {!! $payment->old_slip_no ? '(Manual Slip No. '.$payment->old_slip_no.')<br/>' : '' !!}                              
                                 </td>
                                 <td>{{ $payment->month }}</td>
                                 <td>{{ $payment->description }}</td>
@@ -71,8 +66,7 @@
                                         class="fas fa-times fa-sm text-white-50"></i> Cancelled</a>
 
                                     @else
-                                        <a href="/slip/{{ $payment->id }}/cancel" class="btn btn-sm mr-1 mb-1 btn-warning shadow-sm" 
-                                        onclick="return confirm('Are you sure you would like to cancel this receipt?');">
+                                        <a href="javascript:;" url="/slip/{{ $payment->id }}/cancel" class="btn_cancel btn btn-sm mr-1 mb-1 btn-warning shadow-sm">
                                         <i class="fas fa-times fa-sm text-white-50"></i> Cancel</a>
 
                                         <a target="_blank" href="/slip/{{ $payment->id }}" class="btn btn-sm mr-1 mb-1 btn-info shadow-sm"><i
@@ -92,5 +86,21 @@
     </div>
 
 </div>
+
+
+<script>
+    $(document).ready(function(){
+        $(".btn_cancel").click(function(){
+            var url = $(this).attr("url");
+
+            var description = prompt("Write Reason:");
+            if(description){
+                window.location.replace(url+"?description="+description);                
+            }else{
+                alert("Please Write Reason To Cancel !");
+            }
+        });
+    });
+</script>
 
 @endsection

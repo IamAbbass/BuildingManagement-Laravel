@@ -45,6 +45,7 @@ class MaintenanceController extends Controller
         $maintenance    = Maintenance::findOrFail($id);
         $maintenance->update([            
             'is_cancelled' => true,
+            'description' => request('description'),
             'updated_by' => auth()->id(),
         ]);
 

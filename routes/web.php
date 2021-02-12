@@ -25,6 +25,7 @@ Route::get('/dashboard', [App\Http\Controllers\HomeController::class, 'dashboard
 
 //Route::get('/import', [App\Http\Controllers\FlatController::class, 'import']);
 Route::get('/cycle', [App\Http\Controllers\FlatController::class, 'cycle']);
+Route::get('/advance', [App\Http\Controllers\FlatController::class, 'advance']);
 Route::get('/search', [App\Http\Controllers\MaintenanceController::class, 'search']);
 Route::post('/search', [App\Http\Controllers\MaintenanceController::class, 'search_process']);
 Route::get('/slip/{id}/cancel', [App\Http\Controllers\MaintenanceController::class, 'cancel']);
