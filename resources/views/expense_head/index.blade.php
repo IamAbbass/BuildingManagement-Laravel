@@ -50,8 +50,13 @@
                                     @endif
                                     
                                 </td>
-                                <td> <a href="/expensehead/{{ $head->id }}/edit" class="btn btn-warning shadow-sm"><i
-                                    class="fas fa-edit fa-sm text-white-50"></i> Edit</a></td>
+                                <td>
+                                    <a href="/expensehead/{{ $head->id }}/edit" class="btn btn-warning shadow-sm"><i
+                                    class="fas fa-edit fa-sm text-white-50"></i> Edit</a>
+
+                                    <a href="/expense?head={{ $head->id }}" class="btn btn-success shadow-sm"><i
+                                    class="fas fa-edit fa-sm text-white-50"></i> Exp. Details</a>
+                                </td>
                             </tr>
                         @endforeach
                     </tbody>

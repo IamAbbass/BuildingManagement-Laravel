@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Models\Expense;
 use Illuminate\Http\Request;
-
 use \App\Models\ExpenseHead;
 
 class ExpenseController extends Controller
@@ -16,12 +15,20 @@ class ExpenseController extends Controller
     
     public function index()
     {
-        $expenses       = Expense::all();        
+        if(request('head')) {
+            $expenses       = Expense::where('head_id',request('head'))->get();
+            $title = "Expenses of ".ExpenseHead::findOrFail(request('head'))->name;
+        }
+        else {
+            $expenses       = Expense::all();
+            $title = "All Expenses";
+        }        
         return view('expense.index',[
             'expenses' => $expenses,
+            'title' => $title
         ]);
     }
-    
+
     public function create()
     {        
         $expense_heads   = ExpenseHead::all();
