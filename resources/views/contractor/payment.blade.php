@@ -25,21 +25,26 @@
                         <label>Amount: *</label>
                         <input required min="0" type="number" class="form-control" name="amount" />
                     </div>
-                    
+
+                    <div class="col-md-4">
+                        <label>Month: *</label>
+                        <input required type="month" class="form-control" name="month" />
+                    </div>                    
 
                     <div class="col-md-4">
                         <label>Date: *</label>
                         <input required type="date" class="form-control" name="date" />
                     </div>
+                    
+                
+                </div>
+
+                <div class="row mt-4">
 
                     <div class="col-md-4">
                         <label>Received Amount: *</label>
                         <input required min="1" type="text" class="form-control" name="payment" />
                     </div>
-                
-                </div>
-
-                <div class="row mt-4">
 
                     <div class="col-md-4">
                         <label>Discount:</label>
@@ -51,18 +56,15 @@
                         <label><input required type="radio" name="method" value="cash" /> Cash</label><br/>
                         <label><input required type="radio" name="method" value="cheque" /> Cheque</label>
                     </div>
-
-                    <div class="col-md-4">
-                        <label>Cheque Number (If Cheque):</label>
-                        <input type="text" class="form-control" name="cheque_no" />
-                    </div>
-
                     
                 </div>
 
                 <div class="row mt-4">                 
 
-                    
+                    <div class="col-md-4">
+                        <label>Cheque Number (If Cheque):</label>
+                        <input type="text" class="form-control" name="cheque_no" />
+                    </div>
 
                     <div class="col-md-4">
                         <label>Payment Type: *</label><br/>
@@ -75,6 +77,7 @@
                         <label>Notes: </label>
                         <input  type="text" class="form-control" name="description" />
                     </div>
+                    
                     <div class="col-md-4">
                         <label>Manual Slip No:</label>
                         <input type="text" class="form-control" name="old_slip_no" />

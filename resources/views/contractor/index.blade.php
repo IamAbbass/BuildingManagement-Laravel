@@ -61,10 +61,10 @@
                                     
                                 </td>
                                 <td> 
-                                    <a href="/contractor/{{ $contractor->id }}/edit" class="btn btn-warning shadow-sm"><i
+                                    <a href="/contractor/{{ $contractor->id }}/edit" class="btn btn-sm mr-1 mb-1 btn-warning shadow-sm"><i
                                         class="fas fa-edit fa-sm text-white-50"></i> Edit</a>
                                     
-                                    <a href="/contractor/{{ $contractor->id }}/payment" class="btn btn-success shadow-sm"><i
+                                    <a href="/contractor/{{ $contractor->id }}/payment" class="btn btn-sm mr-1 mb-1 btn-success shadow-sm"><i
                                         class="fas fa-edit fa-sm text-white-50"></i> Add Payment</a>
 
                                     <a href="/contractor/{{ $contractor->id }}" class="btn btn-sm mr-1 mb-1 btn-info shadow-sm"><i
