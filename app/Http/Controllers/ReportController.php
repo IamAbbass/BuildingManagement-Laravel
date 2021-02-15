@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use \App\Models\Maintenance;
 use \App\Models\Expense;
+use Carbon\CarbonPeriod;
 
 class ReportController extends Controller
 {
@@ -20,13 +21,22 @@ class ReportController extends Controller
 
     public function daily_report_print()
     {
-        $date   = strtoupper(date('d-M-Y',strtotime(request('date'))));
-        // $to     = request('to');
-        $payments = Maintenance::where('date',$date)->get();        
-        $expense = Expense::where('date',$date)->sum('amount');
+        $from   = strtoupper(date('d-M-Y',strtotime(request('from'))));
+        $to     = strtoupper(date('d-M-Y',strtotime(request('to'))));
+        
+        $dates = CarbonPeriod::create($from,$to);
+        $queryDates = array();
+
+        foreach($dates as $date){
+            $queryDates[] = strtoupper(date('d-M-Y',strtotime($date)));
+        }
+
+        $payments = Maintenance::whereIn('date',$queryDates)->get();        
+        $expense  = Expense::whereIn('date',$queryDates)->sum('amount');
 
         return view('report.daily_print',[
-            'date' => $date,
+            'from'     => $from,
+            'to'       => $to,
             'payments' => $payments,
             'expense'  => $expense,
         ]);

@@ -22,13 +22,13 @@
                 @csrf
                 <div class="row">
                     <div class="col-md-4">
-                        <label>Date: *</label>
-                        <input value="{{ request('date') }}" required name="date" class="form-control" type="date" />
+                        <label>From Date: *</label>
+                        <input value="{{ request('from') }}" required name="from" class="form-control" type="date" />
                     </div>
-                    {{-- <div class="col-md-4">
-                        <label>Date To: *</label>
+                    <div class="col-md-4">
+                        <label>To Date: *</label>
                         <input value="{{ request('to') }}" required name="to" class="form-control" type="date" />
-                    </div> --}}
+                    </div>
                     <div class="col-md-4">
                         <label>&nbsp;</label><br/>
                         <button class="btn btn-primary">Generate</button>
