@@ -22,11 +22,30 @@
     </li>    
 
     <hr class="sidebar-divider my-0">
-    <li class="nav-item">
+    {{-- <li class="nav-item">
         <a class="nav-link" href="/flat">
             <i class="fas fa-fw fa-building"></i>
             <span>Flats</span></a>
-    </li> 
+    </li>  --}}
+
+    <li class="nav-item">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities" aria-expanded="true" aria-controls="collapseUtilities">
+            <i class="fas fa-fw fa-building"></i>
+            <span>Flats</span>
+        </a>
+        <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
+            <div class="bg-white py-2 collapse-inner rounded">
+                <a class="collapse-item" href="/flat?block=1">Block A</a>
+                <a class="collapse-item" href="/flat?block=2">Block B</a>
+                <a class="collapse-item" href="/flat?block=3">Block C</a>
+                <a class="collapse-item" href="/flat?block=4">Block D</a>
+                <a class="collapse-item" href="/flat?block=5">Block E</a>
+                <a class="collapse-item" href="/flat?block=6">Block F</a>
+                <a class="collapse-item" href="/flat?block=7">Block G</a>
+            </div>
+        </div>
+    </li>
+    
     
     <hr class="sidebar-divider my-0">
     <li class="nav-item">

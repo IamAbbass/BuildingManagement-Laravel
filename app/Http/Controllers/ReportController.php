@@ -31,7 +31,7 @@ class ReportController extends Controller
             $queryDates[] = strtoupper(date('d-M-Y',strtotime($date)));
         }
 
-        $payments = Maintenance::whereIn('date',$queryDates)->get();        
+        $payments = Maintenance::whereIn('date',$queryDates)->where('is_cancelled',false)->get();        
         $expense  = Expense::whereIn('date',$queryDates)->sum('amount');
 
         return view('report.daily_print',[

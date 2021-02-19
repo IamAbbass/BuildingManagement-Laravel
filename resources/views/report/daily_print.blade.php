@@ -53,8 +53,6 @@
                                 <td>
                                     {{ $payment->id }}
                                 </td>
-                                
-                                
                                 <td>
                                     {{ $payment->account ? $payment->account->name : '-' }}
                                 </td>
