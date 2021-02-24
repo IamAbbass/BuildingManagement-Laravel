@@ -9,6 +9,7 @@ use \App\Models\Maintenance;
 // use \Maatwebsite\Excel\Excel;
 use \App\Imports\ImportExcel;
 use \Maatwebsite\Excel\Facades\Excel;
+use Carbon\CarbonPeriod;
 
 class FlatController extends Controller
 {
@@ -54,25 +55,58 @@ class FlatController extends Controller
     {        
         $flats  = Flat::where('block_id',$selected_block)->get();
         $block  = Block::findOrFail($selected_block);
+        $head   = request('head');
+        if($head){
+            $account_head  = AccountHead::findOrFail($head);        
+            $title = "Block-".$block->name." ".date('M-Y')." '$account_head->name Defaulter List'";
+        }else{
+            $title = "Block-".$block->name." ".date('M-Y')." 'Complete Defaulter List'";
+        }
+
+        
         return view('flat.defaulter',[
             'flats'     => $flats,
             'block'     => $block,
+            'title'     => $title,
         ]);
     }
 
-    public function show($id)
+    public function show($flat_id)
     {
-        $flat = Flat::findOrFail($id);
+        $flat = Flat::findOrFail($flat_id);
+
+        
+        //whereIn('date',$queryDates)
+        $payments = Maintenance::where('is_cancelled',false)
+        ->where('flat_id',$flat_id)->get();     
+
         return view('flat.show',[
             'flat' => $flat,
+            'payments' => $payments
         ]);
     }
 
-    public function print($id)
+    public function print($flat_id)
     {
-        $flat = Flat::findOrFail($id);
+        $flat = Flat::findOrFail($flat_id);
+
+        $from   = strtoupper(date('d-M-Y',strtotime(request('from'))));
+        $to     = strtoupper(date('d-M-Y',strtotime(request('to'))));
+        
+        $dates = CarbonPeriod::create($from,$to);
+        $queryDates = array();        
+
+        foreach($dates as $date){
+            $queryDates[] = strtoupper(date('d-M-Y',strtotime($date)));
+        }
+
+        $payments = Maintenance::whereIn('date',$queryDates)
+        ->where('is_cancelled',false)
+        ->where('flat_id',$flat_id)->get();     
+
         return view('flat.ledger',[
             'flat' => $flat,
+            'payments' => $payments
         ]);
     }
     
