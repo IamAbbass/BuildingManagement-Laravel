@@ -29,6 +29,9 @@
             padding: 2px !important;
             color: #000;
         }
+        #wrapper #content-wrapper{
+            background: #fff;
+        }
     </style>
 
 
