@@ -200,7 +200,7 @@ class FlatController extends Controller
             //Account Head
             $account_head = AccountHead::findOrFail(request('head_id'));
 
-            $message    = "Received with thanks Rs. ".(number_format(request('amount')))."/- Flat # SSQ1-(".($flat->name).")";
+            $message    = "Saima Square One: Received with thanks Rs. ".(number_format(request('amount')))."/- Flat # SSQ1-(".($flat->name).")";
             $message    .= " against ".$account_head->name.".";
             $message    .= " Payment by ".ucfirst(request('method'));            
             $message    .= " for the month of $month.";
@@ -369,24 +369,35 @@ class FlatController extends Controller
             $month = "JAN-2021";   
             if($JAN2021[$key]){
                 $flat = Flat::where('name',$name)->first();
+
+
+                $trashed   = Maintenance::where('head_id',1)->where('flat_id',$flat->id)->where('type','partial')
+                ->where('month',$month)->where('payment',0)->get();
+                foreach($trashed as $trash){
+                    $trash->delete();
+                }  
+
+
                 $already_paid   = Maintenance::where('flat_id',$flat->id)
                 ->where('month',$month)
-                ->where('head_id',1)->count();
-                if($already_paid == 0){
-                    $payment = Maintenance::create([
-                        'head_id' => 1,
-                        'flat_id' => $flat->id,
-                        'amount' => 10000,
-                        'discount' => 0,
-                        'method' => 'cash',
-                        'date' => $date_array[$key],
-                        'type' => 'full',
-                        'month' => $month,
-                        'old_slip_no' => $slip_array[$key],
-                        'payment' => 0,
-                    ]);
-                    $count++;                                       
-                }
+                ->where('head_id',1)->first();
+
+                $already_paid->delete();
+
+                $payment = Maintenance::create([
+                    'head_id' => 1,
+                    'flat_id' => $flat->id,
+                    'amount' => 10000,
+                    'discount' => 0,
+                    'method' => 'cash',
+                    'date' => $date_array[$key],
+                    'type' => 'full',
+                    'month' => $month,
+                    'old_slip_no' => $slip_array[$key],
+                    'payment' => 10000,
+                ]);
+                $count++;   
+
             }
         }   
         
@@ -394,24 +405,32 @@ class FlatController extends Controller
             $month = "FEB-2021";   
             if($FEB2021[$key]){
                 $flat = Flat::where('name',$name)->first();
+
+                $trashed   = Maintenance::where('head_id',1)->where('flat_id',$flat->id)->where('type','partial')
+                ->where('month',$month)->where('payment',0)->get();
+                foreach($trashed as $trash){
+                    $trash->delete();
+                }
+
                 $already_paid   = Maintenance::where('flat_id',$flat->id)
                 ->where('month',$month)
-                ->where('head_id',1)->count();
-                if($already_paid == 0){
-                    $payment = Maintenance::create([
-                        'head_id' => 1,
-                        'flat_id' => $flat->id,
-                        'amount' => 10000,
-                        'discount' => 0,
-                        'method' => 'cash',
-                        'date' => $date_array[$key],
-                        'type' => 'full',
-                        'month' => $month,
-                        'old_slip_no' => $slip_array[$key],
-                        'payment' => 0,
-                    ]);
-                    $count++;                                       
-                }
+                ->where('head_id',1)->first();
+
+                $already_paid->delete();
+
+                $payment = Maintenance::create([
+                    'head_id' => 1,
+                    'flat_id' => $flat->id,
+                    'amount' => 10000,
+                    'discount' => 0,
+                    'method' => 'cash',
+                    'date' => $date_array[$key],
+                    'type' => 'full',
+                    'month' => $month,
+                    'old_slip_no' => $slip_array[$key],
+                    'payment' => 10000,
+                ]);
+                $count++;  
             }
         }    
 
@@ -419,24 +438,32 @@ class FlatController extends Controller
             $month = "MAR-2021";   
             if($MAR2021[$key]){
                 $flat = Flat::where('name',$name)->first();
+
+                $trashed   = Maintenance::where('head_id',1)->where('flat_id',$flat->id)->where('type','partial')
+                ->where('month',$month)->where('payment',0)->get();
+                foreach($trashed as $trash){
+                    $trash->delete();
+                }
+
                 $already_paid   = Maintenance::where('flat_id',$flat->id)
                 ->where('month',$month)
-                ->where('head_id',1)->count();
-                if($already_paid == 0){
-                    $payment = Maintenance::create([
-                        'head_id' => 1,
-                        'flat_id' => $flat->id,
-                        'amount' => 10000,
-                        'discount' => 0,
-                        'method' => 'cash',
-                        'date' => $date_array[$key],
-                        'type' => 'full',
-                        'month' => $month,
-                        'old_slip_no' => $slip_array[$key],
-                        'payment' => 0,
-                    ]);
-                    $count++;                                       
-                }
+                ->where('head_id',1)->first();
+
+                $already_paid->delete();
+
+                $payment = Maintenance::create([
+                    'head_id' => 1,
+                    'flat_id' => $flat->id,
+                    'amount' => 10000,
+                    'discount' => 0,
+                    'method' => 'cash',
+                    'date' => $date_array[$key],
+                    'type' => 'full',
+                    'month' => $month,
+                    'old_slip_no' => $slip_array[$key],
+                    'payment' => 10000,
+                ]);
+                $count++;  
             }
         }    
 
@@ -444,24 +471,32 @@ class FlatController extends Controller
             $month = "APR-2021";   
             if($APR2021[$key]){
                 $flat = Flat::where('name',$name)->first();
+
+                $trashed   = Maintenance::where('head_id',1)->where('flat_id',$flat->id)->where('type','partial')
+                ->where('month',$month)->where('payment',0)->get();
+                foreach($trashed as $trash){
+                    $trash->delete();
+                }
+
                 $already_paid   = Maintenance::where('flat_id',$flat->id)
                 ->where('month',$month)
-                ->where('head_id',1)->count();
-                if($already_paid == 0){
-                    $payment = Maintenance::create([
-                        'head_id' => 1,
-                        'flat_id' => $flat->id,
-                        'amount' => 10000,
-                        'discount' => 0,
-                        'method' => 'cash',
-                        'date' => $date_array[$key],
-                        'type' => 'full',
-                        'month' => $month,
-                        'old_slip_no' => $slip_array[$key],
-                        'payment' => 0,
-                    ]);
-                    $count++;                                       
-                }
+                ->where('head_id',1)->first();
+
+                $already_paid->delete();
+
+                $payment = Maintenance::create([
+                    'head_id' => 1,
+                    'flat_id' => $flat->id,
+                    'amount' => 10000,
+                    'discount' => 0,
+                    'method' => 'cash',
+                    'date' => $date_array[$key],
+                    'type' => 'full',
+                    'month' => $month,
+                    'old_slip_no' => $slip_array[$key],
+                    'payment' => 10000,
+                ]);
+                $count++;  
             }
         } 
 
@@ -469,24 +504,32 @@ class FlatController extends Controller
             $month = "MAY-2021";   
             if($MAY2021[$key]){
                 $flat = Flat::where('name',$name)->first();
+
+                $trashed   = Maintenance::where('head_id',1)->where('flat_id',$flat->id)->where('type','partial')
+                ->where('month',$month)->where('payment',0)->get();
+                foreach($trashed as $trash){
+                    $trash->delete();
+                }
+
                 $already_paid   = Maintenance::where('flat_id',$flat->id)
                 ->where('month',$month)
-                ->where('head_id',1)->count();
-                if($already_paid == 0){
-                    $payment = Maintenance::create([
-                        'head_id' => 1,
-                        'flat_id' => $flat->id,
-                        'amount' => 10000,
-                        'discount' => 0,
-                        'method' => 'cash',
-                        'date' => $date_array[$key],
-                        'type' => 'full',
-                        'month' => $month,
-                        'old_slip_no' => $slip_array[$key],
-                        'payment' => 0,
-                    ]);
-                    $count++;                                       
-                }
+                ->where('head_id',1)->first();
+
+                $already_paid->delete();
+
+                $payment = Maintenance::create([
+                    'head_id' => 1,
+                    'flat_id' => $flat->id,
+                    'amount' => 10000,
+                    'discount' => 0,
+                    'method' => 'cash',
+                    'date' => $date_array[$key],
+                    'type' => 'full',
+                    'month' => $month,
+                    'old_slip_no' => $slip_array[$key],
+                    'payment' => 10000,
+                ]);
+                $count++;  
             }
         } 
 
@@ -494,24 +537,32 @@ class FlatController extends Controller
             $month = "JUN-2021";   
             if($JUN2021[$key]){
                 $flat = Flat::where('name',$name)->first();
+
+                $trashed   = Maintenance::where('head_id',1)->where('flat_id',$flat->id)->where('type','partial')
+                ->where('month',$month)->where('payment',0)->get();
+                foreach($trashed as $trash){
+                    $trash->delete();
+                }
+
                 $already_paid   = Maintenance::where('flat_id',$flat->id)
                 ->where('month',$month)
-                ->where('head_id',1)->count();
-                if($already_paid == 0){
-                    $payment = Maintenance::create([
-                        'head_id' => 1,
-                        'flat_id' => $flat->id,
-                        'amount' => 10000,
-                        'discount' => 0,
-                        'method' => 'cash',
-                        'date' => $date_array[$key],
-                        'type' => 'full',
-                        'month' => $month,
-                        'old_slip_no' => $slip_array[$key],
-                        'payment' => 0,
-                    ]);
-                    $count++;                                       
-                }
+                ->where('head_id',1)->first();
+
+                $already_paid->delete();
+
+                $payment = Maintenance::create([
+                    'head_id' => 1,
+                    'flat_id' => $flat->id,
+                    'amount' => 10000,
+                    'discount' => 0,
+                    'method' => 'cash',
+                    'date' => $date_array[$key],
+                    'type' => 'full',
+                    'month' => $month,
+                    'old_slip_no' => $slip_array[$key],
+                    'payment' => 10000,
+                ]);
+                $count++;  
             }
         } 
 
