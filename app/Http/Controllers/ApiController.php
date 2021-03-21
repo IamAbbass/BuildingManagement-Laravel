@@ -9,6 +9,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use \App\Models\Block;
 use \App\Models\Flat;
+use \App\Models\ExpenseHead;
+
 
 use Auth;
 
@@ -66,7 +68,54 @@ class ApiController extends Controller
 
     //show single flat details
     public function flat_details($id){
-        return Flat::where('name',$id)->get();  
+        $flat = Flat::where('name',$id)->first();
+        if($flat){
+          return [
+            'flat'      => $flat,
+            'vehicles'  => $flat->vehicles,
+            'payments'  => $flat->payments,
+            'success'   => true,
+          ];
+        }else{
+          return [
+            'flat'      => [],
+            'vehicles'  => [],
+            'payments'  => [],
+            'success'   => false,
+          ];
+        }        
     }
+
+    //Expense Head Summary
+    public function expense_head(){
+      // $month = request('month');
+      $expense_heads = ExpenseHead::all();
+      $return = array();
+      foreach($expense_heads as $key => $expense_head){
+        $return[$key]['id']     = $expense_head->id;       
+        $return[$key]['name']   = $expense_head->name;       
+        $return[$key]['total']  = $expense_head->expense->sum('amount');
+        // ->where('date', 'LIKE', '%2021%')->get;
+      }
+      return $return;      
+    }
+
+    public function expense_head_details($id){
+      
+      $expense_head = ExpenseHead::findOrFail($id);
+      return $expense_head;
+
+      $return = array();
+      foreach($expense_heads as $key => $expense_head){
+        $return[$key]['id']     = $expense_head->id;       
+        $return[$key]['name']   = $expense_head->name;       
+        $return[$key]['total']  = $expense_head->expense->sum('amount');
+        // ->where('date', 'LIKE', '%2021%')->get;
+      }
+      return $return;      
+    }
+
+    
+
 
 }
