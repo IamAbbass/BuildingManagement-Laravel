@@ -111,7 +111,7 @@
                                         class="fas fa-times fa-sm text-white-50"></i> Cancelled</a>
 
                                     @else
-                                        <a href="/slip/{{ $payment->id }}/cancel" class="btn btn-sm mr-1 mb-1 btn-warning shadow-sm"><i
+                                        <a href="javascript:;" url="/slip/{{ $payment->id }}/cancel" class="btn_cancel btn btn-sm mr-1 mb-1 btn-warning shadow-sm"><i
                                         class="fas fa-times fa-sm text-white-50"></i> Cancel</a>
 
                                         <a target="_blank" href="/slip/{{ $payment->id }}" class="btn btn-sm mr-1 mb-1 btn-info shadow-sm"><i
@@ -148,8 +148,7 @@
     $(document).ready(function(){
         $(".btn_cancel").click(function(){
             var url = $(this).attr("url");
-
-            var description = prompt("Write Reason:");
+            var description = prompt("Write Reason:");            
             if(description){
                 window.location.replace(url+"?description="+description);                
             }else{
