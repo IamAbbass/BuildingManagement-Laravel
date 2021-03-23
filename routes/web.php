@@ -19,6 +19,8 @@ Route::get('/', function () {
 
 Auth::routes(['register'=>false,'reset'=>false]);
 
+Route::get('/dup', [App\Http\Controllers\HomeController::class, 'dup']);
+
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'home']);
 Route::get('/dashboard', [App\Http\Controllers\HomeController::class, 'dashboard']);
 

@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use \App\Models\Expense;
 use App\Models\Maintenance;
 use App\Models\AccountHead;
+use App\Models\Flat;
 use App\Models\ExpenseHead;
 
 class HomeController extends Controller
@@ -49,5 +50,34 @@ class HomeController extends Controller
             'account_heads' => $account_heads,
             'expense_heads' => $expense_heads
         ]);
+    }
+
+    public function dup()
+    {
+
+
+        ini_set('max_execution_time', 3600);
+
+        $flats = Flat::all();
+        // $flats = Flat::where('id',131)->get();
+
+        foreach($flats as $flat){
+            foreach($flat->payments->where('type','full') as $payment){
+                $duplicates   = Maintenance::where('head_id',1)
+                ->where('flat_id',$flat->id)
+                ->where('type','partial')
+                ->where('month',$payment->month)
+                ->where('payment',0)
+                ->get();
+
+                foreach($duplicates as $duplicate){
+                    $duplicate->delete();
+                }
+                
+            }    
+            
+            echo $flat->id."<br/";
+
+        }        
     }
 }

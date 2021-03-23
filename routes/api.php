@@ -22,9 +22,6 @@ Route::get('/expense/head/{head_id}', [App\Http\Controllers\ApiController::class
 
 
 // Route::post('/signin', [App\Http\Controllers\ApiController::class, 'signin']);
-
-
-
 // // /api/expense/head/{id}?month=FEB-2021 - show all expenses linked to the head
 // 
 // // /api/report?month=FEB-2021 || /api/report?date=01-FEB-2021 show daily collection report
