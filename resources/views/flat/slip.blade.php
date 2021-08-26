@@ -281,6 +281,12 @@ function convert_number_to_words($number){
             </div>
             <div class="clearfix"></div>
         </div>
+        
+        <div class="row" style="padding:5px">
+            <p style="font-size: 11px; text-align:center;">
+                {{ $payment->description }}
+            </p>
+        </div>
 
         <div class="row" style="padding:5px">
             <p style="font-size: 11px; text-align:center;">
@@ -362,6 +368,12 @@ function convert_number_to_words($number){
                 </span>
             </div>
             <div class="clearfix"></div>
+        </div>
+        
+        <div class="row" style="padding:5px">
+            <p style="font-size: 11px; text-align:center;">
+                {{ $payment->description }}
+            </p>
         </div>
 
         <div class="row" style="padding:5px">
