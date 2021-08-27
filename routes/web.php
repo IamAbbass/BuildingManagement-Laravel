@@ -43,6 +43,7 @@ Route::patch('/flat/{id}/', [App\Http\Controllers\FlatController::class, 'update
 Route::get('/flat/{id}/print', [App\Http\Controllers\FlatController::class, 'print']);
 Route::get('/flat/{id}/payment', [App\Http\Controllers\FlatController::class, 'payment']);
 Route::post('/flat/{id}/payment', [App\Http\Controllers\FlatController::class, 'payment_save']);
+Route::get('/payment/method/{id}', [App\Http\Controllers\FlatController::class, 'method']);
 Route::get('/slip/{id}', [App\Http\Controllers\FlatController::class, 'slip']);
 Route::get('/contractor/slip/{id}', [App\Http\Controllers\ContractorController::class, 'slip']);
 

@@ -101,7 +101,10 @@
                                 <td>
                                     {{ number_format($payment->payment) }} 
                                     <span class="badge badge-secondary">{{ ucfirst($payment->type) }}</span>       
-                                    <span class="badge badge-secondary">{{ ucfirst($payment->method) }} {{ $payment->method == 'cheque' ? $payment->cheque_no : '' }}</span>       
+                                    <span class="badge badge-secondary">
+                                    <a target="_blank" href="/payment/method/{{ $payment->id }}" style="color:#fff">
+                                        <span>{{ ucfirst($payment->method) }} {{ $payment->method == 'cheque' ? $payment->cheque_no : '' }}</span>
+                                    </a>
                                 </td>
                                 <td>{{ number_format($payment->amount-$payment->discount-$payment->payment) }}</td>                              
                                 <td>{{ $payment->date }}</td>

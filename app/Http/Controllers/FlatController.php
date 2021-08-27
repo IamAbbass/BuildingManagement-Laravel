@@ -351,6 +351,21 @@ class FlatController extends Controller
         
     }
 
+    public function method($id){
+        $result = Maintenance::findOrFail($id);
+        if ($result->date == strtoupper(date("d-M-Y"))) {
+            $result->update([
+                'method' => $result->method == "cash" ? "cheque" : "cash",
+                'updated_by' => auth()->id()
+            ]);
+            session()->flash('success','Payment method update successfully.');
+            return redirect()->back();
+        }
+        else {
+            session()->flash('danger','You are not allowed to updated old  slips!');
+            return redirect()->back();
+        }
+    }
 
     public function advance(){
         $flat_array = ["E-0703","E-1005","G-0501","G-0503","G-0705","F-0502","F-1103","C-0404","C-0704","A-0301","C-1001","D-0901", "B-0105", "G-0403", "C-0702", "G-0203", "G-0904", "G-0102", "G-0402", "A-1104", "E-0101", "E-0103", "E-1002", "E-0701", "B-0103", "A-0106", "F-0203", "F-0904", "D-1204", "G-0803", "B-0106", "G-0802", "E-0105", "G-0202", "C-0104", "D-0303", "A-0305", "E-1205", "A-0306", "G-0306", "F-1005","F-0904"];
