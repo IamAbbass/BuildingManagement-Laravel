@@ -358,11 +358,11 @@ class FlatController extends Controller
                 'method' => $result->method == "cash" ? "cheque" : "cash",
                 'updated_by' => auth()->id()
             ]);
-            session()->flash('success','Payment method update successfully.');
+            session()->flash('success','Payment method updated.');
             return redirect()->back();
         }
         else {
-            session()->flash('danger','You are not allowed to updated old  slips!');
+            session()->flash('danger','You are not allowed to update payment method of old generated slips!');
             return redirect()->back();
         }
     }
