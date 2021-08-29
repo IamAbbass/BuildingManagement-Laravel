@@ -9,7 +9,7 @@ use \App\Models\Maintenance;
 // use \Maatwebsite\Excel\Excel;
 use \App\Imports\ImportExcel;
 use \Maatwebsite\Excel\Facades\Excel;
-use Carbon\CarbonPeriod;
+// use Carbon\CarbonPeriod;
 
 class FlatController extends Controller
 {
@@ -88,19 +88,34 @@ class FlatController extends Controller
 
     public function print($flat_id)
     {
+        // The following old filter updated by Zuhair
+        // $from   = strtoupper(date('d-M-Y',strtotime(request('from'))));
+        // $to     = strtoupper(date('d-M-Y',strtotime(request('to'))));
+        
+        // $dates = CarbonPeriod::create($from,$to);
+        // $queryDates = array();        
+
+        // foreach($dates as $date){
+        //     $queryDates[] = strtoupper(date('d-M-Y',strtotime($date)));
+        // }
+
+        // $payments = Maintenance::whereIn('date',$queryDates)
+        // ->where('is_cancelled',false)
+        // ->where('flat_id',$flat_id)->get();     
+
+        // return view('flat.ledger',[
+        //     'flat' => $flat,
+        //     'payments' => $payments
+        // ]);
+
+
         $flat = Flat::findOrFail($flat_id);
 
-        $from   = strtoupper(date('d-M-Y',strtotime(request('from'))));
-        $to     = strtoupper(date('d-M-Y',strtotime(request('to'))));
-        
-        $dates = CarbonPeriod::create($from,$to);
-        $queryDates = array();        
-
-        foreach($dates as $date){
-            $queryDates[] = strtoupper(date('d-M-Y',strtotime($date)));
-        }
-
-        $payments = Maintenance::whereIn('date',$queryDates)
+        $start = date('Y-m-d',strtotime(request('from')));
+        $end   = date('Y-m-d',strtotime(request('to')));
+      
+        $payments = Maintenance::where('created_at', '>=', $start.' 00:00:00')
+        ->where('created_at', '<=', $end.' 00:00:00')
         ->where('is_cancelled',false)
         ->where('flat_id',$flat_id)->get();     
 
@@ -191,6 +206,7 @@ class FlatController extends Controller
                 'created_by' => auth()->id()
             ]);            
 
+            $send_sms   = true;
             $username   = "923022203204";///Your Username
             $password   = "riahuzM@25";///Your Password
             $sender     = "Saima One";
@@ -207,7 +223,7 @@ class FlatController extends Controller
             // $message    .= " Balance 20,000/- ";
             $message    .= " $date ".date("h:i A");
 
-            if($flat->person_mobile){
+            if($flat->person_mobile && $send_sms == true){
                 $post = "sender=".urlencode($sender)."&mobile=".urlencode($mobile)."&message=".urlencode($message)."";
                 $url = "https://sendpk.com/api/sms.php?username=$username&password=$password";
                 $ch = curl_init();
