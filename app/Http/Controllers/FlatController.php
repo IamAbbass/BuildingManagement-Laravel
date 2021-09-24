@@ -209,7 +209,7 @@ class FlatController extends Controller
             $send_sms   = true;
             $username   = "923022203204";///Your Username
             $password   = "riahuzM@25";///Your Password
-            $sender     = "Saima One";
+            $sender     = "ZDEVELOPERS";
             $mobile     = $flat->person_mobile;
             // $message    = "Thanks ".($flat->person_name).". Rs. ".number_format(request('amount'))." Received.";
 
