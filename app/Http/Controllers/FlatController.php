@@ -207,16 +207,15 @@ class FlatController extends Controller
             ]);            
 
             $send_sms   = true;
-            $username   = "923022203204";///Your Username
-            $password   = "riahuzM@25";///Your Password
-            $sender     = "ZDEVELOPERS";
-            $mobile     = $flat->person_mobile;
+            $api_key = "923022203204-c71e914a-2abf-41a4-96cc-769a6e773802";///YOUR API KEY
+            $mobile = $flat->person_mobile; ///Recepient Mobile Number
+            $sender = "ZDEVELOPERS";
             // $message    = "Thanks ".($flat->person_name).". Rs. ".number_format(request('amount'))." Received.";
 
             //Account Head
             $account_head = AccountHead::findOrFail(request('head_id'));
 
-            $message    = "Saima Square One: Received with thanks Rs. ".(number_format(request('amount')))."/- Flat # SSQ1-(".($flat->name).")";
+            $message     = "Saima Square One: Received with thanks Rs. ".(number_format(request('amount')))."/- Flat # SSQ1-(".($flat->name).")";
             $message    .= " against ".$account_head->name.".";
             $message    .= " Payment by ".ucfirst(request('method'));            
             $message    .= " for the month of $month.";
@@ -224,8 +223,9 @@ class FlatController extends Controller
             $message    .= " $date ".date("h:i A");
 
             if($flat->person_mobile && $send_sms == true){
+                ////sending sms
                 $post = "sender=".urlencode($sender)."&mobile=".urlencode($mobile)."&message=".urlencode($message)."";
-                $url = "https://sendpk.com/api/sms.php?username=$username&password=$password";
+                $url = "https://sendpk.com/api/sms.php?api_key=$api_key";
                 $ch = curl_init();
                 $timeout = 30; // set to zero for no timeout
                 curl_setopt($ch, CURLOPT_USERAGENT, 'Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; SV1)');
@@ -234,7 +234,7 @@ class FlatController extends Controller
                 curl_setopt($ch, CURLOPT_POSTFIELDS,$post);
                 curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
                 curl_setopt ($ch, CURLOPT_CONNECTTIMEOUT, $timeout);
-                $result = curl_exec($ch); 
+                $result = curl_exec($ch);
 
                 $payment->update([
                     'sms_delivery'=> $result,

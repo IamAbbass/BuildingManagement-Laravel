@@ -191,7 +191,7 @@ function convert_number_to_words($number){
             border-top: 3px dashed;
             margin: 0 5px;
         }
-        
+
        .watermark {
             background: url({{ asset('img/watermark.png') }});
             background-size: 200px;
@@ -205,7 +205,7 @@ function convert_number_to_words($number){
             position: fixed !important;
             left: 600px;
         }
-        
+
         .print{
             display: none;
         }
@@ -261,6 +261,12 @@ function convert_number_to_words($number){
         </div>
 
         <div class="row">
+            <div class="one_two bold"><span>Tenant Mr/Mrs.:</span></div>
+            <div class="one_two"><span>{{ $payment->flat->tenant_name }} </span></div>
+            <div class="clearfix"></div>
+        </div>
+
+        <div class="row">
             <div class="one_two bold"><span>{{ $payment->account->name }}:</span></div>
             <div class="one_two"><span>{{ $payment->month }}</span></div>
             <div class="clearfix"></div>
@@ -281,7 +287,7 @@ function convert_number_to_words($number){
             </div>
             <div class="clearfix"></div>
         </div>
-        
+
         <div class="row" style="padding:5px">
             <p style="font-size: 11px; text-align:center;">
                 {{ $payment->description }}
@@ -302,7 +308,7 @@ function convert_number_to_words($number){
                {{ auth()->user()->name }}
                 at {{ date('d-M-Y h:i a') }}</span>
             </p>
-        </div>        
+        </div>
         </div>
 	</div>
 
@@ -349,6 +355,12 @@ function convert_number_to_words($number){
         </div>
 
         <div class="row">
+            <div class="one_two bold"><span>Tenant Mr/Mrs.:</span></div>
+            <div class="one_two"><span>{{ $payment->flat->tenant_name }} </span></div>
+            <div class="clearfix"></div>
+        </div>
+
+        <div class="row">
             <div class="one_two bold"><span>{{ $payment->account->name }}:</span></div>
             <div class="one_two"><span>{{ $payment->month }}</span></div>
             <div class="clearfix"></div>
@@ -369,7 +381,7 @@ function convert_number_to_words($number){
             </div>
             <div class="clearfix"></div>
         </div>
-        
+
         <div class="row" style="padding:5px">
             <p style="font-size: 11px; text-align:center;">
                 {{ $payment->description }}
