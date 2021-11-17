@@ -22,7 +22,7 @@
 
     <link href="{{ asset('vendor/datatables/dataTables.bootstrap4.min.css') }}" rel="stylesheet">
 
-    
+
     <script src="{{ asset('vendor/jquery/jquery.min.js') }}"></script>
     <style>
         table td, table th{
@@ -66,9 +66,9 @@
 
     <script>
         $(document).ready(function(){
-            window.print();            
+            window.print();
         });
-        
+
     </script>
 
 </body>

@@ -19,7 +19,7 @@
         <a class="nav-link" href="/search">
             <i class="fas fa-fw fa-search"></i>
             <span>Search</span></a>
-    </li>    
+    </li>
 
     <hr class="sidebar-divider my-0">
     {{-- <li class="nav-item">
@@ -45,65 +45,65 @@
             </div>
         </div>
     </li>
-    
-    
+
+
     <hr class="sidebar-divider my-0">
     <li class="nav-item">
         <a class="nav-link" href="/expensehead">
             <i class="fas fa-fw fa-list"></i>
             <span>Expense Heads</span></a>
-    </li> 
+    </li>
 
     <hr class="sidebar-divider my-0">
     <li class="nav-item">
         <a class="nav-link" href="/expense">
             <i class="fas fa-fw fa-receipt"></i>
             <span>All Expenses</span></a>
-    </li> 
+    </li>
 
     <hr class="sidebar-divider my-0">
     <li class="nav-item">
         <a class="nav-link" href="/accounthead">
             <i class="fas fa-fw fa-list"></i>
             <span>Account Heads</span></a>
-    </li> 
+    </li>
 
     <hr class="sidebar-divider my-0">
     <li class="nav-item">
         <a class="nav-link" href="/employee">
             <i class="fas fa-fw fa-users"></i>
             <span>Employees</span></a>
-    </li> 
+    </li>
 
     <hr class="sidebar-divider my-0">
     <li class="nav-item">
         <a class="nav-link" href="/contractor">
             <i class="fas fa-fw fa-users"></i>
             <span>Contractors</span></a>
-    </li> 
+    </li>
 
     <hr class="sidebar-divider my-0">
     <li class="nav-item">
         <a class="nav-link" href="/attendance">
             <i class="fas fa-fw fa-thumbs-up"></i>
             <span>Bio Metric</span></a>
-    </li> 
+    </li>
 
     <hr class="sidebar-divider my-0">
     <li class="nav-item">
         <a class="nav-link" href="/report/daily">
             <i class="fas fa-fw fa-edit"></i>
             <span>Daily Collection Report</span></a>
-    </li> 
+    </li>
 
     <hr class="sidebar-divider my-0">
     <li class="nav-item">
         <a class="nav-link" href="/cycle">
             <i class="fas fa-fw fa-spinner"></i>
             <span>Generate Cycle ({{ date('M-Y') }})</span></a>
-    </li> 
+    </li>
 
-    
+
 
 
     {{-- - View All Maintenance (Block Wise Filter)
@@ -111,12 +111,12 @@
 - Maintenance Report (Month Year)
 - Daily Reports (Date from to)
 - Users --}}
-    
 
-    
+
+
 
     {{-- <!-- Divider -->
-    <hr class="sidebar-divider">    
+    <hr class="sidebar-divider">
     <li class="nav-item">
         <a class="nav-link" href="charts.html">
             <i class="fas fa-fw fa-chart-area"></i>

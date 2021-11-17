@@ -9,7 +9,7 @@
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
         <h1 class="h3 mb-2 text-gray-800">Flat {{ $flat->name }} History</h1>
     </div>
-    
+
 
     <!-- DataTales Example -->
     <div class="card shadow mb-4">
@@ -33,14 +33,14 @@
                     </div>
                 </div>
             </form>
-            
+
         </div>
         <div class="card-body">
 
             <div class="table-responsive">
                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                     <thead>
-            
+
                         <tr>
                             <th>Sno</th>
                             <th>Month</th>
@@ -62,24 +62,24 @@
                             $sum_discount   = 0;
                             $sum_payment    = 0;
                             $sum_balance    = 0;
-            
-                            
+
+
                         @endphp
-                        
+
                         @foreach($payments as $payment)
-            
+
                             @php
-                                $sno = 0; 
-                                
+                                $sno = 0;
+
                                 $sum_amount     += $payment->amount;
                                 $sum_discount   += $payment->discount;
                                 $sum_payment    += $payment->payment;
-                                
+
                                 $balance_this   = $payment->amount-$payment->discount-$payment->payment;
-            
+
                                 $sum_balance    += $balance_this;
                             @endphp
-                        
+
                             <tr>
                                 <td>{{ ++$sno }}</td>
                                 <td>{{ $payment->month }}</td>
@@ -87,7 +87,7 @@
                                     {!! $payment->old_slip_no ? '(Manual Slip No. '.$payment->old_slip_no.')<br/>' : '' !!}
                                     {!! $payment->description ? $payment->description : '' !!}
                                 </td>
-            
+
                                 <td>
                                     {{ $payment->id }}
                                 </td>
@@ -97,16 +97,16 @@
                                 <td>
                                     {{ number_format($payment->amount) }}
                                 </td>
-                                <td>{{ $payment->discount }}</td>                                
+                                <td>{{ $payment->discount }}</td>
                                 <td>
-                                    {{ number_format($payment->payment) }} 
-                                    <span class="badge badge-secondary">{{ ucfirst($payment->type) }}</span>       
+                                    {{ number_format($payment->payment) }}
+                                    <span class="badge badge-secondary">{{ ucfirst($payment->type) }}</span>
                                     <span class="badge badge-secondary">
                                     <a target="_blank" href="/payment/method/{{ $payment->id }}" style="color:#fff">
                                         <span>{{ ucfirst($payment->method) }} {{ $payment->method == 'cheque' ? $payment->cheque_no : '' }}</span>
                                     </a>
                                 </td>
-                                <td>{{ number_format($payment->amount-$payment->discount-$payment->payment) }}</td>                              
+                                <td>{{ number_format($payment->amount-$payment->discount-$payment->payment) }}</td>
                                 <td>{{ $payment->date }}</td>
                                 <td>
                                     @if($payment->is_cancelled == true)
@@ -124,22 +124,22 @@
                             </tr>
                         @endforeach
                     </tbody>
-            
+
                     <tfoot>
                         <tr>
                             <th colspan="5">Total</th>
                             <th>{{ $sum_amount }}</th>
-                            <th>{{ $sum_discount }}</th>                                
+                            <th>{{ $sum_discount }}</th>
                             <th>{{ $sum_payment }}</th>
-                            <th>{{ $sum_balance }}</th>                              
+                            <th>{{ $sum_balance }}</th>
                             <th>-</th>
                         </tr>
                     </tfoot>
                 </table>
             </div>
-            
-            
-            
+
+
+
 
         </div>
     </div>
@@ -151,9 +151,9 @@
     $(document).ready(function(){
         $(".btn_cancel").click(function(){
             var url = $(this).attr("url");
-            var description = prompt("Write Reason:");            
+            var description = prompt("Write Reason:");
             if(description){
-                window.location.replace(url+"?description="+description);                
+                window.location.replace(url+"?description="+description);
             }else{
                 alert("Please Write Reason To Cancel !");
             }

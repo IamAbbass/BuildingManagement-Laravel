@@ -15,7 +15,7 @@ class ReportController extends Controller
     }
 
     public function daily_report()
-    {    
+    {
         return view('report.daily');
     }
 
@@ -23,7 +23,7 @@ class ReportController extends Controller
     {
         $from   = strtoupper(date('d-M-Y',strtotime(request('from'))));
         $to     = strtoupper(date('d-M-Y',strtotime(request('to'))));
-        
+
         $dates = CarbonPeriod::create($from,$to);
         $queryDates = array();
 
@@ -31,7 +31,7 @@ class ReportController extends Controller
             $queryDates[] = strtoupper(date('d-M-Y',strtotime($date)));
         }
 
-        $payments = Maintenance::whereIn('date',$queryDates)->where('is_cancelled',false)->get();        
+        $payments = Maintenance::whereIn('date',$queryDates)->where('is_cancelled',false)->get();
         $expense  = Expense::whereIn('date',$queryDates)->sum('amount');
 
         return view('report.daily_print',[
@@ -42,5 +42,5 @@ class ReportController extends Controller
         ]);
     }
 
-    
+
 }

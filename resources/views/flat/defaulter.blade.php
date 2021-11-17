@@ -6,8 +6,8 @@
 <div>
     <h3 style="color:black; margin-bottom: 25px;">{{ $title }}</h3>
 
-            
-                
+
+
     <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
         <thead>
             <tr>
@@ -21,31 +21,31 @@
         </thead>
         <tbody>
             @php
-                $sno = 0;    
-            @endphp                        
+                $sno = 0;
+            @endphp
             @foreach($flats as $flat)
-                @php  
+                @php
                     $total = 0;
-                @endphp  
+                @endphp
 
                 @if($flat->isDefaulter->sum('payment') < 10000 && ($flat->payments->sum('amount')-$flat->payments->sum('discount')-$flat->payments->sum('payment') > 0))
-                    @php   
+                    @php
                         if(request('head')){
                             $payments = $flat->payments->where('head_id',request('head'));
                         }else{
-                            $payments = $flat->payments;                        
+                            $payments = $flat->payments;
                         }
-                        
+
                         $balance = $payments->sum('amount')-$payments->sum('discount')-$payments->sum('payment');
                         $total += $balance;
                     @endphp
-                    
+
                     <tr>
                         <td>{{ ++$sno }}</td>
                         <td>Block {{ $flat->block->name }}</td>
                         <td>{{ $flat->name }}</td>
                         <td>{{ $flat->person_name }}</td>
-                        <td> 
+                        <td>
                             PKR {{ number_format($total) }}
                         </td>
                         {{-- <td>
@@ -64,8 +64,8 @@
                                 @endforeach
                             </ol>
                         </td> --}}
-                    </tr>                            
-                @endif                            
+                    </tr>
+                @endif
             @endforeach
         </tbody>
 

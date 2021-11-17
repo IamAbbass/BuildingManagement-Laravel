@@ -31,23 +31,23 @@
                 $sum_payment    = 0;
                 $sum_balance    = 0;
 
-                
+
             @endphp
-            
+
             @foreach($payments as $payment)
 
                 @php
-                    $sno = 0; 
-                    
+                    $sno = 0;
+
                     $sum_amount     += $payment->amount;
                     $sum_discount   += $payment->discount;
                     $sum_payment    += $payment->payment;
-                    
+
                     $balance_this   = $payment->amount-$payment->discount-$payment->payment;
 
                     $sum_balance    += $balance_this;
                 @endphp
-            
+
                 <tr>
                     <td>{{ ++$sno }}</td>
                     <td>{{ $payment->month }}</td>
@@ -65,13 +65,13 @@
                     <td>
                         {{ number_format($payment->amount) }}
                     </td>
-                    <td>{{ $payment->discount }}</td>                                
+                    <td>{{ $payment->discount }}</td>
                     <td>
-                        {{ number_format($payment->payment) }} 
-                        <span class="badge badge-secondary">{{ ucfirst($payment->type) }}</span>       
-                        <span class="badge badge-secondary">{{ ucfirst($payment->method) }} {{ $payment->method == 'cheque' ? $payment->cheque_no : '' }}</span>       
+                        {{ number_format($payment->payment) }}
+                        <span class="badge badge-secondary">{{ ucfirst($payment->type) }}</span>
+                        <span class="badge badge-secondary">{{ ucfirst($payment->method) }} {{ $payment->method == 'cheque' ? $payment->cheque_no : '' }}</span>
                     </td>
-                    <td>{{ number_format($payment->amount-$payment->discount-$payment->payment) }}</td>                              
+                    <td>{{ number_format($payment->amount-$payment->discount-$payment->payment) }}</td>
                     <td>{{ $payment->date }}</td>
                 </tr>
             @endforeach
@@ -81,14 +81,14 @@
             <tr>
                 <th colspan="5">Total</th>
                 <th>{{ $sum_amount }}</th>
-                <th>{{ $sum_discount }}</th>                                
+                <th>{{ $sum_discount }}</th>
                 <th>{{ $sum_payment }}</th>
-                <th>{{ $sum_balance }}</th>                              
+                <th>{{ $sum_balance }}</th>
                 <th>-</th>
             </tr>
         </tfoot>
     </table>
-    
+
 
 
 </div>

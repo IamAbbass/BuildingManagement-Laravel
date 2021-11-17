@@ -17,14 +17,14 @@ class FlatController extends Controller
     {
         $this->middleware('auth');
     }
-    
+
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {        
+    {
         $blocks = Block::all();
         $selected_block = request('block') ?? 1;
         $flats  = Flat::where('block_id',$selected_block)->get();
@@ -39,7 +39,7 @@ class FlatController extends Controller
     }
 
     public function export($selected_block)
-    {        
+    {
         $flats  = Flat::where('block_id',$selected_block)->get();
         $block  = Block::findOrFail($selected_block);
 
@@ -52,18 +52,18 @@ class FlatController extends Controller
 
     //yahan
     public function defaulter($selected_block)
-    {        
+    {
         $flats  = Flat::where('block_id',$selected_block)->get();
         $block  = Block::findOrFail($selected_block);
         $head   = request('head');
         if($head){
-            $account_head  = AccountHead::findOrFail($head);        
+            $account_head  = AccountHead::findOrFail($head);
             $title = "Block-".$block->name." ".date('M-Y')." '$account_head->name Defaulter List'";
         }else{
             $title = "Block-".$block->name." ".date('M-Y')." 'Complete Defaulter List'";
         }
 
-        
+
         return view('flat.defaulter',[
             'flats'     => $flats,
             'block'     => $block,
@@ -75,10 +75,10 @@ class FlatController extends Controller
     {
         $flat = Flat::findOrFail($flat_id);
 
-        
+
         //whereIn('date',$queryDates)
         $payments = Maintenance::where('is_cancelled',false)
-        ->where('flat_id',$flat_id)->get();     
+        ->where('flat_id',$flat_id)->get();
 
         return view('flat.show',[
             'flat' => $flat,
@@ -91,9 +91,9 @@ class FlatController extends Controller
         // The following old filter updated by Zuhair
         // $from   = strtoupper(date('d-M-Y',strtotime(request('from'))));
         // $to     = strtoupper(date('d-M-Y',strtotime(request('to'))));
-        
+
         // $dates = CarbonPeriod::create($from,$to);
-        // $queryDates = array();        
+        // $queryDates = array();
 
         // foreach($dates as $date){
         //     $queryDates[] = strtoupper(date('d-M-Y',strtotime($date)));
@@ -101,7 +101,7 @@ class FlatController extends Controller
 
         // $payments = Maintenance::whereIn('date',$queryDates)
         // ->where('is_cancelled',false)
-        // ->where('flat_id',$flat_id)->get();     
+        // ->where('flat_id',$flat_id)->get();
 
         // return view('flat.ledger',[
         //     'flat' => $flat,
@@ -113,18 +113,18 @@ class FlatController extends Controller
 
         $start = date('Y-m-d',strtotime(request('from')));
         $end   = date('Y-m-d',strtotime(request('to')));
-      
+
         $payments = Maintenance::where('created_at', '>=', $start.' 00:00:00')
         ->where('created_at', '<=', $end.' 00:00:00')
         ->where('is_cancelled',false)
-        ->where('flat_id',$flat_id)->get();     
+        ->where('flat_id',$flat_id)->get();
 
         return view('flat.ledger',[
             'flat' => $flat,
             'payments' => $payments
         ]);
     }
-    
+
     public function edit($id)
     {
         $flat = Flat::findOrFail($id);
@@ -132,25 +132,25 @@ class FlatController extends Controller
             'flat' => $flat,
         ]);
     }
-    
+
     public function update($id)
     {
         $flat = Flat::findOrFail($id);
         $flat->update([
             'person_name'=> request('person_name'),
-            'person_email'=> request('person_email'),            
+            'person_email'=> request('person_email'),
             'person_mobile'=> request('person_mobile'),
             'person_mobile2'=> request('person_mobile2'),
             'ptcl_no' => request('ptcl_no'),
             'person_cnic'=> request('person_cnic'),
             'person_perm_address'=> request('person_perm_address'),
-            'tenant_name'=> request('tenant_name'),  
+            'tenant_name'=> request('tenant_name'),
             'notes'=> request('notes'),
             'status'=> request('status'),
             'updated_by'=> auth()->id(),
         ]);
         session()->flash('success','Flat Info Updated!');
-        return redirect('/flat'); 
+        return redirect('/flat');
     }
 
     public function payment($id)
@@ -165,7 +165,7 @@ class FlatController extends Controller
     }
 
     public function payment_save ($id)
-    { 
+    {
         $month          = strtoupper(date("M-Y", strtotime(request('month'))));
 
         /*
@@ -177,8 +177,8 @@ class FlatController extends Controller
         ->where('month',$month)->where('payment',0)->get();
         foreach($trashed as $trash){
             $trash->delete();
-        }        
-        
+        }
+
         $already_paid   = Maintenance::where('flat_id',$id)
         ->where('month',$month)
         ->where('type','full')
@@ -202,9 +202,9 @@ class FlatController extends Controller
                 'month' => $month,
                 'payment' => request('payment'),
                 'description' => request('description'),
-                'old_slip_no' => request('old_slip_no'),     
+                'old_slip_no' => request('old_slip_no'),
                 'created_by' => auth()->id()
-            ]);            
+            ]);
 
             $send_sms   = true;
             $api_key = "923022203204-c71e914a-2abf-41a4-96cc-769a6e773802";///YOUR API KEY
@@ -217,7 +217,7 @@ class FlatController extends Controller
 
             $message     = "Saima Square One: Received with thanks Rs. ".(number_format(request('amount')))."/- Flat # SSQ1-(".($flat->name).")";
             $message    .= " against ".$account_head->name.".";
-            $message    .= " Payment by ".ucfirst(request('method'));            
+            $message    .= " Payment by ".ucfirst(request('method'));
             $message    .= " for the month of $month.";
             // $message    .= " Balance 20,000/- ";
             $message    .= " $date ".date("h:i A");
@@ -240,28 +240,28 @@ class FlatController extends Controller
                     'sms_delivery'=> $result,
                 ]);
             }
-            
 
-            return redirect("/slip/$payment->id"); 
+
+            return redirect("/slip/$payment->id");
         }else{
             session()->flash('danger','Maintenance For '.$month.' Already Paid!');
-            return back(); 
+            return back();
         }
-        
-        
-    } 
-    
+
+
+    }
+
     public function slip ($id)
-    {     
+    {
         $payment = Maintenance::findOrFail($id);
 
         return view("flat.slip",[
             'payment' => $payment,
-        ]); 
+        ]);
     }
-    
+
     public function import ()
-    {     
+    {
         $import = Excel::toCollection(new ImportExcel, "excel.xlsx");
         $sheet_one = $import[0];
 
@@ -279,8 +279,8 @@ class FlatController extends Controller
             // 6 = balance
             // 7 = slip no
 
-            if (strpos($row[0], 'UNIT') !== false) { //Load the flat     
-                // echo $row[1]."<br/>";           
+            if (strpos($row[0], 'UNIT') !== false) { //Load the flat
+                // echo $row[1]."<br/>";
                 $flat_id = Flat::where('name',$row[1])->first()->id;
                 // $flat++;
             }
@@ -295,7 +295,7 @@ class FlatController extends Controller
                 }else{
                     $head_id = 0;
                 }
-                
+
                 Maintenance::create([
                     'head_id' => $head_id,
                     'flat_id' => $flat_id,
@@ -312,7 +312,7 @@ class FlatController extends Controller
             }
         }
         return ['success' => true];
-    }   
+    }
     public function cycle (){
         $flats = Flat::all();
         $month = strtoupper(date("M-Y"));
@@ -336,8 +336,8 @@ class FlatController extends Controller
                 foreach($trashed as $trash){
                     $trash->delete();
                 }
-            }  
-        
+            }
+
             $count = 0;
             foreach($flats as $flat){
                 $already_paid   = Maintenance::where('flat_id',$flat->id)
@@ -363,8 +363,8 @@ class FlatController extends Controller
 
             session()->flash('success','Monthly Cycle Generated');
             return redirect('/flat');
-        }  
-        
+        }
+
     }
 
     public function method($id){
@@ -393,11 +393,11 @@ class FlatController extends Controller
         $APR2021 = [false,false,false,true,true,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,true,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false];
         $MAY2021 = [false,false,false,true,true,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,true,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false];
         $JUN2021 = [false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,true,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false];
-    
+
         $count = 0;
 
-        foreach($flat_array as $key => $name){   
-            $month = "JAN-2021";   
+        foreach($flat_array as $key => $name){
+            $month = "JAN-2021";
             if($JAN2021[$key]){
                 $flat = Flat::where('name',$name)->first();
 
@@ -406,7 +406,7 @@ class FlatController extends Controller
                 ->where('month',$month)->where('payment',0)->get();
                 foreach($trashed as $trash){
                     $trash->delete();
-                }  
+                }
 
 
                 $already_paid   = Maintenance::where('flat_id',$flat->id)
@@ -427,13 +427,13 @@ class FlatController extends Controller
                     'old_slip_no' => $slip_array[$key],
                     'payment' => 10000,
                 ]);
-                $count++;   
+                $count++;
 
             }
-        }   
-        
-        foreach($flat_array as $key => $name){   
-            $month = "FEB-2021";   
+        }
+
+        foreach($flat_array as $key => $name){
+            $month = "FEB-2021";
             if($FEB2021[$key]){
                 $flat = Flat::where('name',$name)->first();
 
@@ -461,12 +461,12 @@ class FlatController extends Controller
                     'old_slip_no' => $slip_array[$key],
                     'payment' => 10000,
                 ]);
-                $count++;  
+                $count++;
             }
-        }    
+        }
 
-        foreach($flat_array as $key => $name){   
-            $month = "MAR-2021";   
+        foreach($flat_array as $key => $name){
+            $month = "MAR-2021";
             if($MAR2021[$key]){
                 $flat = Flat::where('name',$name)->first();
 
@@ -494,12 +494,12 @@ class FlatController extends Controller
                     'old_slip_no' => $slip_array[$key],
                     'payment' => 10000,
                 ]);
-                $count++;  
+                $count++;
             }
-        }    
+        }
 
-        foreach($flat_array as $key => $name){   
-            $month = "APR-2021";   
+        foreach($flat_array as $key => $name){
+            $month = "APR-2021";
             if($APR2021[$key]){
                 $flat = Flat::where('name',$name)->first();
 
@@ -527,12 +527,12 @@ class FlatController extends Controller
                     'old_slip_no' => $slip_array[$key],
                     'payment' => 10000,
                 ]);
-                $count++;  
+                $count++;
             }
-        } 
+        }
 
-        foreach($flat_array as $key => $name){   
-            $month = "MAY-2021";   
+        foreach($flat_array as $key => $name){
+            $month = "MAY-2021";
             if($MAY2021[$key]){
                 $flat = Flat::where('name',$name)->first();
 
@@ -560,12 +560,12 @@ class FlatController extends Controller
                     'old_slip_no' => $slip_array[$key],
                     'payment' => 10000,
                 ]);
-                $count++;  
+                $count++;
             }
-        } 
+        }
 
-        foreach($flat_array as $key => $name){   
-            $month = "JUN-2021";   
+        foreach($flat_array as $key => $name){
+            $month = "JUN-2021";
             if($JUN2021[$key]){
                 $flat = Flat::where('name',$name)->first();
 
@@ -593,12 +593,12 @@ class FlatController extends Controller
                     'old_slip_no' => $slip_array[$key],
                     'payment' => 10000,
                 ]);
-                $count++;  
+                $count++;
             }
-        } 
+        }
 
         return $count."";
     }
 
-    
+
 }

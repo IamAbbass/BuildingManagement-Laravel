@@ -203,7 +203,7 @@ function convert_number_to_words($number){
             float: right;
             margin-top: 15px ;
             position: fixed !important;
-            left: 600px;
+            left: 675px;
         }
 
         .print{

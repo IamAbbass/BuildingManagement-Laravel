@@ -19,7 +19,7 @@
                             <th>Sno</th>
                             <th>Flat</th>
                             <th>Receipt</th>
-                            
+
                             <th>Head</th>
                             {{-- <th>Amount</th> --}}
                             {{-- <th>Discount</th> --}}
@@ -33,10 +33,10 @@
                     <tbody>
                         @php
                             $sno            = 0;
-                            $total          = 0;  
+                            $total          = 0;
                             $less_cheque    = 0;
                         @endphp
-                        
+
                         @foreach($payments as $payment)
                             @php
                                 $total += $payment->payment;
@@ -44,7 +44,7 @@
                                     $less_cheque += $payment->payment;
                                 }
                             @endphp
-                        
+
                             <tr>
                                 <td>{{ ++$sno }}</td>
                                 <td>
@@ -64,7 +64,7 @@
                                     {{ ucfirst($payment->method) }} {{ $payment->method == 'cheque' ? $payment->cheque_no : '' }}</td>
                                 <td>
                                     {!! $payment->old_slip_no ? '(Manual Slip No. '.$payment->old_slip_no.')<br/>' : '' !!}
-                                    {{ number_format($payment->payment) }} <span class="badge badge-secondary">{{ ucfirst($payment->type) }}  </span>                              
+                                    {{ number_format($payment->payment) }} <span class="badge badge-secondary">{{ ucfirst($payment->type) }}  </span>
                                 </td>
                                 <td>{{ $payment->month }}</td>
                                 {{-- <td>{{ $payment->description }}</td> --}}
