@@ -18,7 +18,7 @@
         </div>
         <div class="card-body">
 
-            <form method="POST" target="_blank" action="/report/daily">
+            <form method="POST" target="_blank" action="{{ env('APP_URL') }}/report/daily">
                 @csrf
                 <div class="row">
                     <div class="col-md-4">

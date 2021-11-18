@@ -8,7 +8,7 @@
     <!-- Page Heading -->
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
         <h1 class="h3 mb-2 text-gray-800">Employees</h1>
-        <a href="/employee/create" class="btn btn-primary shadow-sm"><i
+        <a href="{{ env('APP_URL') }}/employee/create" class="btn btn-primary shadow-sm"><i
         class="fas fa-plus fa-sm text-white-50"></i> Create</a>
     </div>
     
@@ -62,7 +62,7 @@
                                     @endif
                                     
                                 </td>
-                                <td> <a href="/employee/{{ $employee->id }}/edit" class="btn btn-warning shadow-sm"><i
+                                <td> <a href="{{ env('APP_URL') }}/employee/{{ $employee->id }}/edit" class="btn btn-warning shadow-sm"><i
                                     class="fas fa-edit fa-sm text-white-50"></i> Edit</a></td>
                             </tr>
                         @endforeach

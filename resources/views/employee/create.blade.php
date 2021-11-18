@@ -17,7 +17,7 @@
             <h6 class="m-0 font-weight-bold text-primary">Create Employee</h6>
         </div>
         <div class="card-body">
-            <form action="/employee" method="POST">
+            <form action="{{ env('APP_URL') }}/employee" method="POST">
                 @csrf
                 <div class="row">                    
                     <div class="col-md-4">

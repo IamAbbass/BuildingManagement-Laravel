@@ -8,7 +8,7 @@
             <h1 class="h3 text-gray-800">Profile</h1>
           </div>
           <div class="card-body">
-            <form action="/profile" method="POST">
+            <form action="{{ env('APP_URL') }}/profile" method="POST">
               @csrf
               <div class="form-group">
                 <label for="company_name">Name:</label>
@@ -36,7 +36,7 @@
           <h1 class="h3 text-gray-800">Change Password</h1>
         </div>
         <div class="card-body">
-          <form action="/profile" method="POST">
+          <form action="{{ env('APP_URL') }}/profile" method="POST">
             @csrf
             <div class="form-group">
               <label for="company_name">Current Password:</label>

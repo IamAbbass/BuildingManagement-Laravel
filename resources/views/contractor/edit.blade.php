@@ -17,7 +17,7 @@
             <h6 class="m-0 font-weight-bold text-primary">Edit Contractor</h6>
         </div>
         <div class="card-body">
-            <form action="/contractor/{{ $contractor->id }}" method="POST">
+            <form action="{{ env('APP_URL') }}/contractor/{{ $contractor->id }}" method="POST">
                 @csrf
                 @method('PATCH')
                 <div class="row">                    

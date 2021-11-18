@@ -17,7 +17,7 @@
             {{-- <h6 class="m-0 font-weight-bold text-primary">Flat {{ $flat->name }} History</h6> --}}
 
 
-            <form method="GET" target="_blank" action="/flat/{{ $flat->id }}/print">
+            <form method="GET" target="_blank" action="{{ env('APP_URL') }}/flat/{{ $flat->id }}/print">
                 <div class="row">
                     <div class="col-md-4">
                         <label>From Date: *</label>
@@ -102,7 +102,7 @@
                                     {{ number_format($payment->payment) }}
                                     <span class="badge badge-secondary">{{ ucfirst($payment->type) }}</span>
                                     <span class="badge badge-secondary">
-                                    <a target="_blank" href="/payment/method/{{ $payment->id }}" style="color:#fff">
+                                    <a target="_blank" href="{{ env('APP_URL') }}/payment/method/{{ $payment->id }}" style="color:#fff">
                                         <span>{{ ucfirst($payment->method) }} {{ $payment->method == 'cheque' ? $payment->cheque_no : '' }}</span>
                                     </a>
                                 </td>
@@ -117,7 +117,7 @@
                                         <a href="javascript:;" url="/slip/{{ $payment->id }}/cancel" class="btn_cancel btn btn-sm mr-1 mb-1 btn-warning shadow-sm"><i
                                         class="fas fa-times fa-sm text-white-50"></i> Cancel</a>
 
-                                        <a target="_blank" href="/slip/{{ $payment->id }}" class="btn btn-sm mr-1 mb-1 btn-info shadow-sm"><i
+                                        <a target="_blank" href="{{ env('APP_URL') }}/slip/{{ $payment->id }}" class="btn btn-sm mr-1 mb-1 btn-info shadow-sm"><i
                                         class="fas fa-print fa-sm text-white-50"></i> Slip</a>
                                     @endif
                                 </td>

@@ -17,7 +17,7 @@
             <h6 class="m-0 font-weight-bold text-primary">Payment for {{ $flat->name }}</h6>
         </div>
         <div class="card-body">
-            <form target="_blank" action="/flat/{{ $flat->id }}/payment" method="POST">
+            <form target="_blank" action="{{ env('APP_URL') }}/flat/{{ $flat->id }}/payment" method="POST">
                 @csrf
                 <div class="row">
                     <div class="col-md-4">

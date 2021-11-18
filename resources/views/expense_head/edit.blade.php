@@ -17,7 +17,7 @@
             <h6 class="m-0 font-weight-bold text-primary">Edit Expense Heads</h6>
         </div>
         <div class="card-body">
-            <form action="/expensehead/{{ $expense_head->id }}" method="POST">
+            <form action="{{ env('APP_URL') }}/expensehead/{{ $expense_head->id }}" method="POST">
                 @csrf
                 @method('PATCH')
 

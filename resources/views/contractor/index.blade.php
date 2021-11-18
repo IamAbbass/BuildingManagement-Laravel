@@ -1,6 +1,5 @@
 @extends('layouts.admin')
 
-
 @section('content')
 
 <div class="container-fluid">
@@ -8,7 +7,7 @@
     <!-- Page Heading -->
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
         <h1 class="h3 mb-2 text-gray-800">Contractors</h1>
-        <a href="/contractor/create" class="btn btn-primary shadow-sm"><i
+        <a href="{{ env('APP_URL') }}/contractor/create" class="btn btn-primary shadow-sm"><i
         class="fas fa-plus fa-sm text-white-50"></i> Create</a>
     </div>
     
@@ -61,13 +60,13 @@
                                     
                                 </td>
                                 <td> 
-                                    <a href="/contractor/{{ $contractor->id }}/edit" class="btn btn-sm mr-1 mb-1 btn-warning shadow-sm"><i
+                                    <a href="{{ env('APP_URL') }}/contractor/{{ $contractor->id }}/edit" class="btn btn-sm mr-1 mb-1 btn-warning shadow-sm"><i
                                         class="fas fa-edit fa-sm text-white-50"></i> Edit</a>
                                     
-                                    <a href="/contractor/{{ $contractor->id }}/payment" class="btn btn-sm mr-1 mb-1 btn-success shadow-sm"><i
+                                    <a href="{{ env('APP_URL') }}/contractor/{{ $contractor->id }}/payment" class="btn btn-sm mr-1 mb-1 btn-success shadow-sm"><i
                                         class="fas fa-edit fa-sm text-white-50"></i> Add Payment</a>
 
-                                    <a href="/contractor/{{ $contractor->id }}" class="btn btn-sm mr-1 mb-1 btn-info shadow-sm"><i
+                                    <a href="{{ env('APP_URL') }}/contractor/{{ $contractor->id }}" class="btn btn-sm mr-1 mb-1 btn-info shadow-sm"><i
                                         class="fas fa-edit fa-sm text-white-50"></i> History</a>
                                 </td>
                             </tr>

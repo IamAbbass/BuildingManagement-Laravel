@@ -2,28 +2,28 @@
 <ul class="navbar-nav bg-gradient-dark sidebar sidebar-dark accordion" id="accordionSidebar">
 
     <!-- Sidebar - Brand -->
-    <a class="sidebar-brand d-flex align-items-center justify-content-center" href="/home">
+    <a class="sidebar-brand d-flex align-items-center justify-content-center" href="{{ env('APP_URL') }}/home">
         <div class="sidebar-brand-text mx-1">{{ env('APP_NAME') }}</div>
     </a>
 
     <!-- Divider -->
     <hr class="sidebar-divider my-0">
     <li class="nav-item active">
-        <a class="nav-link" href="/dashboard">
+        <a class="nav-link" href="{{ env('APP_URL') }}/dashboard">
             <i class="fas fa-fw fa-tachometer-alt"></i>
             <span>Dashboard</span></a>
     </li>
 
     <hr class="sidebar-divider my-0">
     <li class="nav-item">
-        <a class="nav-link" href="/search">
+        <a class="nav-link" href="{{ env('APP_URL') }}/search">
             <i class="fas fa-fw fa-search"></i>
             <span>Search</span></a>
     </li>
 
     <hr class="sidebar-divider my-0">
     {{-- <li class="nav-item">
-        <a class="nav-link" href="/flat">
+        <a class="nav-link" href="{{ env('APP_URL') }}/flat">
             <i class="fas fa-fw fa-building"></i>
             <span>Flats</span></a>
     </li>  --}}
@@ -35,13 +35,13 @@
         </a>
         <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
-                <a class="collapse-item" href="/flat?block=1">Block A</a>
-                <a class="collapse-item" href="/flat?block=2">Block B</a>
-                <a class="collapse-item" href="/flat?block=3">Block C</a>
-                <a class="collapse-item" href="/flat?block=4">Block D</a>
-                <a class="collapse-item" href="/flat?block=5">Block E</a>
-                <a class="collapse-item" href="/flat?block=6">Block F</a>
-                <a class="collapse-item" href="/flat?block=7">Block G</a>
+                <a class="collapse-item" href="{{ env('APP_URL') }}/flat?block=1">Block A</a>
+                <a class="collapse-item" href="{{ env('APP_URL') }}/flat?block=2">Block B</a>
+                <a class="collapse-item" href="{{ env('APP_URL') }}/flat?block=3">Block C</a>
+                <a class="collapse-item" href="{{ env('APP_URL') }}/flat?block=4">Block D</a>
+                <a class="collapse-item" href="{{ env('APP_URL') }}/flat?block=5">Block E</a>
+                <a class="collapse-item" href="{{ env('APP_URL') }}/flat?block=6">Block F</a>
+                <a class="collapse-item" href="{{ env('APP_URL') }}/flat?block=7">Block G</a>
             </div>
         </div>
     </li>
@@ -49,56 +49,56 @@
 
     <hr class="sidebar-divider my-0">
     <li class="nav-item">
-        <a class="nav-link" href="/expensehead">
+        <a class="nav-link" href="{{ env('APP_URL') }}/expensehead">
             <i class="fas fa-fw fa-list"></i>
             <span>Expense Heads</span></a>
     </li>
 
     <hr class="sidebar-divider my-0">
     <li class="nav-item">
-        <a class="nav-link" href="/expense">
+        <a class="nav-link" href="{{ env('APP_URL') }}/expense">
             <i class="fas fa-fw fa-receipt"></i>
             <span>All Expenses</span></a>
     </li>
 
     <hr class="sidebar-divider my-0">
     <li class="nav-item">
-        <a class="nav-link" href="/accounthead">
+        <a class="nav-link" href="{{ env('APP_URL') }}/accounthead">
             <i class="fas fa-fw fa-list"></i>
             <span>Account Heads</span></a>
     </li>
 
     <hr class="sidebar-divider my-0">
     <li class="nav-item">
-        <a class="nav-link" href="/employee">
+        <a class="nav-link" href="{{ env('APP_URL') }}/employee">
             <i class="fas fa-fw fa-users"></i>
             <span>Employees</span></a>
     </li>
 
     <hr class="sidebar-divider my-0">
     <li class="nav-item">
-        <a class="nav-link" href="/contractor">
+        <a class="nav-link" href="{{ env('APP_URL') }}/contractor">
             <i class="fas fa-fw fa-users"></i>
             <span>Contractors</span></a>
     </li>
 
     <hr class="sidebar-divider my-0">
     <li class="nav-item">
-        <a class="nav-link" href="/attendance">
+        <a class="nav-link" href="{{ env('APP_URL') }}/attendance">
             <i class="fas fa-fw fa-thumbs-up"></i>
             <span>Bio Metric</span></a>
     </li>
 
     <hr class="sidebar-divider my-0">
     <li class="nav-item">
-        <a class="nav-link" href="/report/daily">
+        <a class="nav-link" href="{{ env('APP_URL') }}/report/daily">
             <i class="fas fa-fw fa-edit"></i>
             <span>Daily Collection Report</span></a>
     </li>
 
     <hr class="sidebar-divider my-0">
     <li class="nav-item">
-        <a class="nav-link" href="/cycle">
+        <a class="nav-link" href="{{ env('APP_URL') }}/cycle">
             <i class="fas fa-fw fa-spinner"></i>
             <span>Generate Cycle ({{ date('M-Y') }})</span></a>
     </li>

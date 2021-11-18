@@ -10,7 +10,7 @@
 
         <div class="btn-group" role="group" aria-label="Basic example">
             @foreach ($blocks as $block)
-                <a href="/flat?block={{ $block->id }}" class="btn {{ ($selected_block == $block->id) ? 'btn-primary' : 'btn-outline-primary' }}">
+                <a href="{{ env('APP_URL') }}/flat?block={{ $block->id }}" class="btn {{ ($selected_block == $block->id) ? 'btn-primary' : 'btn-outline-primary' }}">
                     Block {{ $block->name }}
                 </a>
             @endforeach
@@ -21,17 +21,17 @@
     <div class="card shadow mb-4">
         <div class="card-header py-3">
             <h6 class="m-0 font-weight-bold text-primary">Flats</h6>
-            <a href="/flat/export/{{ $selected_block }}" class="btn btn-info float-right mr-1">Export Maintenance Report</a>
-            <a href="/flat/export/{{ $selected_block }}?type=full" class="btn btn-success float-right mr-1">Export Flat Info Report</a>
+            <a href="{{ env('APP_URL') }}/flat/export/{{ $selected_block }}" class="btn btn-info float-right mr-1">Export Maintenance Report</a>
+            <a href="{{ env('APP_URL') }}/flat/export/{{ $selected_block }}?type=full" class="btn btn-success float-right mr-1">Export Flat Info Report</a>
 
             <button class="btn btn-danger float-right mr-1 dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 Defaulter List
             </button>
              <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                 @foreach ($account_heads as $account_head)
-                    <a target="_blank" class="dropdown-item" href="/flat/export/{{ $selected_block }}/defaulter?head={{ $account_head->id }}">{{ $account_head->name }}</a>
+                    <a target="_blank" class="dropdown-item" href="{{ env('APP_URL') }}/flat/export/{{ $selected_block }}/defaulter?head={{ $account_head->id }}">{{ $account_head->name }}</a>
                 @endforeach
-                <a target="_blank" class="dropdown-item" href="/flat/export/{{ $selected_block }}/defaulter">All</a>
+                <a target="_blank" class="dropdown-item" href="{{ env('APP_URL') }}/flat/export/{{ $selected_block }}/defaulter">All</a>
             </div>
         </div>
 
@@ -87,7 +87,7 @@
                                             <li>{{ $vehicle->number }}</li>
                                         @endforeach
                                     </ol>
-                                    <a href="/flat/{{ $flat->id }}/vehicle" class="btn btn-sm btn-secondary shadow-sm">Edit</a>
+                                    <a href="{{ env('APP_URL') }}/flat/{{ $flat->id }}/vehicle" class="btn btn-sm btn-secondary shadow-sm">Edit</a>
                                 </td>
                                 {{-- <td>{{ $flat->status }}</td> --}}
                                 {{-- <td>
@@ -99,13 +99,13 @@
                                     </b>
                                 </td>
                                 <td>
-                                    <a href="/flat/{{ $flat->id }}/edit" class="btn btn-sm mr-1 mb-1 btn-warning shadow-sm"><i
+                                    <a href="{{ env('APP_URL') }}/flat/{{ $flat->id }}/edit" class="btn btn-sm mr-1 mb-1 btn-warning shadow-sm"><i
                                         class="fas fa-edit fa-sm text-white-50"></i> Edit</a>
 
-                                    <a href="/flat/{{ $flat->id }}/payment" class="btn btn-sm mr-1 mb-1 btn-success shadow-sm"><i
+                                    <a href="{{ env('APP_URL') }}/flat/{{ $flat->id }}/payment" class="btn btn-sm mr-1 mb-1 btn-success shadow-sm"><i
                                         class="fas fa-edit fa-sm text-white-50"></i> Payment</a>
 
-                                    <a href="/flat/{{ $flat->id }}" class="btn btn-sm mr-1 mb-1 btn-info shadow-sm"><i
+                                    <a href="{{ env('APP_URL') }}/flat/{{ $flat->id }}" class="btn btn-sm mr-1 mb-1 btn-info shadow-sm"><i
                                         class="fas fa-edit fa-sm text-white-50"></i> History</a>
                                 </td>
                             </tr>

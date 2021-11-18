@@ -15,7 +15,7 @@
     <div class="card shadow mb-4">
         <div class="card-header py-3">
             <h6 class="m-0 font-weight-bold text-primary">{{ $contractor->name }} History</h6>
-            <a href="/contractor/{{ $contractor->id }}/print" class="btn btn-success float-right mr-1">Export Ledger</a>
+            <a href="{{ env('APP_URL') }}/contractor/{{ $contractor->id }}/print" class="btn btn-success float-right mr-1">Export Ledger</a>
             
         </div>
         <div class="card-body">
@@ -67,7 +67,7 @@
                                         <a class="btn mr-1 mb-1 btn-danger shadow-sm"><i
                                         class="fas fa-times fa-sm text-white-50"></i> Cancelled</a>
                                     @else
-                                        <a href="/contractor/{{ $payment->id }}/cancel" class="btn mr-1 mb-1 btn-warning shadow-sm"><i
+                                        <a href="{{ env('APP_URL') }}/contractor/{{ $payment->id }}/cancel" class="btn mr-1 mb-1 btn-warning shadow-sm"><i
                                         class="fas fa-times fa-sm text-white-50"></i> Cancel</a>
                                     @endif
                                 </td>

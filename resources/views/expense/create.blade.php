@@ -17,7 +17,7 @@
             <h6 class="m-0 font-weight-bold text-primary">Create Expense</h6>
         </div>
         <div class="card-body">
-            <form action="/expense" method="POST">
+            <form action="{{ env('APP_URL') }}/expense" method="POST">
                 @csrf
 
                 <div class="row">

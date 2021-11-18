@@ -17,7 +17,7 @@
             <h6 class="m-0 font-weight-bold text-primary">Edit Employee</h6>
         </div>
         <div class="card-body">
-            <form action="/employee/{{ $employee->id }}" method="POST">
+            <form action="{{ env('APP_URL') }}/employee/{{ $employee->id }}" method="POST">
                 @csrf
                 @method('PATCH')
                 <div class="row">                    

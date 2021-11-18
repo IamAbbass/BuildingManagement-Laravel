@@ -17,7 +17,7 @@
             <h6 class="m-0 font-weight-bold text-primary">Edit Account Heads</h6>
         </div>
         <div class="card-body">
-            <form action="/accounthead/{{ $account_head->id }}" method="POST">
+            <form action="{{ env('APP_URL') }}/accounthead/{{ $account_head->id }}" method="POST">
                 @csrf
                 @method('PATCH')
 
