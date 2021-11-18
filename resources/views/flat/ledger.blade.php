@@ -14,7 +14,7 @@
                 <th>Sno</th>
                 <th>Month</th>
                 <th>Description</th>
-                <th>Slip No</th>
+                {{-- <th>Slip No</th> --}}
                 <th>Head</th>
                 <th>Dues</th>
                 <th>Discount</th>
@@ -37,8 +37,6 @@
             @foreach($payments as $payment)
 
                 @php
-                    $sno = 0;
-
                     $sum_amount     += $payment->amount;
                     $sum_discount   += $payment->discount;
                     $sum_payment    += $payment->payment;
@@ -56,9 +54,9 @@
                         {!! $payment->description ? $payment->description : '' !!}
                     </td>
 
-                    <td>
+                    {{-- <td>
                         {{ $payment->id }}
-                    </td>
+                    </td> --}}
                     <td>
                         {{ $payment->account ? $payment->account->name : '-' }}
                     </td>
@@ -79,7 +77,7 @@
 
         <tfoot>
             <tr>
-                <th colspan="5">Total</th>
+                <th colspan="4">Total</th>
                 <th>{{ $sum_amount }}</th>
                 <th>{{ $sum_discount }}</th>
                 <th>{{ $sum_payment }}</th>

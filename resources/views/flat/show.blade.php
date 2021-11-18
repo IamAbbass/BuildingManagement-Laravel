@@ -69,8 +69,6 @@
                         @foreach($payments as $payment)
 
                             @php
-                                $sno = 0;
-
                                 $sum_amount     += $payment->amount;
                                 $sum_discount   += $payment->discount;
                                 $sum_payment    += $payment->payment;
