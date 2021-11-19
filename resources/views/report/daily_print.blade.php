@@ -18,7 +18,7 @@
                         <tr>
                             <th>Sno</th>
                             <th>Flat</th>
-                            <th>Receipt</th>
+                            {{-- <th>Receipt</th> --}}
 
                             <th>Head</th>
                             {{-- <th>Amount</th> --}}
@@ -50,9 +50,9 @@
                                 <td>
                                     {{ $payment->flat ? $payment->flat->name : '' }}
                                 </td>
-                                <td>
+                                {{-- <td>
                                     {{ $payment->id }}
-                                </td>
+                                </td> --}}
                                 <td>
                                     {{ $payment->account ? $payment->account->name : '-' }}
                                 </td>

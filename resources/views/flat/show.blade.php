@@ -112,10 +112,13 @@
                                         class="fas fa-times fa-sm text-white-50"></i> Cancelled</a>
 
                                     @else
-                                        <a href="javascript:;" url="/slip/{{ $payment->id }}/cancel" class="btn_cancel btn btn-sm mr-1 mb-1 btn-warning shadow-sm"><i
+                                        <a href="javascript:;" url="{{ env('APP_URL') }}/slip/{{ $payment->id }}/cancel" class="btn_cancel btn btn-sm mr-1 mb-1 btn-danger shadow-sm"><i
                                         class="fas fa-times fa-sm text-white-50"></i> Cancel</a>
 
-                                        <a target="_blank" href="{{ env('APP_URL') }}/slip/{{ $payment->id }}" class="btn btn-sm mr-1 mb-1 btn-info shadow-sm"><i
+                                        <a href="{{ env('APP_URL') }}/slip/{{ $payment->id }}/edit" class="btn btn-sm mr-1 mb-1 btn-warning shadow-sm"><i
+                                            class="fas fa-edit fa-sm text-white-50"></i> Edit</a>
+
+                                        <a target="_blank" href="{{ env('APP_URL') }}/slip/{{ $payment->id }}" class="btn btn-sm mr-1 mb-1 btn-primary shadow-sm"><i
                                         class="fas fa-print fa-sm text-white-50"></i> Slip</a>
                                     @endif
                                 </td>

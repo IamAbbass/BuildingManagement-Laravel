@@ -20,7 +20,7 @@
 
                         <tr>
                             <th>Sno</th>
-                            <th>Slip No</th>
+                            {{-- <th>Slip No</th> --}}
                             <th>Amount</th>
                             <th>Discount</th>
                             <th>Method</th>
@@ -38,9 +38,9 @@
                         
                             <tr>
                                 <td>{{ ++$sno }}</td>
-                                <td>
+                                {{-- <td>
                                     {{ $payment->id }}
-                                </td>
+                                </td> --}}
                                 <td>
                                     {{ number_format($payment->amount) }}
                                 </td>

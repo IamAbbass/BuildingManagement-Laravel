@@ -163,6 +163,52 @@ class FlatController extends Controller
             'flat' => $flat,
         ]);
     }
+    
+    public function payment_edit($slip_id)
+    {
+        $maintenance            = Maintenance::findOrFail($slip_id);
+        $account_heads          = AccountHead::where('default_amount','>',0)->get();
+        
+        if($maintenance->created_by == null || $maintenance->created_by == auth()->id()){
+            return view('flat.payment_edit',[
+                'maintenance'   => $maintenance,
+                'account_heads' => $account_heads,
+            ]);
+        }else{
+            session()->flash('danger', 'This slip is created by '.$maintenance->creator.'. Only he can edit it!');
+            return back();
+        }        
+    }
+
+    public function payment_update ($slip_id)
+    {
+        $month      = strtoupper(date("M-Y", strtotime(request('month'))));
+        $date       = strtoupper(date("d-M-Y", strtotime(request('date'))));
+        // $flat       = Flat::findOrFail($id);
+        $payment    = Maintenance::findOrFail($slip_id);
+
+        if($payment->created_by == null || $payment->created_by == auth()->id()){
+            $payment->update([
+                'head_id' => request('head_id'),
+                // 'flat_id' => $id,
+                'amount' => request('amount'),
+                'discount' => request('discount'),
+                'method' => request('method'),
+                'cheque_no' => request('cheque_no'),
+                'date' => $date,
+                'type' => request('type'),
+                'month' => $month,
+                'payment' => request('payment'),
+                'description' => request('description'),
+                'old_slip_no' => request('old_slip_no'),
+                'updated_by' => auth()->id()
+            ]);
+            return redirect("/slip/$payment->id");
+        }else{
+            session()->flash('danger', 'This slip is created by '.$payment->creator.'. Only he can edit it!');
+            return back();
+        }
+    }
 
     public function payment_save ($id)
     {
