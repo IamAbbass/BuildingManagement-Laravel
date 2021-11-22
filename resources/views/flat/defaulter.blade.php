@@ -22,20 +22,20 @@
         <tbody>
             @php
                 $sno = 0;
-                $total = 0;
+                $grand_total = 0;
             @endphp
             @foreach($flats as $flat)
 
-                @if($flat->isDefaulter->sum('payment') < 10000 && ($flat->payments->sum('amount')-$flat->payments->sum('discount')-$flat->payments->sum('payment') > 0))
+                @if($flat->isDefaulter->sum('payment') < 10000 && ($flat->payments->where('is_cancelled',false)->sum('amount')-$flat->payments->where('is_cancelled',false)->sum('discount')-$flat->payments->where('is_cancelled',false)->sum('payment') > 0))
                     @php
                         if(request('head')){
-                            $payments = $flat->payments->where('head_id',request('head'));
+                            $payments = $flat->payments->where('is_cancelled',false)->where('head_id',request('head'));
                         }else{
-                            $payments = $flat->payments;
+                            $payments = $flat->payments->where('is_cancelled',false);
                         }
 
                         $balance = $payments->sum('amount')-$payments->sum('discount')-$payments->sum('payment');
-                        $total += $balance;
+                        $grand_total += $balance;
                     @endphp
 
                     <tr>
@@ -44,24 +44,8 @@
                         <td>{{ $flat->name }}</td>
                         <td>{{ $flat->person_name }}</td>
                         <td>
-                            PKR {{ number_format($total) }}
+                            PKR {{ number_format($balance) }}
                         </td>
-                        {{-- <td>
-                            <ol>
-                                @foreach ($flat->payments->where('type','==','partial')->where('is_cancelled','==',false) as $detail)
-                                    @php
-                                        $balance = $detail->amount-$detail->discount-$detail->payment;
-                                    @endphp
-                                    @if($balance > 0)
-                                        <li>
-                                            {{ $detail->account ? $detail->account->name : '' }}
-                                            ({{ $detail->month }} {{ $detail->description  }})
-                                            <b>{{ $balance }}</b>
-                                        </li>
-                                    @endif
-                                @endforeach
-                            </ol>
-                        </td> --}}
                     </tr>
                 @endif
             @endforeach
@@ -70,7 +54,7 @@
         <tfoot>
             <tr>
                 <th class="text-center" colspan="4">Total Outstanding</th>
-                <th class="text-left">PKR {{ number_format($total) }}</th>
+                <th class="text-left">PKR {{ number_format($grand_total) }}</th>
             </tr>
         </tfoot>
     </table>
