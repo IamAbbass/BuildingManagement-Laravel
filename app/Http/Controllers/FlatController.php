@@ -74,12 +74,7 @@ class FlatController extends Controller
     public function show($flat_id)
     {
         $flat = Flat::findOrFail($flat_id);
-
-
-        //whereIn('date',$queryDates)
-        $payments = Maintenance::where('is_cancelled',false)
-        ->where('flat_id',$flat_id)->get();
-
+        $payments = Maintenance::where('is_cancelled',false)->where('flat_id',$flat_id)->get();
         return view('flat.show',[
             'flat' => $flat,
             'payments' => $payments

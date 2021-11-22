@@ -36,9 +36,18 @@
                     <tbody>
                         @php
                             $sno = 0;    
+                            $total = 0;
                         @endphp
                         
                         @foreach($flats as $flat)
+
+                            @php
+                                $balance = $flat->payments->where('is_cancelled',false)->sum('amount')-
+                                            $flat->payments->where('is_cancelled',false)->sum('discount')-
+                                            $flat->payments->where('is_cancelled',false)->sum('payment');
+                                
+                                $total += $balance;
+                            @endphp
                         
                             <tr>
                                 <td>{{ ++$sno }}</td>
@@ -60,13 +69,16 @@
                                 @endif
                                 <td>
                                     <b class="text-danger">
-                                        PKR {{ number_format($flat->payments->sum('amount')-$flat->payments->sum('discount')-$flat->payments->sum('payment')) }}
+                                        PKR {{ number_format($balance) }}
                                     </b>
                                 </td>
                             </tr>
                         @endforeach
                     </tbody>
+
                 </table>
+
+                <p class="text-dark" style="float:right;"><b class="text-danger">Total Outstanding: PKR {{ number_format($total) }}</b></p>
             </div>
         </div>
     </div>

@@ -57,6 +57,12 @@
 
                         @foreach($flats as $flat)
 
+                            @php
+                                $balance = $flat->payments->where('is_cancelled',false)->sum('amount')-
+                                $flat->payments->where('is_cancelled',false)->sum('discount')-
+                                $flat->payments->where('is_cancelled',false)->sum('payment');
+                            @endphp
+
                             <tr>
                                 <td>{{ ++$sno }}</td>
                                 <td>Block {{ $flat->block->name }}</td>
@@ -95,7 +101,7 @@
                                 </td> --}}
                                 <td>
                                     <b class="text-danger">
-                                        PKR {{ number_format($flat->payments->sum('amount')-$flat->payments->sum('discount')-$flat->payments->sum('payment')) }}
+                                        PKR {{ number_format($balance) }}
                                     </b>
                                 </td>
                                 <td>

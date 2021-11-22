@@ -72,9 +72,8 @@
                                 $sum_amount     += $payment->amount;
                                 $sum_discount   += $payment->discount;
                                 $sum_payment    += $payment->payment;
-
+                                
                                 $balance_this   = $payment->amount-$payment->discount-$payment->payment;
-
                                 $sum_balance    += $balance_this;
                             @endphp
 

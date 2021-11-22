@@ -22,11 +22,9 @@
         <tbody>
             @php
                 $sno = 0;
+                $total = 0;
             @endphp
             @foreach($flats as $flat)
-                @php
-                    $total = 0;
-                @endphp
 
                 @if($flat->isDefaulter->sum('payment') < 10000 && ($flat->payments->sum('amount')-$flat->payments->sum('discount')-$flat->payments->sum('payment') > 0))
                     @php

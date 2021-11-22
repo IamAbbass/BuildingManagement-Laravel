@@ -31,10 +31,15 @@
                     </thead>
                     <tbody>
                         @php
-                            $sno = 0;    
+                            $sno = 0;  
+                            $total = 0;  
                         @endphp
                         
                         @foreach($contractor->payments->where('payment','>',0) as $payment)
+
+                            @php 
+                                $total += $payment->amount;  
+                            @endphp
                         
                             <tr>
                                 <td>{{ ++$sno }}</td>
@@ -56,6 +61,13 @@
                             </tr>
                         @endforeach
                     </tbody>
+                    <tfoot>
+                        <tr>
+                            <th>Total</th>
+                            <th>{{ number_format($total) }}</th>
+                            <th colspan="5"></th>
+                        </tr>
+                    </tfoot>
                 </table>
             </div>
             
