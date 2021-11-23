@@ -30,8 +30,6 @@
                 $sum_discount   = 0;
                 $sum_payment    = 0;
                 $sum_balance    = 0;
-
-
             @endphp
 
             @foreach($payments as $payment)
@@ -65,9 +63,16 @@
                     </td>
                     <td>{{ $payment->discount }}</td>
                     <td>
-                        {{ number_format($payment->payment) }}
-                        <span class="badge badge-secondary">{{ ucfirst($payment->type) }}</span>
-                        <span class="badge badge-secondary">{{ ucfirst($payment->method) }} {{ $payment->method == 'cheque' ? $payment->cheque_no : '' }}</span>
+                        @if($payment->payment > 0)
+                            {{ number_format($payment->payment) }}
+                            <span class="badge badge-secondary">{{ ucfirst($payment->type) }}</span>
+                            <span class="badge badge-secondary">
+                            <a target="_blank" href="{{ env('APP_URL') }}/payment/method/{{ $payment->id }}" style="color:#fff">
+                                <span>{{ ucfirst($payment->method) }} {{ $payment->method == 'cheque' ? $payment->cheque_no : '' }}</span>
+                            </a>                                        
+                        @else
+                            <span class="badge badge-danger">UNPAID</span>
+                        @endif
                     </td>
                     <td>{{ number_format($payment->amount-$payment->discount-$payment->payment) }}</td>
                     <td>{{ $payment->date }}</td>

@@ -77,6 +77,7 @@
                                 $sum_balance    += $balance_this;
                             @endphp
 
+
                             <tr>
                                 <td>{{ ++$sno }}</td>
                                 <td>{{ $payment->month }}</td>
@@ -86,7 +87,7 @@
                                 </td>
 
                                 <td>
-                                    {{ $payment->id }}
+                                    {{ $payment->payment > 0 ? $payment->id : '-' }}
                                 </td>
                                 <td>
                                     {{ $payment->account ? $payment->account->name : '-' }}
@@ -96,32 +97,43 @@
                                 </td>
                                 <td>{{ $payment->discount }}</td>
                                 <td>
-                                    {{ number_format($payment->payment) }}
-                                    <span class="badge badge-secondary">{{ ucfirst($payment->type) }}</span>
-                                    <span class="badge badge-secondary">
-                                    <a target="_blank" href="{{ env('APP_URL') }}/payment/method/{{ $payment->id }}" style="color:#fff">
-                                        <span>{{ ucfirst($payment->method) }} {{ $payment->method == 'cheque' ? $payment->cheque_no : '' }}</span>
-                                    </a>
+                                    @if($payment->payment > 0)
+                                        {{ number_format($payment->payment) }}
+                                        <span class="badge badge-secondary">{{ ucfirst($payment->type) }}</span>
+                                        <span class="badge badge-secondary">
+                                        <a target="_blank" href="{{ env('APP_URL') }}/payment/method/{{ $payment->id }}" style="color:#fff">
+                                            <span>{{ ucfirst($payment->method) }} {{ $payment->method == 'cheque' ? $payment->cheque_no : '' }}</span>
+                                        </a>                                        
+                                    @else
+                                        <span class="badge badge-danger">UNPAID</span>
+                                    @endif
                                 </td>
                                 <td>{{ number_format($payment->amount-$payment->discount-$payment->payment) }}</td>
                                 <td>{{ $payment->date }}</td>
                                 <td>
-                                    @if($payment->is_cancelled == true)
-                                        <a class="btn btn-sm mr-1 mb-1 btn-danger shadow-sm"><i
-                                        class="fas fa-times fa-sm text-white-50"></i> Cancelled</a>
 
+                                    @if($payment->payment > 0)
+
+                                        @if($payment->is_cancelled == true)
+                                            <a class="btn btn-sm mr-1 mb-1 btn-danger shadow-sm"><i
+                                            class="fas fa-times fa-sm text-white-50"></i> Cancelled</a>
+
+                                        @else
+                                            <a href="javascript:;" url="{{ env('APP_URL') }}/slip/{{ $payment->id }}/cancel" class="btn_cancel btn btn-sm mr-1 mb-1 btn-danger shadow-sm"><i
+                                            class="fas fa-times fa-sm text-white-50"></i> Cancel</a>
+
+                                            <a href="{{ env('APP_URL') }}/slip/{{ $payment->id }}/edit" class="btn btn-sm mr-1 mb-1 btn-warning shadow-sm"><i
+                                                class="fas fa-edit fa-sm text-white-50"></i> Edit</a>
+
+                                            <a target="_blank" href="{{ env('APP_URL') }}/slip/{{ $payment->id }}" class="btn btn-sm mr-1 mb-1 btn-primary shadow-sm"><i
+                                            class="fas fa-print fa-sm text-white-50"></i> Slip</a>
+                                        @endif                                        
                                     @else
-                                        <a href="javascript:;" url="{{ env('APP_URL') }}/slip/{{ $payment->id }}/cancel" class="btn_cancel btn btn-sm mr-1 mb-1 btn-danger shadow-sm"><i
-                                        class="fas fa-times fa-sm text-white-50"></i> Cancel</a>
-
-                                        <a href="{{ env('APP_URL') }}/slip/{{ $payment->id }}/edit" class="btn btn-sm mr-1 mb-1 btn-warning shadow-sm"><i
-                                            class="fas fa-edit fa-sm text-white-50"></i> Edit</a>
-
-                                        <a target="_blank" href="{{ env('APP_URL') }}/slip/{{ $payment->id }}" class="btn btn-sm mr-1 mb-1 btn-primary shadow-sm"><i
-                                        class="fas fa-print fa-sm text-white-50"></i> Slip</a>
+                                        
                                     @endif
                                 </td>
                             </tr>
+                                
                         @endforeach
                     </tbody>
 
