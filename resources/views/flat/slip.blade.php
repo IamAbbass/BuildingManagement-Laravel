@@ -201,9 +201,8 @@ function convert_number_to_words($number){
 
        .qrcode {
             float: right;
-            margin-top: 15px ;
-            position: fixed !important;
-            left: 675px;
+            position: relative;
+            right: 20px;
         }
 
         .print{
@@ -224,8 +223,8 @@ function convert_number_to_words($number){
 	<!-- Office Copy -->
     <div class="container">
         <div class="watermark">
-        <div class="qrcode print">
-            {!! DNS2D::getBarcodeHTML("https://accounts.saimasquare1.com/verify/".$payment->id, 'QRCODE',3,3,'#be1d2c') !!}
+        <div class="qrcode">
+            {!! \Milon\Barcode\Facades\DNS2DFacade::getBarcodeSVG("https://accounts.saimasquare1.com/verify/".$payment->id, 'QRCODE',3,3,'#000000') !!}
         </div>
         <h4 class="text-center"><kbd>Office Copy</kbd></h4>
         <h4 class="text-center">{{ config('app.name', 'Laravel') }}
@@ -242,7 +241,7 @@ function convert_number_to_words($number){
         </h4>
         <h4 class="text-center flat-no">Block-{{ $payment->flat->block->name }} / Flat# SSQ1-{{ $payment->flat->name }}</h4>
 
-        <div class="row">
+        <d class="row">
             <div class="one_six bold"><span>Receipt No:</span></div>
             <div class="one_six"><span>{{ $payment->id }}</span></div>
 
@@ -252,8 +251,7 @@ function convert_number_to_words($number){
             <div class="one_six text-right bold"><span>Date:</span></div>
             <div class="one_six"><span>{{ $payment->date }}</span></div>
             <div class="clearfix"></div>
-        </div>
-
+        </d
         <div class="row">
             <div class="one_two bold"><span>Received with thanks from Mr/Mrs.:</span></div>
             <div class="one_two"><span>{{ $payment->flat->person_name }} </span></div>
@@ -318,8 +316,8 @@ function convert_number_to_words($number){
 	<!-- Resident Copy -->
     <div class="container" >
         <div class="watermark">
-        <div class="qrcode print">
-            {!! DNS2D::getBarcodeHTML("https://accounts.saimasquare1.com/verify/".$payment->id, 'QRCODE',3,3,'#be1d2c') !!}
+        <div class="qrcode">
+            {!! \Milon\Barcode\Facades\DNS2DFacade::getBarcodeSVG("https://accounts.saimasquare1.com/verify/".$payment->id, 'QRCODE',3,3,'#000000') !!}
         </div>
         <h4 class="text-center"><kbd>Resident Copy</kbd></h4>
 		<h4 class="text-center">{{ config('app.name', 'Laravel') }}
@@ -336,7 +334,7 @@ function convert_number_to_words($number){
         </h4>
         <h4 class="text-center flat-no">Block-{{ $payment->flat->block->name }} / Flat# SSQ1-{{ $payment->flat->name }}</h4>
 
-        <div class="row">
+        <d class="row">
             <div class="one_six bold"><span>Receipt No:</span></div>
             <div class="one_six"><span>{{ $payment->id }}</span></div>
 
@@ -346,8 +344,7 @@ function convert_number_to_words($number){
             <div class="one_six text-right bold"><span>Date:</span></div>
             <div class="one_six"><span>{{ $payment->date }}</span></div>
             <div class="clearfix"></div>
-        </div>
-
+        </d
         <div class="row">
             <div class="one_two bold"><span>Received with thanks from Mr/Mrs.:</span></div>
             <div class="one_two"><span>{{ $payment->flat->person_name }} </span></div>

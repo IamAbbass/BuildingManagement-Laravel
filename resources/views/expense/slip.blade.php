@@ -194,11 +194,10 @@ function convert_number_to_words($number){
             background-position: bottom 65px center;
         }
 
-       .qrcode {
+        .qrcode {
             float: right;
-            margin-top: 15px ;
-            position: fixed !important;
-            left: 600px;
+            position: relative;
+            right: 20px;
         }
         
         .print{
@@ -217,8 +216,8 @@ function convert_number_to_words($number){
 
     <div class="container">
         <div class="watermark">
-        <div class="qrcode print">
-        {!! DNS2D::getBarcodeHTML("https://accounts.saimasquare1.com/verify/".$expense->id, 'QRCODE',3,3,'#be1d2c') !!}
+        <div class="qrcode">
+            {!! \Milon\Barcode\Facades\DNS2DFacade::getBarcodeSVG("https://accounts.saimasquare1.com/verify/".$expense->id, 'QRCODE',3,3,'#000000') !!}
         </div>
         <h4 class="text-center"><kbd>Expense Slip</kbd></h4>
         <h4 class="text-center">{{ config('app.name', 'Laravel') }}

@@ -108,7 +108,9 @@
                                         <span class="badge badge-danger">UNPAID</span>
                                     @endif
                                 </td>
-                                <td>{{ number_format($payment->amount-$payment->discount-$payment->payment) }}</td>
+                                <td>
+                                    {{ $balance_this > 0 ? number_format($balance_this) : '' }}
+                                </td>
                                 <td>{{ $payment->date }}</td>
                                 <td>
 

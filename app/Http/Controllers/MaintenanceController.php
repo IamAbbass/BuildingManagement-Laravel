@@ -26,8 +26,6 @@ class MaintenanceController extends Controller
     public function search_process ()
     {
         $maintenance = Maintenance::where('id',request('receipt_no'))->where('is_cancelled',false)->first();
-        
-
         if($maintenance){
             if($maintenance->contractor_id){
                 return redirect("/contractor/slip/$maintenance->id"); 
